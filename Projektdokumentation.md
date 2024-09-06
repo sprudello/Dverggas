@@ -48,32 +48,28 @@
 
 ## 2 Planen
 
-| AP-№ | Frist    | Zuständig | Beschreibung                                        | geplante Zeit |
-| ---- | -------- | --------- | --------------------------------------------------- | ------------- |
-| 1.A  | 23.08.24 | Julius    | Einrichtung der Entwicklungsumgebung                | 45'           |
-| 1.B  | 23.08.24 | Timo      | Auswahl der Technologien                            | 45'           |
-| 1.C  | 23.08.24 | Julius    | Grundstruktur der Anwendung aufsetzen               | 45'           |
-| 1.D  | 30.08.24 | Timo      | Implementierung der Nutzerregistrierung (Backend)   | 45'           |
-| 1.E  | 30.08.24 | Julius    | Implementierung der Nutzerregistrierung (Frontend)  | 45'           |
-| 1.F  | 30.08.24 | Timo      | Implementierung der Nutzeranmeldung (Backend)       | 45'           |
-| 1.G  | 30.08.24 | Julius    | Implementierung der Nutzeranmeldung (Frontend)      | 45'           |
-| 2.A  | 06.09.24 | Julius    | Entwicklung der Profildatenverwaltung (Backend)     | 45'           |
-| 2.B  | 06.09.24 | Timo      | Entwicklung der Profildatenverwaltung (Frontend)    | 45'           |
-| 3.A  | 13.09.24 | Timo      | Aufbau der Produkt-Datenbankstruktur                | 45'           |
-| 3.B  | 13.09.24 | Julius    | Entwicklung der API für Produkte und Kategorien     | 45'           |
-| 3.C  | 13.09.24 | Timo      | Implementierung der Kategoriefilterung (Backend)    | 45'           |
-| 3.D  | 20.09.24 | Julius    | Implementierung der Kategoriefilterung (Frontend)   | 45'           |
-| 3.E  | 20.09.24 | Timo      | Implementierung der Produktsuche (Backend)          | 45'           |
-| 3.F  | 20.09.24 | Julius    | Implementierung der Produktsuche (Frontend)         | 45'           |
-| 4.A  | 27.09.24 | Julius    | Entwicklung der Warenkorb-Funktionalität (Backend)  | 45'           |
-| 4.B  | 27.09.24 | Timo      | Entwicklung der Warenkorb-Funktionalität (Frontend) | 45'           |
-| 5.A  | 27.09.24 | Timo      | Implementierung des Checkout-Prozesses (Backend)    | 45'           |
-| 5.B  | 27.09.24 | Julius    | Implementierung des Checkout-Prozesses (Frontend)   | 45'           |
-| 6.A  | 27.09.24 | Julius    | Implementierung der Sicherheitsmaßnahmen für Login  | 45'           |
-| 6.B  | 27.09.24 | Timo      | Überprüfung der Sicherheitsmaßnahmen durch Tests    | 45'           |
-| 7.A  | 27.09.24 | Julius    | Durchführung von Unit-Tests für alle Module         | 45'           |
-| 7.B  | 27.09.24 | Timo      | Erreichen der Testabdeckung von 80%                 | 45'           |
-| 7.C  | 27.09.24 | Beide     | End-to-End-Tests und Fehlerbehebung                 | 45'           |
+| AP-№ | Frist    | Zuständig | Beschreibung                                       | geplante Zeit |
+| ---- | -------- | --------- | -------------------------------------------------- | ------------- |
+| 1.A  | 23.08.24 | Beide     | Einrichtung der Entwicklungsumgebung               | 45'           |
+| 1.B  | 23.08.24 | Timo      | Auswahl der Technologien                           | 45'           |
+| 1.C  | 23.08.24 | Julius    | Grundstruktur der Anwendung aufsetzen              | 45'           |
+| 1.D  | 30.08.24 | Timo      | Implementierung der Nutzerregistrierung (Backend)  | 45'           |
+| 1.E  | 30.08.24 | Julius    | Implementierung der Nutzerregistrierung (Frontend) | 45'           |
+| 1.F  | 30.08.24 | Timo      | Implementierung der Nutzeranmeldung (Backend)      | 45'           |
+| 1.G  | 30.08.24 | Julius    | Implementierung der Nutzeranmeldung (Frontend)     | 45'           |
+| 2.A  | 06.09.24 | Julius    | Entwicklung der Profildatenverwaltung (Backend)    | 45'           |
+| 2.B  | 06.09.24 | Timo      | Entwicklung der Profildatenverwaltung (Frontend)   | 45'           |
+| 3.A  | 13.09.24 | Timo      | Aufbau der Produkt-Datenbankstruktur               | 45'           |
+| 3.B  | 13.09.24 | Julius    | Entwicklung der API für Produkte und Kategorien    | 45'           |
+| 3.C  | 13.09.24 | Timo      | Implementierung der Kategoriefilterung (Backend)   | 45'           |
+| 3.D  | 20.09.24 | Julius    | Implementierung der Kategoriefilterung (Frontend)  | 45'           |
+| 3.E  | 20.09.24 | Timo      | Implementierung der Produktsuche (Backend)         | 45'           |
+| 3.F  | 20.09.24 | Julius    | Implementierung der Produktsuche (Frontend)        | 45'           |
+| 6.A  | 27.09.24 | Julius    | Implementierung der Sicherheitsmaßnahmen für Login | 45'           |
+| 6.B  | 27.09.24 | Timo      | Überprüfung der Sicherheitsmaßnahmen durch Tests   | 45'           |
+| 7.A  | 27.09.24 | Julius    | Durchführung von Unit-Tests für alle Module        | 45'           |
+| 7.B  | 27.09.24 | Timo      | Erreichen der Testabdeckung von 80%                | 45'           |
+| 7.C  | 27.09.24 | Beide     | End-to-End-Tests und Fehlerbehebung                | 45'           |
 
 Total: 
 
