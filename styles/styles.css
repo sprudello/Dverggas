@@ -94,6 +94,22 @@ footer {
     margin-top: 5px;
 }
 
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 10px;
+    width: auto; 
+    display: inline-block;
+}
+
+.legal-link {
+    color: blue;
+    text-decoration: underline;
+}
 
 /* Error messages */
 .error {
