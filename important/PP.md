@@ -41,6 +41,3 @@ You have the right to:
 We may update this privacy policy at any time, and you’ll probably find out about it when it’s too late. But don’t worry, it’s just business.
 
 *Thank you for trusting us with your data. If you're not happy about it, you can try reading our policy again—spoiler alert: it won't change. But hey, our legal team is ready for your strongly worded email. In the meantime, just remember: everyone else has already accepted it.*
-
-
-
