@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Validate checkbox agreements
-    if (!$accept_agb) {
+    if (!$accept_tos) {
         $errors[] = "You must accept the General Terms and Conditions!";
     }
 
@@ -168,13 +168,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="checkbox-group">
-            <input type="checkbox" name="accept_agb" id="accept_agb" required>
-            <label for="accept_agb">I accept the <a href="https://github.com/sprudello/Dverggas/blob/main/important/GToS.md" class="legal-link">General Terms and Conditions</a> <span class="required">*</span></label>
+            <input type="checkbox" name="accept_tos" id="accept_tos" required>
+            <label for="accept_tos">I accept the <a href="https://github.com/sprudello/Dverggas/blob/main/important/GToS.md" target="_blank" class="legal-link">General Terms and Conditions</a> <span class="required">*</span></label>
         </div>
 
         <div class="checkbox-group">
             <input type="checkbox" name="accept_privacy" id="accept_privacy" required>
-            <label for="accept_privacy">I accept the <a href="https://github.com/sprudello/Dverggas/blob/main/important/PP.md" class="legal-link">Privacy Policy</a> <span class="required">*</span></label>
+            <label for="accept_privacy">I accept the <a href="https://github.com/sprudello/Dverggas/blob/main/important/PP.md" target="_blank" class="legal-link">Privacy Policy</a> <span class="required">*</span></label>
         </div>
 
         <button type="submit" class="login-button">Register</button>

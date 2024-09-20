@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Please fill all required fields!";
         exit;
     }
-
+    
     if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
         $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
     } else {
