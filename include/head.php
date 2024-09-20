@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="en">
+
 <head>
     <title>Dverggas</title>
-    <link rel="stylesheet" type="text/css" href="../styles/styles.css">
-    <script src="scripts/script.js"></script>
+    <script src="https://kit.fontawesome.com/4c39a50c7e.js" crossorigin="anonymous"></script>
+
+    <?php
+    $base_path = (basename(dirname($_SERVER['SCRIPT_NAME'])) == 'auth') ? '../' : '';
+    ?>
+    <link rel="stylesheet" type="text/css" href="<?= $base_path; ?>styles/styles.css">
+
+    <script src="<?= $base_path; ?>scripts/script.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body></body>
+
+<body>
