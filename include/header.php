@@ -1,8 +1,3 @@
-    <button>
-        <h1>Dverggas</h1>
-    </button>
-    
-=======
 <!-- Header -->
 <header>
     <button>
