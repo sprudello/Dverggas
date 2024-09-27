@@ -122,7 +122,7 @@ while ($row = mysqli_fetch_assoc($result_all)) {
             });
             moreIcon.className = "fa-solid fa-arrow-left";
         } else {
-            const additionalCategories = categoryList.querySelectorAll('.category-card:nth-child(n+4)');
+            const additionalCategories = Array.from(categoryList.children).slice(3);
             additionalCategories.forEach(category => category.remove());
             moreIcon.className = "fa-solid fa-arrow-right";
         }
@@ -130,6 +130,7 @@ while ($row = mysqli_fetch_assoc($result_all)) {
         expanded = !expanded;
     }
 
+    // From ChatGPT
     function randomColor() {
         return '#' + Math.floor(Math.random() * 16777215).toString(16);
     }
