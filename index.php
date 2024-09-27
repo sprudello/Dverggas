@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include_once 'include/head.php';
 include_once 'include/header.php';
 include_once 'db/connection.php';
@@ -33,16 +34,6 @@ while ($row = mysqli_fetch_assoc($result_all)) {
     $all_categories[] = $row;
 }
 ?>
-
-
-
-<!-- Search Bar -->
-<div class="searchbar">
-    <input type="text" placeholder="Search categories">
-    <button>
-        <i class="fa-solid fa-magnifying-glass"></i> Search
-    </button>
-</div>
 
 <!-- Categories Section -->
 <div class="categories">
