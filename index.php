@@ -1,23 +1,39 @@
 <?php
 session_start();
-include_once "include/head.php";
-include_once "include/header.php";
 
+include_once 'include/head.php';
+include_once 'include/header.php';
+include_once 'db/connection.php';
+
+
+// Function to get subcategories
+function getSubcategories($parent_id, $conn) {
+    $subcategories_query = "SELECT name FROM categories WHERE parent_id = $parent_id LIMIT 3";
+    $sub_result = mysqli_query($conn, $subcategories_query);
+    $subcategories = [];
+    while ($sub_row = mysqli_fetch_assoc($sub_result)) {
+        $subcategories[] = $sub_row['name'];
+    }
+    return $subcategories;
+}
+
+// Fetch the initial 3
+$query = "SELECT * FROM categories WHERE parent_id IS NULL LIMIT 3";
+$result = mysqli_query($conn, $query);
+$categories = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $categories[] = $row;
+}
+
+// Fetch all categories (excluding those with parent_id)
+$query_all = "SELECT * FROM categories WHERE parent_id IS NULL";
+$result_all = mysqli_query($conn, $query_all);
+$all_categories = [];
+while ($row = mysqli_fetch_assoc($result_all)) {
+    $row['subcategories'] = getSubcategories($row['id'], $conn); // Fetch subcategories
+    $all_categories[] = $row;
+}
 ?>
-
-<!DOCTYPE html>
-
-<<<<<<< Updated upstream
-<body>
-    <p>This is a Text</p>
-</body>
-</html>
-<?php 
-include_once "include/footer.php";
-?>
-=======
-
-
 
 <!-- Categories Section -->
 <div class="categories">
@@ -97,4 +113,3 @@ include_once "include/footer.php";
 </script>
 
 <?php include_once 'include/footer.php'; ?>
->>>>>>> Stashed changes
