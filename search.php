@@ -4,7 +4,7 @@ include_once 'include/head.php';
 include_once 'include/header.php';
 include_once 'db/connection.php';
 
-// Suchfunktion definieren
+// Define search function
 function searchProducts($conn, $searchTerm) {
     $sql = "
     SELECT 
@@ -37,7 +37,7 @@ function searchProducts($conn, $searchTerm) {
     return $products;
 }
 
-// Suchbegriff abrufen
+// Retrieve search term
 $searchTerm = '';
 $products = [];
 
@@ -49,21 +49,21 @@ if (isset($_GET['search_term'])) {
 $conn->close();
 ?>
 
-<!-- Suchergebnisse anzeigen -->
+<!-- Display search results -->
 <div class="search-results">
-    <h2>Suchergebnisse für "<?php echo htmlspecialchars($searchTerm); ?>"</h2>
+    <h2>Search results for "<?php echo htmlspecialchars($searchTerm); ?>"</h2>
     <?php if (!empty($products)): ?>
         <?php foreach ($products as $product): ?>
             <div class="product">
                 <h3><?php echo htmlspecialchars($product['title']); ?></h3>
-                <p>Kategorie: <?php echo htmlspecialchars($product['category_name']); ?></p>
-                <p>Beschreibung: <?php echo htmlspecialchars($product['prod_desc']); ?></p>
-                <p>Preis: <?php echo htmlspecialchars($product['price']); ?>€</p>
-                <p>Marke: <?php echo htmlspecialchars($product['brand']); ?></p>
+                <p>Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
+                <p>Description: <?php echo htmlspecialchars($product['prod_desc']); ?></p>
+                <p>Price: <?php echo htmlspecialchars($product['price']); ?>€</p>
+                <p>Brand: <?php echo htmlspecialchars($product['brand']); ?></p>
             </div>
         <?php endforeach; ?>
     <?php else: ?>
-        <p>Keine Produkte gefunden.</p>
+        <p>No products found.</p>
     <?php endif; ?>
 </div>
 
