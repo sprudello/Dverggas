@@ -53,15 +53,17 @@ $conn->close();
 <div class="search-results">
     <h2>Search results for "<?php echo htmlspecialchars($searchTerm); ?>"</h2>
     <?php if (!empty($products)): ?>
-        <?php foreach ($products as $product): ?>
-            <div class="product">
-                <h3><?php echo htmlspecialchars($product['title']); ?></h3>
-                <p>Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
-                <p>Description: <?php echo htmlspecialchars($product['prod_desc']); ?></p>
-                <p>Price: <?php echo htmlspecialchars($product['price']); ?>€</p>
-                <p>Brand: <?php echo htmlspecialchars($product['brand']); ?></p>
-            </div>
-        <?php endforeach; ?>
+        <div class="product-grid">
+            <?php foreach ($products as $product): ?>
+                <div class="product-card">
+                    <h3><?php echo htmlspecialchars($product['title']); ?></h3>
+                    <p>Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
+                    <p>Description: <?php echo htmlspecialchars($product['prod_desc']); ?></p>
+                    <p>Price: <?php echo htmlspecialchars($product['price']); ?>€</p>
+                    <p>Brand: <?php echo htmlspecialchars($product['brand']); ?></p>
+                </div>
+            <?php endforeach; ?>
+        </div>
     <?php else: ?>
         <p>No products found.</p>
     <?php endif; ?>
