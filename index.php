@@ -42,7 +42,7 @@ while ($row = mysqli_fetch_assoc($result_all)) {
     <h2>Categories</h2>
     <div id="category-list" class="category-grid">
         <?php foreach ($categories as $category):
-            $randomColor = sprintf('#%06X', mt_rand(0, 0xFFFFFF)); // Generate random color
+            $randomColor = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
             ?>
             <a href="category.php?id=<?= $category['id']; ?>" style="text-decoration: none; color: inherit;">
                 <div class="category-card" style="background-color: <?= $randomColor; ?>;">
