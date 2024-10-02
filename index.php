@@ -64,7 +64,7 @@ while ($row = mysqli_fetch_assoc($result_all)) {
     </div>
     <div class="more-link">
         <a href="javascript:void(0);" id="more-link" onclick="toggleCategories()">
-            <i id="more-icon" class="fa-solid fa-arrow-right"></i>
+            <i id="more-icon" class="fa-solid fa-arrow-down"></i>
         </a>
     </div>
 </div>
@@ -109,11 +109,11 @@ while ($row = mysqli_fetch_assoc($result_all)) {
 
             applyRandomBackgroundColor(categoryDiv.querySelector('.category-card'));
         });
-        moreIcon.className = "fa-solid fa-arrow-left";
+        moreIcon.className = "fa-solid fa-arrow-up";
     } else {
         const additionalCategories = Array.from(categoryList.children).slice(3);
         additionalCategories.forEach(category => category.remove());
-        moreIcon.className = "fa-solid fa-arrow-right";
+        moreIcon.className = "fa-solid fa-arrow-down";
     }
 
     expanded = !expanded;
