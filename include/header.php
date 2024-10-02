@@ -1,8 +1,6 @@
 <!-- Header -->
 <header>
-    <button>
-        <h1>Dverggas</h1>
-    </button>
+        <a class="title-button" href="index.php">Dverggas</a>
   <!-- Search Bar -->
     <form method="GET" action="search.php">
         <div class="searchbar">
