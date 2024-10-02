@@ -1,8 +1,19 @@
+:root {
+    --bg-color: #242424;
+    --text-color: white;
+    --header-bg-color: #202020;
+    --card-bg-color: #333;
+    --input-bg-color: #444;
+    --link-color: #007bff;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+    --hover-shadow-color: rgba(255, 255, 255, 0.2);
+}
+
 /* Base Style */
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #242424;
-    color: white;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
@@ -24,11 +35,11 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #202020;
+    background-color: var(--header-bg-color);
 }
 
 header div {
-    position:relative;
+    position: relative;
 }
 
 header .fa-user {
@@ -39,13 +50,13 @@ header .fa-user {
 .title-button {
     font-size: 2rem;
     font-weight: bold;
-    color: white;
-    text-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    text-shadow: 0 4px 8px var(--shadow-color);
     transition: transform 0.3s;
 }
 
 .title-button:hover {
-    text-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 4px 8px var(--hover-shadow-color);
     transform: scale(1.05);
 }
 
@@ -55,8 +66,8 @@ header .fa-user {
     position: absolute;
     top: 100%;
     right: 0;
-    background-color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg-color);
+    box-shadow: 0 4px 8px var(--shadow-color);
     padding: 10px;
     border-radius: 5px;
     z-index: 100;
@@ -66,16 +77,81 @@ header .fa-user {
 #user-menu p, 
 #user-menu a {
     font-size: 14px;
-    color: black;
+    color: var(--text-color);
     text-decoration: none;
     margin: 5px 0;
     display: block;
+    text-shadow: 0 4px 8px var(--shadow-color);
+    transition: transform 0.3s;
+    transform-origin: left;
 }
 
 #user-menu a:hover {
-    color: #007bff;
+    transform: scale(1.05);
+    text-shadow: 0 4px 8px var(--hover-shadow-color);
 }
 
+.switch-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Switch Button (from https://www.w3schools.com/howto/howto_css_switch.asp)*/
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 23px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: #6600cc;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #6600cc;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
 
 /* Search Bar */
 .searchbar {
@@ -84,17 +160,19 @@ header .fa-user {
 }
 
 .searchbar input {
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
     padding: 10px;
     border-radius: 25px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-bg-color);
     width: 300px;
 }
 
 .searchbar button {
     padding: 10px;
     border-radius: 25px;
-    background-color: #007bff;
-    color: white;
+    background-color: #6600cc;
+    color: black;
     border: none;
 }
 
@@ -129,20 +207,19 @@ header .fa-user {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-    transition: box-shadow 0.3s;
-    transition: transform 0.5s;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: box-shadow 0.3s, transform 0.5s;
 }
 
 .category-card:hover {
-    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 16px var(--hover-shadow-color);
     transform: scale(1.03);
 }
 
 .category-name {
     font-size: 18px;
     font-weight: bold;
-    color: white;
+    color: var(--text-color);
     padding: 5px;
     position: absolute;
     bottom: 0;
@@ -182,7 +259,7 @@ header .fa-user {
 
 .category-menu ul li a {
     text-decoration: none;
-    color: #007bff;
+    color: var(--link-color);
 }
 
 .category-menu ul li a:hover {
@@ -197,24 +274,23 @@ header .fa-user {
 }
 
 .product-card {
-    border: 1px solid #ccc;
+    border: 1px solid var(--card-bg-color);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px var(--shadow-color);
     transition: box-shadow 0.3s ease;
 }
 
 .product-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px var(--hover-shadow-color);
 }
-
 
 /* Footer */
 footer {
     text-align: center;
     padding: 10px 0;
-    background-color: #202020;
-    color: white;
+    background-color: var(--header-bg-color);
+    color: var(--text-color);
     font-size: 14px;
     position: relative;
 }
@@ -224,8 +300,8 @@ footer {
     width: 600px;
     padding: 50px;
     margin: 0 auto;
-    background-color: #f7f7f7;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg-color);
+    box-shadow: 0 0 20px var(--shadow-color);
     border-radius: 10px;
     box-sizing: border-box;
     margin-bottom: 50px;
@@ -253,7 +329,7 @@ footer {
 .input-group select {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #848484;
     border-radius: 5px;
     box-sizing: border-box;
 }
@@ -299,7 +375,7 @@ footer {
 }
 
 .legal-link {
-    color: blue;
+    color: #6600cc;
     text-decoration: underline;
 }
 
@@ -316,7 +392,7 @@ footer {
 .login-button {
     width: 100%;
     padding: 12px;
-    background-color: #4CAF50;
+    background-color: #6600cc;
     color: white;
     border: none;
     border-radius: 5px;
@@ -325,9 +401,22 @@ footer {
 }
 
 .login-button:hover {
-    background-color: #45a049;
+    background-color: #5800af;
 }
 
 .error-messages {
     margin-bottom: 20px;
+}
+
+/* Overrides */
+.iti__selected-dial-code {
+    color: black;
+}
+
+.iti__country-name {
+    color: black;
+}
+
+.country-name {
+    color: black;
 }

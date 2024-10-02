@@ -42,7 +42,7 @@ while ($row = mysqli_fetch_assoc($result_all)) {
     <h2>Categories</h2>
     <div id="category-list" class="category-grid">
         <?php foreach ($categories as $category):
-            $randomColor = sprintf('#%06X', mt_rand(0, 0xFFFFFF)); // Generate random color
+            $randomColor = sprintf('#%06X', mt_rand(0, 0xFFFFFF));
             ?>
             <a href="category.php?id=<?= $category['id']; ?>" style="text-decoration: none; color: inherit;">
                 <div class="category-card" style="background-color: <?= $randomColor; ?>;">
@@ -64,7 +64,7 @@ while ($row = mysqli_fetch_assoc($result_all)) {
     </div>
     <div class="more-link">
         <a href="javascript:void(0);" id="more-link" onclick="toggleCategories()">
-            <i id="more-icon" class="fa-solid fa-arrow-right"></i>
+            <i id="more-icon" class="fa-solid fa-arrow-down"></i>
         </a>
     </div>
 </div>
@@ -85,36 +85,40 @@ while ($row = mysqli_fetch_assoc($result_all)) {
     }
 
     function toggleCategories() {
-        const categoryList = document.getElementById('category-list');
-        const moreIcon = document.getElementById('more-icon');
+    const categoryList = document.getElementById('category-list');
+    const moreIcon = document.getElementById('more-icon');
 
-        if (!expanded) {
-            allCategories.slice(3).forEach(category => {
-                const categoryDiv = document.createElement('a');
-                categoryDiv.href = `category.php?id=${category.id}`;
-                categoryDiv.style.textDecoration = 'none';
-                categoryDiv.style.color = 'inherit';
+    if (!expanded) {
+        allCategories.slice(3).forEach(category => {
+            const categoryDiv = document.createElement('a');
+            categoryDiv.href = `category.php?id=${category.id}`;
+            categoryDiv.style.textDecoration = 'none';
+            categoryDiv.style.color = 'inherit';
 
-                categoryDiv.innerHTML = `
-                    <div class="category-card" style="background-color: ${randomColor()}">
-                        <div class="category-name">${category.name}</div>
-                        <div class="subcategory-list">
-                            ${category.subcategories.map(subcategory => `
-                                <span class="subcategory">${subcategory}</span>
-                            `).join('')}
-                        </div>
-                    </div>`;
-                categoryList.appendChild(categoryDiv);
-            });
-            moreIcon.className = "fa-solid fa-arrow-left";
-        } else {
-            const additionalCategories = Array.from(categoryList.children).slice(3);
-            additionalCategories.forEach(category => category.remove());
-            moreIcon.className = "fa-solid fa-arrow-right";
-        }
+            categoryDiv.innerHTML = `
+                <div class="category-card">
+                    <div class="category-name">${category.name}</div>
+                    <div class="subcategory-list">
+                        ${category.subcategories.map(subcategory => `
+                            <span class="subcategory">${subcategory}</span>
+                        `).join('')}
+                    </div>
+                </div>`;
 
-        expanded = !expanded;
+            categoryList.appendChild(categoryDiv);
+
+            applyRandomBackgroundColor(categoryDiv.querySelector('.category-card'));
+        });
+        moreIcon.className = "fa-solid fa-arrow-up";
+    } else {
+        const additionalCategories = Array.from(categoryList.children).slice(3);
+        additionalCategories.forEach(category => category.remove());
+        moreIcon.className = "fa-solid fa-arrow-down";
     }
+
+    expanded = !expanded;
+}
+
 
     // ChatGPT
     function randomColor() {
