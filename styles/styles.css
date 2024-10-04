@@ -300,11 +300,13 @@ footer {
     width: 600px;
     padding: 50px;
     margin: 0 auto;
+    margin-top: 7%;
     background-color: var(--card-bg-color);
     box-shadow: 0 0 20px var(--shadow-color);
     border-radius: 10px;
     box-sizing: border-box;
     margin-bottom: 50px;
+    
 }
 
 .login-title {
@@ -420,3 +422,4 @@ footer {
 .country-name {
     color: black;
 }
+

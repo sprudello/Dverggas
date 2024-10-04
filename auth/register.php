@@ -90,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
 
+        <!-- First Step -->
         <div class="two-columns">
             <div class="input-group">
                 <label for="firstname">Firstname <span class="required">*</span></label>
@@ -111,7 +112,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="username" id="username" placeholder="Username" required>
             </div>
         </div>
-
+        
+        <!-- Second Step -->
         <div class="two-columns">
             <div class="input-group">
                 <label for="email">Email <span class="required">*</span></label>
@@ -123,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
 
+        <!-- Third Step -->
         <div class="two-columns">
             <div class="input-group">
                 <label for="street">Address <span class="required">*</span></label>
@@ -138,7 +141,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="street2">Additional Address</label>
             <input type="text" name="street2" id="street2" placeholder="Street 2 (optional)">
         </div>
-
+        
+        <!-- Fourth Step -->
         <div class="two-columns">
             <div class="input-group">
                 <label for="plz">PLZ <span class="required">*</span></label>
@@ -154,7 +158,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="country">Country <span class="required">*</span></label>
             <input type="text" name="country" id="country" required>
         </div>
-
+        
+        <!-- Fifth Step -->
         <div class="two-columns">
             <div class="input-group">
                 <label for="password">Password <span class="required">*</span></label>
@@ -176,7 +181,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="checkbox" name="accept_privacy" id="accept_privacy" required>
             <label for="accept_privacy">I accept the <a href="https://github.com/sprudello/Dverggas/blob/main/important/PP.md" target="_blank" class="legal-link">Privacy Policy</a> <span class="required">*</span></label>
         </div>
-
+        
+        <!-- Last Step-->
         <button type="submit" class="login-button">Register</button>
     </form>
 </div>
