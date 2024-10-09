@@ -296,7 +296,7 @@ footer {
   position: relative;
 }
 
-/* Login/Logout/Registration Style */
+/* Login/Logout Style */
 .login-box {
   width: 600px;
   padding: 50px;
@@ -416,24 +416,7 @@ footer {
   margin-bottom: 20px;
 }
 
-/* Overrides */
-.iti--separate-dial-code .iti__selected-dial-code {
-  color: black;
-}
-
-.country-select {
-  color: black;
-}
-
-.iti__selected-dial-code {
-  color: black;
-}
-
-.country-name {
-  color: black;
-}
-
-/* Registration Form Styles */
+/* Registration style with help from ChatGPT*/
 .registration-container {
   width: 600px;
   margin: 50px auto;
@@ -528,7 +511,6 @@ footer {
   background-color: #5800af;
 }
 
-/* Input Focus Styles */
 .input-group input:focus,
 .input-group select:focus,
 .input-group textarea:focus {
@@ -537,52 +519,26 @@ footer {
   box-shadow: 0 0 5px rgba(102, 0, 204, 0.5);
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .registration-container {
-    width: 90%;
-  }
-
-  .two-columns {
-    flex-direction: column;
-  }
-
-  .two-columns .input-group {
-    width: 100%;
-  }
-}
-
-/* Country Select and Phone Input Overrides */
-.iti {
-  width: 100%;
-}
-
-.country-select {
-  width: 100%;
-}
-
-.country-select input {
-  background-color: var(--input-bg-color);
-  color: var(--text-color);
-}
-
-.iti__flag-container {
-  background-color: var(--input-bg-color);
-}
-
-.iti__selected-flag {
-  background-color: var(--input-bg-color);
-}
-
-/* Password Match Message */
 #password-match {
   color: red;
 }
 
-/* Success Message */
 .success-message {
   color: green;
   font-size: 16px;
   margin-bottom: 20px;
   text-align: center;
+}
+
+/* Overrides */
+.iti__country {
+  padding: 5px 10px;
+  outline: none;
+  color: black;
+}
+
+.country-select .country-list .country-name,
+.country-select .country-list .flag {
+  vertical-align: middle;
+  color: black;
 }

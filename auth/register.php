@@ -8,7 +8,6 @@ $username = $firstname = $lastname = $display_name = $email = $phone_number = $p
 $street = $street2 = $house_number = $plz = $city = $country = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitize and retrieve form data
     $username = trim($_POST['username'] ?? '');
     $firstname = trim($_POST['firstname'] ?? '');
     $lastname = trim($_POST['lastname'] ?? '');
@@ -24,8 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $country = trim($_POST['country'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
-
-    // Retrieve checkbox values
     $accept_tos = isset($_POST['accept_tos']);
     $accept_privacy = isset($_POST['accept_privacy']);
 
@@ -74,17 +71,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "You must accept the Privacy Policy!";
     }
 
-    // Optional: Additional validations (e.g., password strength) can be added here
-
     if (empty($errors)) {
-        // Hash the password securely
+        // Hash the password
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
         // Prepare the INSERT statement
         $stmt = $conn->prepare("INSERT INTO users (username, firstname, lastname, display_name, email, phone_number, street, street2, house_number, plz, city, country, password_hash) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         if ($stmt) {
-            // Bind parameters, using 's' for strings and 'null' for NULL values
+            // Bind parameters
             $stmt->bind_param(
                 'sssssssssssss',
                 $username,
@@ -102,11 +97,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $password_hash
             );
 
-            // Successful registration
+            // (Un)Successful registration
             if ($stmt->execute()) {
-                echo "<script>
-                    window.location.href = 'login.php';
-                    </script>";
+                echo "<script>window.location.href = 'login.php'; </script>";
             } else {
                 $errors[] = "Error: " . htmlspecialchars($stmt->error);
             }
@@ -275,12 +268,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
 
-<!-- Include the registration.js script -->
-<script src="registration.js"></script>
-
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // Initialize intl-tel-input for phone numbers
+        // Initialize intl-tel-input
         var input = document.querySelector("#phone");
         var iti = window.intlTelInput(input, {
             separateDialCode: true,
@@ -289,13 +279,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
         });
 
-        // Update hidden phone_code input on country change or input
+        // Update hidden phone_code input
         input.addEventListener('countrychange', function () {
             var countryData = iti.getSelectedCountryData();
             document.getElementById('phone_code').value = '+' + countryData.dialCode;
         });
 
-        // Populate phone_code on initial load if a country is pre-selected
+        // Populate phone_code on initial load
         var countryData = iti.getSelectedCountryData();
         document.getElementById('phone_code').value = '+' + countryData.dialCode;
 
@@ -337,7 +327,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             });
         });
 
-        // Add event listeners to Previous buttons
+        // Event listeners for Previous buttons
         prevButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 currentStep--;
@@ -350,7 +340,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             });
         });
 
-        // Function to update the progress step content
+        // Update progress step content
         function updateProgressStepContent(stepIndex) {
             if (progressSteps[stepIndex].classList.contains("completed")) {
                 progressSteps[stepIndex].innerHTML = '<i class="fa-solid fa-check"></i>';
@@ -359,7 +349,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Function to show a specific step
         function showStep(step) {
             steps.forEach((s, index) => {
                 s.classList.toggle("active", index === step);
@@ -410,7 +399,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
 
-            // Additional custom validation for password match (assuming step 4 is password)
+            // Additional validation for password match
             if (step === 4) {
                 const password = document.getElementById("password");
                 const confirmPassword = document.getElementById("confirm_password");
@@ -420,7 +409,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     passwordMatchMsg.textContent = "Passwords do not match.";
                     valid = false;
                 } else {
-                    passwordMatchMsg.textContent = "";
+                    passwordMatchMsg.textContent = "Passwords match.";
                 }
             }
             return valid;
@@ -441,12 +430,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             });
         }
 
+        /*
         // Handle form submission
         form.addEventListener("submit", (e) => {
             if (!validateStep(currentStep)) {
                 e.preventDefault();
             }
         });
+        */
     });
 
 </script>
