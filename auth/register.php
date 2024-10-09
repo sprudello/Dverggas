@@ -30,7 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $accept_privacy = isset($_POST['accept_privacy']);
 
     // Combine phone code and phone number
-    $full_phone_number = $phone_code . $phone_number;
+    if (empty($phone_number)) {
+        $full_phone_number = null;
+    } else {
+        $full_phone_number = $phone_code . $phone_number;
+    }
 
     // Validate required fields
     if (empty($username) || empty($firstname) || empty($lastname) || empty($email) || empty($street) || empty($house_number) || empty($plz) || empty($city) || empty($country) || empty($password)) {
@@ -80,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare("INSERT INTO users (username, firstname, lastname, display_name, email, phone_number, street, street2, house_number, plz, city, country, password_hash) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         if ($stmt) {
+            // Bind parameters, using 's' for strings and 'null' for NULL values
             $stmt->bind_param(
                 'sssssssssssss',
                 $username,
@@ -97,12 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $password_hash
             );
 
+            // Successful registration
             if ($stmt->execute()) {
-                // Registration successful
-                // Optionally, redirect the user or log them in
-                echo "<div class='success-message'>Registration successful! You can now <a href='login.php'>login</a>.</div>";
+                echo "<script>
+                    window.location.href = 'login.php';
+                    </script>";
             } else {
-                // Handle execution errors
                 $errors[] = "Error: " . htmlspecialchars($stmt->error);
             }
 
@@ -117,106 +122,146 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include_once '../include/head.php'; ?>
 
 <!-- Registration form -->
-<div class="login-box">
-    <h2 class="login-title">Register</h2>
-    <form method="POST" action="register.php">
-        <?php if (!empty($errors)): ?>
-            <div class="error-messages">
-                <?php foreach ($errors as $error): ?>
-                    <p class="error"><?= htmlspecialchars($error) ?></p>
-                <?php endforeach; ?>
-            </div>
-        <?php endif; ?>
-
-        <div class="two-columns">
-            <div class="input-group">
-                <label for="firstname">Firstname <span class="required">*</span></label>
-                <input type="text" name="firstname" id="firstname" placeholder="Firstname" value="<?= htmlspecialchars($firstname ?? '') ?>" required>
-            </div>
-            <div class="input-group">
-                <label for="lastname">Lastname <span class="required">*</span></label>
-                <input type="text" name="lastname" id="lastname" placeholder="Lastname" value="<?= htmlspecialchars($lastname ?? '') ?>" required>
+<div class="registration-container">
+    <form id="registration-form" method="post" action="">
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+            <div class="progress-steps">
+                <div class="progress-step active">1</div>
+                <div class="progress-step">2</div>
+                <div class="progress-step">3</div>
+                <div class="progress-step">4</div>
+                <div class="progress-step">5</div>
+                <div class="progress-step">6</div>
             </div>
         </div>
 
-        <div class="two-columns">
-            <div class="input-group">
-                <label for="display_name">Displayname</label>
-                <input type="text" name="display_name" id="display_name" placeholder="Displayname (optional)" value="<?= htmlspecialchars($display_name ?? '') ?>">
+        <div class="steps-container">
+            <?php if (!empty($errors)): ?>
+                <div class="error-messages">
+                    <?php foreach ($errors as $error): ?>
+                        <div class="error"><?php echo htmlspecialchars($error); ?></div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Step 1: Personal Information -->
+            <div class="step active">
+                <h2>Personal Information</h2>
+                <div class="two-columns">
+                    <div class="input-group">
+                        <label for="firstname">Firstname <span class="required">*</span></label>
+                        <input type="text" name="firstname" id="firstname" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="lastname">Lastname <span class="required">*</span></label>
+                        <input type="text" name="lastname" id="lastname" required>
+                    </div>
+                </div>
+                <div class="two-columns">
+                    <div class="input-group">
+                        <label for="display_name">Displayname</label>
+                        <input type="text" name="display_name" id="display_name">
+                    </div>
+                    <div class="input-group">
+                        <label for="username">Username <span class="required">*</span></label>
+                        <input type="text" name="username" id="username" required>
+                    </div>
+                </div>
+                <button type="button" class="next-button">Next</button>
             </div>
-            <div class="input-group">
-                <label for="username">Username <span class="required">*</span></label>
-                <input type="text" name="username" id="username" placeholder="Username" value="<?= htmlspecialchars($username ?? '') ?>" required>
+
+            <!-- Step 2: Contact Information -->
+            <div class="step">
+                <h2>Contact Information</h2>
+                <div class="input-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="phone">Phone number</label>
+                    <input type="tel" id="phone" name="phone_number">
+                </div>
+                <input type="hidden" id="phone_code" name="phone_code">
+                <button type="button" class="prev-button">Previous</button>
+                <button type="button" class="next-button">Next</button>
+            </div>
+
+            <!-- Step 3: Address -->
+            <div class="step">
+                <h2>Address</h2>
+                <div class="two-columns">
+                    <div class="input-group">
+                        <label for="street">Street <span class="required">*</span></label>
+                        <input type="text" name="street" id="street" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="house_number">House number <span class="required">*</span></label>
+                        <input type="text" name="house_number" id="house_number" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="street2">Additional Address</label>
+                    <input type="text" name="street2" id="street2">
+                </div>
+                <button type="button" class="prev-button">Previous</button>
+                <button type="button" class="next-button">Next</button>
+            </div>
+
+            <!-- Step 4: Location -->
+            <div class="step">
+                <h2>Location</h2>
+                <div class="two-columns">
+                    <div class="input-group">
+                        <label for="plz">PLZ <span class="required">*</span></label>
+                        <input type="text" name="plz" id="plz" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="city">City <span class="required">*</span></label>
+                        <input type="text" name="city" id="city" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="country">Country <span class="required">*</span></label>
+                    <input type="text" name="country" id="country" required>
+                </div>
+                <button type="button" class="prev-button">Previous</button>
+                <button type="button" class="next-button">Next</button>
+            </div>
+
+            <!-- Step 5: Password -->
+            <div class="step">
+                <h2>Password</h2>
+                <div class="input-group">
+                    <label for="password">Password <span class="required">*</span></label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="input-group">
+                    <label for="confirm_password">Confirm Password <span class="required">*</span></label>
+                    <input type="password" name="confirm_password" id="confirm_password" required>
+                    <small id="password-match" class="info-message"></small>
+                </div>
+                <button type="button" class="prev-button">Previous</button>
+                <button type="button" class="next-button">Next</button>
+            </div>
+
+            <!-- Step 6: Terms and Conditions -->
+            <div class="step">
+                <h2>Terms and Conditions</h2>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="accept_tos" id="accept_tos" required>
+                    <label for="accept_tos">I accept the <a href="#" class="legal-link">General Terms and Conditions</a>
+                        <span class="required">*</span></label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" name="accept_privacy" id="accept_privacy" required>
+                    <label for="accept_privacy">I accept the <a href="#" class="legal-link">Privacy Policy</a> <span
+                            class="required">*</span></label>
+                </div>
+                <button type="button" class="prev-button">Previous</button>
+                <button type="submit" class="submit-button">Register</button>
             </div>
         </div>
-
-        <div class="two-columns">
-            <div class="input-group">
-                <label for="email">Email <span class="required">*</span></label>
-                <input type="email" name="email" id="email" placeholder="Email" value="<?= htmlspecialchars($email ?? '') ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
-            </div>
-            <div class="input-group">
-                <label for="phone_number">Phone number</label>
-                <input type="tel" id="phone" name="phone_number" placeholder="Phone Number" value="<?= htmlspecialchars($phone_number ?? '') ?>">
-                <input type="hidden" name="phone_code" id="phone_code">
-            </div>
-        </div>
-
-        <div class="two-columns">
-            <div class="input-group">
-                <label for="street">Address <span class="required">*</span></label>
-                <input type="text" name="street" id="street" placeholder="Street" value="<?= htmlspecialchars($street ?? '') ?>" required>
-            </div>
-            <div class="input-group">
-                <label for="house_number">House number <span class="required">*</span></label>
-                <input type="text" name="house_number" id="house_number" placeholder="House Number" value="<?= htmlspecialchars($house_number ?? '') ?>" required>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label for="street2">Additional Address</label>
-            <input type="text" name="street2" id="street2" placeholder="Street 2 (optional)" value="<?= htmlspecialchars($street2 ?? '') ?>">
-        </div>
-
-        <div class="two-columns">
-            <div class="input-group">
-                <label for="plz">PLZ <span class="required">*</span></label>
-                <input type="text" name="plz" id="plz" placeholder="PLZ" value="<?= htmlspecialchars($plz ?? '') ?>" required>
-            </div>
-            <div class="input-group">
-                <label for="city">City <span class="required">*</span></label>
-                <input type="text" name="city" id="city" placeholder="City" value="<?= htmlspecialchars($city ?? '') ?>" required>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label for="country">Country <span class="required">*</span></label>
-            <input type="text" name="country" id="country" value="<?= htmlspecialchars($country ?? '') ?>" required>
-        </div>
-
-        <div class="two-columns">
-            <div class="input-group">
-                <label for="password">Password <span class="required">*</span></label>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-            </div>
-            <div class="input-group">
-                <label for="confirm_password">Confirm Password <span class="required">*</span></label>
-                <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required>
-                <small id="password-match" class="info-message"></small>
-            </div>
-        </div>
-
-        <div class="checkbox-group">
-            <input type="checkbox" name="accept_tos" id="accept_tos" <?= isset($_POST['accept_tos']) ? 'checked' : '' ?> required>
-            <label for="accept_tos">I accept the <a href="https://github.com/sprudello/Dverggas/blob/main/important/GToS.md" target="_blank" class="legal-link">General Terms and Conditions</a> <span class="required">*</span></label>
-        </div>
-
-        <div class="checkbox-group">
-            <input type="checkbox" name="accept_privacy" id="accept_privacy" <?= isset($_POST['accept_privacy']) ? 'checked' : '' ?> required>
-            <label for="accept_privacy">I accept the <a href="https://github.com/sprudello/Dverggas/blob/main/important/PP.md" target="_blank" class="legal-link">Privacy Policy</a> <span class="required">*</span></label>
-        </div>
-
-        <button type="submit" class="login-button">Register</button>
     </form>
 </div>
 
@@ -230,26 +275,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
 
-<script>
-    // Initialize intl-tel-input for phone numbers
-    var input = document.querySelector("#phone");
-    var iti = window.intlTelInput(input, {
-        separateDialCode: true,
-        initialCountry: "ch",
-        preferredCountries: ["ch", "de", "fr", "it", "us"],
-        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
-    });
+<!-- Include the registration.js script -->
+<script src="registration.js"></script>
 
-    // Update hidden phone_code input on country change or input
-    input.addEventListener('countrychange', function() {
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize intl-tel-input for phone numbers
+        var input = document.querySelector("#phone");
+        var iti = window.intlTelInput(input, {
+            separateDialCode: true,
+            initialCountry: "ch",
+            preferredCountries: ["ch", "de", "fr", "it", "us"],
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+        });
+
+        // Update hidden phone_code input on country change or input
+        input.addEventListener('countrychange', function () {
+            var countryData = iti.getSelectedCountryData();
+            document.getElementById('phone_code').value = '+' + countryData.dialCode;
+        });
+
+        // Populate phone_code on initial load if a country is pre-selected
         var countryData = iti.getSelectedCountryData();
         document.getElementById('phone_code').value = '+' + countryData.dialCode;
-    });
 
-    // Initialize country-select
-    $(document).ready(function() {
+        // Initialize country-select
         $("#country").countrySelect({
-            defaultCountry: "ch", 
+            defaultCountry: "ch",
             preferredCountries: ["ch", "de", "fr", "it", "us"],
         });
 
@@ -257,23 +309,144 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (countryValue) {
             $("#country").countrySelect("setCountry", countryValue);
         }
-    });
 
-    // Password Match Check
-    $("#password, #confirm_password").on('keyup', function () {
-        var password = $("#password").val();
-        var confirm_password = $("#confirm_password").val();
+        // Multi-step form script
+        const form = document.getElementById("registration-form");
+        const steps = Array.from(form.querySelectorAll(".step"));
+        const nextButtons = form.querySelectorAll(".next-button");
+        const prevButtons = form.querySelectorAll(".prev-button");
+        const progressSteps = document.querySelectorAll(".progress-step");
+        const progressBar = document.querySelector(".progress-bar");
+        const totalSteps = steps.length;
+        let currentStep = 0;
 
-        if (password === confirm_password && password !== "") {
-            $("#password-match").html("<span style='color: green;'>Passwords match</span>");
-        } else {
-            $("#password-match").html("<span style='color: red;'>Passwords do not match</span>");
+        showStep(currentStep);
+
+        nextButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                if (validateStep(currentStep)) {
+                    progressSteps[currentStep].classList.add("completed");
+                    progressSteps[currentStep].classList.remove("active");
+                    updateProgressStepContent(currentStep);
+
+                    currentStep++;
+                    if (currentStep < totalSteps) {
+                        showStep(currentStep);
+                    }
+                }
+            });
+        });
+
+        // Add event listeners to Previous buttons
+        prevButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                currentStep--;
+                if (currentStep >= 0) {
+                    progressSteps[currentStep].classList.remove("completed");
+                    progressSteps[currentStep].classList.add("active");
+                    progressSteps[currentStep].innerHTML = currentStep + 1;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        // Function to update the progress step content
+        function updateProgressStepContent(stepIndex) {
+            if (progressSteps[stepIndex].classList.contains("completed")) {
+                progressSteps[stepIndex].innerHTML = '<i class="fa-solid fa-check"></i>';
+            } else {
+                progressSteps[stepIndex].innerHTML = stepIndex + 1;
+            }
         }
+
+        // Function to show a specific step
+        function showStep(step) {
+            steps.forEach((s, index) => {
+                s.classList.toggle("active", index === step);
+            });
+
+            // Update progress steps classes
+            progressSteps.forEach((ps, index) => {
+                if (index < step) {
+                    ps.classList.add("completed");
+                    updateProgressStepContent(index);
+                } else if (index === step) {
+                    ps.classList.add("active");
+                    ps.classList.remove("completed");
+                    if (!ps.classList.contains("completed")) {
+                        ps.innerHTML = index + 1;
+                    }
+                } else {
+                    ps.classList.remove("active", "completed");
+                    ps.innerHTML = index + 1;
+                }
+            });
+
+            // Calculate and set progress
+            const progressPercentage = step === 0 ? 0 : (step / (totalSteps - 1)) * 100;
+            progressBar.style.setProperty("--progress", `${progressPercentage}%`);
+
+            // Focus on the first input of the current step
+            const firstInput = steps[step].querySelector("input, select, textarea");
+            if (firstInput) {
+                firstInput.focus();
+            }
+
+            form.scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Function to validate the current step
+        function validateStep(step) {
+            const currentFormStep = steps[step];
+            const inputs = Array.from(
+                currentFormStep.querySelectorAll("input, select, textarea")
+            );
+            let valid = true;
+
+            inputs.forEach((input) => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    valid = false;
+                }
+            });
+
+            // Additional custom validation for password match (assuming step 4 is password)
+            if (step === 4) {
+                const password = document.getElementById("password");
+                const confirmPassword = document.getElementById("confirm_password");
+                const passwordMatchMsg = document.getElementById("password-match");
+
+                if (password.value !== confirmPassword.value) {
+                    passwordMatchMsg.textContent = "Passwords do not match.";
+                    valid = false;
+                } else {
+                    passwordMatchMsg.textContent = "";
+                }
+            }
+            return valid;
+        }
+
+        // Real-time password match validation
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirm_password");
+        const passwordMatchMsg = document.getElementById("password-match");
+
+        if (password && confirmPassword && passwordMatchMsg) {
+            confirmPassword.addEventListener("input", () => {
+                if (password.value !== confirmPassword.value) {
+                    passwordMatchMsg.textContent = "Passwords do not match.";
+                } else {
+                    passwordMatchMsg.textContent = "";
+                }
+            });
+        }
+
+        // Handle form submission
+        form.addEventListener("submit", (e) => {
+            if (!validateStep(currentStep)) {
+                e.preventDefault();
+            }
+        });
     });
 
-    // Populate phone_code on initial load if a country is pre-selected
-    document.addEventListener("DOMContentLoaded", function() {
-        var countryData = iti.getSelectedCountryData();
-        document.getElementById('phone_code').value = '+' + countryData.dialCode;
-    });
 </script>

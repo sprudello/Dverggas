@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user && password_verify($password, $user['password_hash'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-        echo "Login successful!";
+        echo "<script>window.location.href = '../index.php';</script>";
     } else {
         echo "Invalid login credentials!";
     }
@@ -49,5 +49,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" class="login-button">Login</button>
     </form>
 </div>
-
-<?php include_once '../include/footer.php'; ?>

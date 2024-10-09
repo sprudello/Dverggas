@@ -98,7 +98,7 @@ header .fa-user {
   gap: 10px;
 }
 
-/* Switch Button (from https://www.w3schools.com/howto/howto_css_switch.asp)*/
+/* Switch Button */
 .switch {
   position: relative;
   display: inline-block;
@@ -342,12 +342,15 @@ footer {
 }
 
 .input-group input,
-.input-group select {
+.input-group select,
+.input-group textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #848484;
   border-radius: 5px;
   box-sizing: border-box;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
 }
 
 .two-columns {
@@ -395,6 +398,10 @@ footer {
   text-decoration: underline;
 }
 
+.legal-link:hover {
+  color: #5800af;
+}
+
 /* Error messages */
 .error {
   color: red;
@@ -415,7 +422,7 @@ footer {
 }
 
 .country-select {
-    color: black;
+  color: black;
 }
 
 .iti__selected-dial-code {
@@ -424,4 +431,158 @@ footer {
 
 .country-name {
   color: black;
+}
+
+/* Registration Form Styles */
+.registration-container {
+  width: 600px;
+  margin: 50px auto;
+  background-color: var(--card-bg-color);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px var(--shadow-color);
+}
+
+.progress-container {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background-color: #444;
+  z-index: 1;
+}
+
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  background-color: #6600cc;
+  width: var(--progress, 0%);
+  transition: width 0.3s;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.progress-step {
+  width: 30px;
+  height: 30px;
+  background-color: #444;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-size: 16px;
+  position: relative;
+}
+
+.progress-step.active {
+  background-color: #6600cc;
+}
+
+.progress-step.completed {
+  background-color: #6600cc;
+}
+
+.progress-step i {
+  font-size: 16px;
+}
+
+.steps-container .step {
+  display: none;
+}
+
+.steps-container .step.active {
+  display: block;
+}
+
+.next-button,
+.prev-button,
+.submit-button {
+  background-color: #6600cc;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.prev-button {
+  margin-right: 10px;
+}
+
+.next-button:hover,
+.prev-button:hover,
+.submit-button:hover {
+  background-color: #5800af;
+}
+
+/* Input Focus Styles */
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+  border-color: #6600cc;
+  outline: none;
+  box-shadow: 0 0 5px rgba(102, 0, 204, 0.5);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .registration-container {
+    width: 90%;
+  }
+
+  .two-columns {
+    flex-direction: column;
+  }
+
+  .two-columns .input-group {
+    width: 100%;
+  }
+}
+
+/* Country Select and Phone Input Overrides */
+.iti {
+  width: 100%;
+}
+
+.country-select {
+  width: 100%;
+}
+
+.country-select input {
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+}
+
+.iti__flag-container {
+  background-color: var(--input-bg-color);
+}
+
+.iti__selected-flag {
+  background-color: var(--input-bg-color);
+}
+
+/* Password Match Message */
+#password-match {
+  color: red;
+}
+
+/* Success Message */
+.success-message {
+  color: green;
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
 }
