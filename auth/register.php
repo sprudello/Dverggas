@@ -429,15 +429,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
         }
-
-        /*
-        // Handle form submission
-        form.addEventListener("submit", (e) => {
-            if (!validateStep(currentStep)) {
-                e.preventDefault();
-            }
-        });
-        */
     });
 
 </script>
