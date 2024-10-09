@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 
 session_start();
 include_once 'include/head.php';
+include_once 'include/header.php';
 include_once 'db/connection.php';
 
 // Get category ID from the URL
@@ -20,47 +21,29 @@ if (!$category) {
 }
 
 // Fetch subcategories of current category
-$query_subcategories = "SELECT * FROM categories WHERE parent_id = $category_id";
+$query_subcategories = "SELECT id, name FROM categories WHERE parent_id = $category_id";
 $result_subcategories = mysqli_query($conn, $query_subcategories);
 $subcategories = [];
 while ($row = mysqli_fetch_assoc($result_subcategories)) {
     $subcategories[] = $row;
 }
 
-// Fetch products of current category
-$query_products = "SELECT * FROM products WHERE category_id = $category_id";
-$result_products = mysqli_query($conn, $query_products);
+$subcategory_ids = array_merge([$category_id], array_column($subcategories, 'id'));
+
+$placeholders = implode(',', array_fill(0, count($subcategory_ids), '?'));
+
+// Fetch products of current category and its subcategories
+$query_products = "SELECT * FROM products WHERE category_id IN ($placeholders)";
+$stmt = $conn->prepare($query_products);
+$stmt->bind_param(str_repeat('i', count($subcategory_ids)), ...$subcategory_ids);
+$stmt->execute();
+$result_products = $stmt->get_result();
+
 $products = [];
-while ($row = mysqli_fetch_assoc($result_products)) {
+while ($row = $result_products->fetch_assoc()) {
     $products[] = $row;
 }
 ?>
-
-<!-- Header -->
-<header>
-    <h1>Dverggas</h1>
-    <!-- Search bar in the header -->
-    <div class="searchbar">
-        <input type="text" placeholder="Search">
-        <button>
-            <i class="fa-solid fa-magnifying-glass"></i> Search
-        </button>
-    </div>
-
-    <div>
-        <i class="fa-solid fa-user" style="font-size: 24px; cursor: pointer;" onclick="toggleUserMenu()"></i>
-        <div id="user-menu" style="display: none;">
-            <?php if (isset($_SESSION['username'])): ?>
-                <p>Welcome, <?= htmlspecialchars($_SESSION['username']); ?></p>
-                <a href="auth/logout.php">Logout</a>
-            <?php else: ?>
-                <p>Welcome, Guest</p>
-                <a href="auth/login.php">Login</a>
-                <a href="auth/register.php">Register</a>
-            <?php endif; ?>
-        </div>
-    </div>
-</header>
 
 <!-- Main Content Area -->
 <div class="main-content" style="display: flex;">
@@ -69,7 +52,10 @@ while ($row = mysqli_fetch_assoc($result_products)) {
         <h3>Subcategories</h3>
         <ul>
             <?php foreach ($subcategories as $subcategory): ?>
-                <li><a href="category.php?id=<?= $subcategory['id']; ?>"><?= htmlspecialchars($subcategory['name']); ?></a>
+                <li>
+                    <a href="category.php?id=<?= $subcategory['id']; ?>">
+                        <?= htmlspecialchars($subcategory['name']); ?>
+                    </a>
                 </li>
             <?php endforeach; ?>
         </ul>

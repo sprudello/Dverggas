@@ -4,22 +4,30 @@ include '../db/connection.php';
 
 $errors = [];
 
+$username = $firstname = $lastname = $display_name = $email = $phone_number = $phone_code = '';
+$street = $street2 = $house_number = $plz = $city = $country = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $display_name = $_POST['display_name'];
-    $email = $_POST['email'];
-    $phone_number = $_POST['phone_number'];
-    $phone_code = $_POST['phone_code'];
-    $street = $_POST['street'];
-    $street2 = $_POST['street2'];
-    $house_number = $_POST['house_number'];
-    $plz = $_POST['plz'];
-    $city = $_POST['city'];
-    $country = $_POST['country'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
+    // Sanitize and retrieve form data
+    $username = trim($_POST['username'] ?? '');
+    $firstname = trim($_POST['firstname'] ?? '');
+    $lastname = trim($_POST['lastname'] ?? '');
+    $display_name = trim($_POST['display_name'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $phone_number = trim($_POST['phone_number'] ?? '');
+    $phone_code = trim($_POST['phone_code'] ?? '');
+    $street = trim($_POST['street'] ?? '');
+    $street2 = trim($_POST['street2'] ?? '');
+    $house_number = trim($_POST['house_number'] ?? '');
+    $plz = trim($_POST['plz'] ?? '');
+    $city = trim($_POST['city'] ?? '');
+    $country = trim($_POST['country'] ?? '');
+    $password = $_POST['password'] ?? '';
+    $confirm_password = $_POST['confirm_password'] ?? '';
+
+    // Retrieve checkbox values
+    $accept_tos = isset($_POST['accept_tos']);
+    $accept_privacy = isset($_POST['accept_privacy']);
 
     // Combine phone code and phone number
     $full_phone_number = $phone_code . $phone_number;
@@ -36,13 +44,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Check if username is available
     $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
-    $stmt->bind_param('s', $username);
-    $stmt->execute();
-    $stmt->store_result();
-    if ($stmt->num_rows > 0) {
-        $errors[] = "Username already taken!";
+    if ($stmt) {
+        $stmt->bind_param('s', $username);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            $errors[] = "Username already taken!";
+        }
+        $stmt->close();
+    } else {
+        $errors[] = "Database error: Unable to prepare statement.";
     }
-    $stmt->close();
 
     // Validate password match
     if ($password !== $confirm_password) {
@@ -58,20 +70,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "You must accept the Privacy Policy!";
     }
 
+    // Optional: Additional validations (e.g., password strength) can be added here
+
     if (empty($errors)) {
+        // Hash the password securely
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
+        // Prepare the INSERT statement
         $stmt = $conn->prepare("INSERT INTO users (username, firstname, lastname, display_name, email, phone_number, street, street2, house_number, plz, city, country, password_hash) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param('sssssssssssss', $username, $firstname, $lastname, $display_name, $email, $full_phone_number, $street, $street2, $house_number, $plz, $city, $country, $password_hash);
+        if ($stmt) {
+            $stmt->bind_param(
+                'sssssssssssss',
+                $username,
+                $firstname,
+                $lastname,
+                $display_name,
+                $email,
+                $full_phone_number,
+                $street,
+                $street2,
+                $house_number,
+                $plz,
+                $city,
+                $country,
+                $password_hash
+            );
 
-        if ($stmt->execute()) {
-            echo "Registration successful!";
+            if ($stmt->execute()) {
+                // Registration successful
+                // Optionally, redirect the user or log them in
+                echo "<div class='success-message'>Registration successful! You can now <a href='login.php'>login</a>.</div>";
+            } else {
+                // Handle execution errors
+                $errors[] = "Error: " . htmlspecialchars($stmt->error);
+            }
+
+            $stmt->close();
         } else {
-            echo "Error: " . $stmt->error;
+            $errors[] = "Database error: Unable to prepare statement.";
         }
-
-        $stmt->close();
     }
 }
 ?>
@@ -93,66 +131,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="two-columns">
             <div class="input-group">
                 <label for="firstname">Firstname <span class="required">*</span></label>
-                <input type="text" name="firstname" id="firstname" placeholder="Firstname" required>
+                <input type="text" name="firstname" id="firstname" placeholder="Firstname" value="<?= htmlspecialchars($firstname ?? '') ?>" required>
             </div>
             <div class="input-group">
                 <label for="lastname">Lastname <span class="required">*</span></label>
-                <input type="text" name="lastname" id="lastname" placeholder="Lastname" required>
+                <input type="text" name="lastname" id="lastname" placeholder="Lastname" value="<?= htmlspecialchars($lastname ?? '') ?>" required>
             </div>
         </div>
 
         <div class="two-columns">
             <div class="input-group">
                 <label for="display_name">Displayname</label>
-                <input type="text" name="display_name" id="display_name" placeholder="Displayname (optional)">
+                <input type="text" name="display_name" id="display_name" placeholder="Displayname (optional)" value="<?= htmlspecialchars($display_name ?? '') ?>">
             </div>
             <div class="input-group">
                 <label for="username">Username <span class="required">*</span></label>
-                <input type="text" name="username" id="username" placeholder="Username" required>
+                <input type="text" name="username" id="username" placeholder="Username" value="<?= htmlspecialchars($username ?? '') ?>" required>
             </div>
         </div>
 
         <div class="two-columns">
             <div class="input-group">
                 <label for="email">Email <span class="required">*</span></label>
-                <input type="email" name="email" id="email" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                <input type="email" name="email" id="email" placeholder="Email" value="<?= htmlspecialchars($email ?? '') ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
             </div>
             <div class="input-group">
                 <label for="phone_number">Phone number</label>
-                <input type="tel" id="phone" name="phone_number" placeholder="Phone Number">
+                <input type="tel" id="phone" name="phone_number" placeholder="Phone Number" value="<?= htmlspecialchars($phone_number ?? '') ?>">
+                <input type="hidden" name="phone_code" id="phone_code">
             </div>
         </div>
 
         <div class="two-columns">
             <div class="input-group">
                 <label for="street">Address <span class="required">*</span></label>
-                <input type="text" name="street" id="street" placeholder="Street" required>
+                <input type="text" name="street" id="street" placeholder="Street" value="<?= htmlspecialchars($street ?? '') ?>" required>
             </div>
             <div class="input-group">
                 <label for="house_number">House number <span class="required">*</span></label>
-                <input type="text" name="house_number" id="house_number" placeholder="House Number" required>
+                <input type="text" name="house_number" id="house_number" placeholder="House Number" value="<?= htmlspecialchars($house_number ?? '') ?>" required>
             </div>
         </div>
 
         <div class="input-group">
             <label for="street2">Additional Address</label>
-            <input type="text" name="street2" id="street2" placeholder="Street 2 (optional)">
+            <input type="text" name="street2" id="street2" placeholder="Street 2 (optional)" value="<?= htmlspecialchars($street2 ?? '') ?>">
         </div>
 
         <div class="two-columns">
             <div class="input-group">
                 <label for="plz">PLZ <span class="required">*</span></label>
-                <input type="text" name="plz" id="plz" placeholder="PLZ" required>
+                <input type="text" name="plz" id="plz" placeholder="PLZ" value="<?= htmlspecialchars($plz ?? '') ?>" required>
             </div>
             <div class="input-group">
                 <label for="city">City <span class="required">*</span></label>
-                <input type="text" name="city" id="city" placeholder="City" required>
+                <input type="text" name="city" id="city" placeholder="City" value="<?= htmlspecialchars($city ?? '') ?>" required>
             </div>
         </div>
 
         <div class="input-group">
             <label for="country">Country <span class="required">*</span></label>
-            <input type="text" name="country" id="country" required>
+            <input type="text" name="country" id="country" value="<?= htmlspecialchars($country ?? '') ?>" required>
         </div>
 
         <div class="two-columns">
@@ -168,21 +207,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="checkbox-group">
-            <input type="checkbox" name="accept_tos" id="accept_tos" required>
+            <input type="checkbox" name="accept_tos" id="accept_tos" <?= isset($_POST['accept_tos']) ? 'checked' : '' ?> required>
             <label for="accept_tos">I accept the <a href="https://github.com/sprudello/Dverggas/blob/main/important/GToS.md" target="_blank" class="legal-link">General Terms and Conditions</a> <span class="required">*</span></label>
         </div>
 
         <div class="checkbox-group">
-            <input type="checkbox" name="accept_privacy" id="accept_privacy" required>
+            <input type="checkbox" name="accept_privacy" id="accept_privacy" <?= isset($_POST['accept_privacy']) ? 'checked' : '' ?> required>
             <label for="accept_privacy">I accept the <a href="https://github.com/sprudello/Dverggas/blob/main/important/PP.md" target="_blank" class="legal-link">Privacy Policy</a> <span class="required">*</span></label>
         </div>
 
         <button type="submit" class="login-button">Register</button>
     </form>
 </div>
-
-
-<?php include_once '../include/footer.php'; ?>
 
 <!-- jQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -197,29 +233,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script>
     // Initialize intl-tel-input for phone numbers
     var input = document.querySelector("#phone");
-    window.intlTelInput(input, {
+    var iti = window.intlTelInput(input, {
         separateDialCode: true,
         initialCountry: "ch",
-        preferredCountries: ["ch", "de", "fr", "it", "us"]
+        preferredCountries: ["ch", "de", "fr", "it", "us"],
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
 
-    // Initialize country-select for country dropdown
+    // Update hidden phone_code input on country change or input
+    input.addEventListener('countrychange', function() {
+        var countryData = iti.getSelectedCountryData();
+        document.getElementById('phone_code').value = '+' + countryData.dialCode;
+    });
+
+    // Initialize country-select
     $(document).ready(function() {
         $("#country").countrySelect({
             defaultCountry: "ch", 
-            preferredCountries: ["ch", "de", "fr", "it", "us"]
+            preferredCountries: ["ch", "de", "fr", "it", "us"],
         });
+
+        var countryValue = $("#country").val();
+        if (countryValue) {
+            $("#country").countrySelect("setCountry", countryValue);
+        }
     });
 
     // Password Match Check
     $("#password, #confirm_password").on('keyup', function () {
-            var password = $("#password").val();
-            var confirm_password = $("#confirm_password").val();
+        var password = $("#password").val();
+        var confirm_password = $("#confirm_password").val();
 
-            if (password === confirm_password && password !== "") {
-                $("#password-match").html("<span style='color: green;'>Passwords match</span>");
-            } else {
-                $("#password-match").html("<span style='color: red;'>Passwords do not match</span>");
-            }
+        if (password === confirm_password && password !== "") {
+            $("#password-match").html("<span style='color: green;'>Passwords match</span>");
+        } else {
+            $("#password-match").html("<span style='color: red;'>Passwords do not match</span>");
+        }
+    });
+
+    // Populate phone_code on initial load if a country is pre-selected
+    document.addEventListener("DOMContentLoaded", function() {
+        var countryData = iti.getSelectedCountryData();
+        document.getElementById('phone_code').value = '+' + countryData.dialCode;
     });
 </script>
