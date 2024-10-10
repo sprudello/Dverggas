@@ -17,35 +17,35 @@ git clone https://github.com/sprudello/Dverggas.git
 - Or download the ZIP by pressing on <>Code and then Download ZIP.
     - If you download the ZIP you have to be careful not to copy the folder with the Dverggas folder inside, but the folder with all the files.
 
-[GIF]
+![GIF]
   
 - Then Download XAMPP [here](https://www.apachefriends.org/download.html).
 
 - After downloading and installing XAMPP, launch XAMPP. You should then be able to see the Control panel.
 
-[Picture]
+![Picture](imgs/ControlPanel.png)
 
 - Start Apache and the MySQL in the control panel. (The MySQL Module may crash so you just have to start it again.)
 
-[GIF]
+![GIF]
 
 - In the Control Panel press on Explorer to open the xampp folder.
 
 - From the xampp folder, locate and navigate to the htdocs folder.
 
-[GIF]
+![GIF]
 
 - In the htdocs folder, paste the Dverggas folder into it. (Path to the Dverggas folder should then look like this: ..\xampp\htdocs\Dverggas)
 
-[Picture]
+![Picture](imgs/DverggasFolder.png.png)
 
 - Press on Admin, on the same row as MySQL, in the control panel. A website should open up.
 
-[Picture]
+![GIF]
 
 - Locate and press on the SQL Button.
 
-[Picture]
+![Picture](imgs/SQLPage.png.png)
 
 - In this you can copypaste the MySQL Scripts located in the db folder. (You have to do it in the order below.)
 
@@ -54,11 +54,13 @@ git clone https://github.com/sprudello/Dverggas.git
     - Thirdly, take the script from [products.sql](https://github.com/sprudello/Dverggas/blob/main/db/products.sql)
     - You can ignore connection.php
 
-[GIF]
+![GIF]
 
 - If all the scripts were successfully executed, then you can move to [localhost/dverggas](http://localhost/dverggas/) and test out the website.
 
+![Picture](imgs/DverggasWebsite.png)
 
-### (Maybe)
+
+### (Maybe) Tutorial Video
 
 [Full tutorial in a GIF/Video]
