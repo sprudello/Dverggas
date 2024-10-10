@@ -1,7 +1,7 @@
 <!-- Header -->
 <header>
-        <a class="title-button" href="index.php">Dverggas</a>
-  <!-- Search Bar -->
+    <a class="title-button" href="index.php">Dverggas</a>
+    <!-- Search Bar -->
     <form method="GET" action="search.php">
         <div class="searchbar">
             <input type="text" name="search_term" placeholder="Suche nach Produkten oder Kategorien">
@@ -18,9 +18,17 @@
                 <a href="auth/logout.php">Logout</a>
             <?php else: ?>
                 <p>Welcome, Guest</p>
-                <a href="auth/login.php">Login</a> 
+                <div class="switch-container">
+                    <p class="mode-text">Dark</p>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <a href="auth/login.php">Login</a>
                 <a href="auth/register.php">Register</a>
             <?php endif; ?>
         </div>
+
     </div>
 </header>
