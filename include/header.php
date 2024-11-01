@@ -19,7 +19,7 @@
             <?php else: ?>
                 <p>Welcome, Guest</p>
                 <div class="switch-container">
-                    <p class="mode-text">Dark</p>
+                <p class="mode-text">Dark</p>
                     <label class="switch">
                         <input type="checkbox">
                         <span class="slider round"></span>

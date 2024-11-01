@@ -85,17 +85,17 @@ while ($row = mysqli_fetch_assoc($result_all)) {
     }
 
     function toggleCategories() {
-        const categoryList = document.getElementById('category-list');
-        const moreIcon = document.getElementById('more-icon');
+    const categoryList = document.getElementById('category-list');
+    const moreIcon = document.getElementById('more-icon');
 
-        if (!expanded) {
-            allCategories.slice(3).forEach(category => {
-                const categoryDiv = document.createElement('a');
-                categoryDiv.href = `category.php?id=${category.id}`;
-                categoryDiv.style.textDecoration = 'none';
-                categoryDiv.style.color = 'inherit';
+    if (!expanded) {
+        allCategories.slice(3).forEach(category => {
+            const categoryDiv = document.createElement('a');
+            categoryDiv.href = `category.php?id=${category.id}`;
+            categoryDiv.style.textDecoration = 'none';
+            categoryDiv.style.color = 'inherit';
 
-                categoryDiv.innerHTML = `
+            categoryDiv.innerHTML = `
                 <div class="category-card">
                     <div class="category-name">${category.name}</div>
                     <div class="subcategory-list">
@@ -104,20 +104,19 @@ while ($row = mysqli_fetch_assoc($result_all)) {
                         `).join('')}
                     </div>
                 </div>`;
+            categoryList.appendChild(categoryDiv);
 
-                categoryList.appendChild(categoryDiv);
-
-                applyRandomBackgroundColor(categoryDiv.querySelector('.category-card'));
-            });
-            moreIcon.className = "fa-solid fa-arrow-up";
-        } else {
-            const additionalCategories = Array.from(categoryList.children).slice(3);
-            additionalCategories.forEach(category => category.remove());
-            moreIcon.className = "fa-solid fa-arrow-down";
-        }
-
-        expanded = !expanded;
+            applyRandomBackgroundColor(categoryDiv.querySelector('.category-card'));
+        });
+        moreIcon.className = "fa-solid fa-arrow-up";
+    } else {
+        const additionalCategories = Array.from(categoryList.children).slice(3);
+        additionalCategories.forEach(category => category.remove());
+        moreIcon.className = "fa-solid fa-arrow-down";
     }
+
+    expanded = !expanded;
+}
 
 
     // ChatGPT
