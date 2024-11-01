@@ -64,7 +64,8 @@ Unser Projekt ist eine benutzerfreundliche Webanwendung, die es Nutzern ermögli
 
 ### 1.4 Diagramme
 
-✍️ Hier können Sie PAPs, Use Case- und Gantt-Diagramme oder Ähnliches einfügen.
+![DverggasSQL](https://github.com/user-attachments/assets/4efbb8fe-2f33-4048-87d1-091429822baf)
+
 
 ## 2 Planen
 
