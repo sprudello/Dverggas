@@ -48,6 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = "Invalid email format!";
     }
 
+    // Validate PLZ format
+    if (!empty($plz) && !preg_match('/^\d{5}$/', $plz)) {
+        $errors[] = "PLZ must be exactly 5 digits.";
+    }
+
     // Check if username is available
     $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
     if ($stmt) {
@@ -209,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="two-columns">
                     <div class="input-group">
                         <label for="plz">PLZ <span class="required">*</span></label>
-                        <input type="text" name="plz" id="plz" required value="<?php echo htmlspecialchars($plz); ?>">
+                        <input type="text" name="plz" id="plz" maxlength="5" pattern="\d{5}" required value="<?php echo htmlspecialchars($plz); ?>">
                     </div>
                     <div class="input-group">
                         <label for="city">City <span class="required">*</span></label>
@@ -418,4 +423,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     });
 
-</script>
+    </script>
