@@ -1,20 +1,23 @@
 # Projekt-Dokumentation
 
-☝️ Alle Text-Stellen, welche mit einem ✍️ beginnen, können Sie löschen, sobald Sie die entsprechende Stellen ausgefüllt haben.
+Dverggas: Julius Burlet und Timo Goedertier
 
-✍️ Ihr Gruppenname und Ihre Nachnamen
-
-| Datum | Version | Zusammenfassung                                                                                                                             |
-| ----- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-|       | 0.0.1   | ✍️ Jedes Mal, wenn Sie an dem Projekt arbeiten, fügen Sie hier eine neue Zeile ein und beschreiben in *einem* Satz, was Sie erreicht haben. |
-|       | ...     |                                                                                                                                             |
-|       | 1.0.0   |                                                                                                                                             |
+| Datum    | Version | Zusammenfassung                                                                                                      |
+|----------|---------|-----------------------------------------------------------------------------------------------------------------------|
+| 23.08.24 | 0.0.1   | Entwicklungsumgebung eingerichtet und Technologien für das Projekt ausgewählt.                                        |
+| 30.08.24 | 0.1.0   | Grundstruktur der Anwendung erstellt und Registrierung sowie Anmelde-Funktionalitäten im Frontend und Backend umgesetzt. |
+| 06.09.24 | 0.2.0   | Dunkelmodus-Toggle und grundlegende Profilverwaltung entwickelt.                                                     |
+| 13.09.24 | 0.3.0   | Produkt-Datenbankstruktur aufgebaut und API für Produkte und Kategorien erstellt.                                   |
+| 20.09.24 | 0.4.0   | Kategoriefilter und Produktsuche im Frontend und Backend implementiert.                                             |
+| 27.09.24 | 0.5.0   | Sicherheitsmaßnahmen für die Anmeldung getestet und Unit-Tests für alle Module durchgeführt.                        |
+| 27.09.24 | 1.0.0   | Kontrolle und Tests abgeschlossen und Anwendung für den produktiven Einsatz freigegeben.                               |
+                                                                                                                                             |
 
 ## 1 Informieren
 
 ### 1.1 Ihr Projekt
 
-✍️ Beschreiben Sie Ihr Projekt in einem griffigen Satz.
+Unser Projekt ist eine benutzerfreundliche Webanwendung, die es Nutzern ermöglicht, sich sicher zu registrieren, Produkte zu durchsuchen und Einkäufe unkompliziert abzuschliessen.
 
 ### 1.2 User Stories
 
