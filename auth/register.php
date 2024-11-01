@@ -7,7 +7,7 @@ $errors = [];
 // Initialize variables to avoid undefined variable warnings
 $username = $firstname = $lastname = $display_name = $email = $phone_number = $phone_code = '';
 $street = $street2 = $house_number = $plz = $city = $country = '';
-$accept_tos = $accept_privacy = false;  // Initialize to false by default
+$accept_tos = $accept_privacy = false;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
@@ -29,7 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $accept_privacy = isset($_POST['accept_privacy']);
 
     // Combine phone code and phone number
-    $full_phone_number = empty($phone_number) ? null : $phone_code . $phone_number;
+    if (empty($phone_number)) {
+        $full_phone_number = null;
+    } else {
+        $full_phone_number = $phone_code . $phone_number;
+    }
 
     // Validate required fields
     if (empty($username)) $errors[] = "Username is required.";
@@ -83,11 +87,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // If no errors, proceed with registration
     if (empty($errors)) {
+        // Hash the password
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
+        // Prepare the INSERT statement
         $stmt = $conn->prepare("INSERT INTO users (username, firstname, lastname, display_name, email, phone_number, street, street2, house_number, plz, city, country, password_hash) 
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         if ($stmt) {
+            // Bind parameters
             $stmt->bind_param(
                 'sssssssssssss',
                 $username,
@@ -105,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $password_hash
             );
 
+            // (Un)Successful registration
             if ($stmt->execute()) {
                 echo "<script>window.location.href = 'login.php'; </script>";
                 exit;
@@ -122,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include_once '../include/head.php'; ?>
 
+<!-- Registration form -->
 <div class="registration-container">
     <?php if (!empty($errors)): ?>
         <div class="error-messages">
@@ -275,6 +284,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+      
+        // Initialize intl-tel-input
         var input = document.querySelector("#phone");
         var iti = window.intlTelInput(input, {
             separateDialCode: true,
@@ -283,6 +294,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
         });
 
+        // Update hidden phone_code input
+        input.addEventListener('countrychange', function () {
+            var countryData = iti.getSelectedCountryData();
+            document.getElementById('phone_code').value = '+' + countryData.dialCode;
+        });
+
+        // Populate phone_code on initial load
+        var countryData = iti.getSelectedCountryData();
+        document.getElementById('phone_code').value = '+' + countryData.dialCode;
+
+        // Initialize country-select
+        $("#country").countrySelect({
+            defaultCountry: "ch",
+            preferredCountries: ["ch", "de", "fr", "it", "us"],
+        });
+
+        var countryValue = $("#country").val();
+        if (countryValue) {
+            $("#country").countrySelect("setCountry", countryValue);
+        }
+
+        // Multi-step form script
+        const form = document.getElementById("registration-form");
+        const steps = Array.from(form.querySelectorAll(".step"));
+        const nextButtons = form.querySelectorAll(".next-button");
+        const prevButtons = form.querySelectorAll(".prev-button");
+        const progressSteps = document.querySelectorAll(".progress-step");
+        const progressBar = document.querySelector(".progress-bar");
+        const totalSteps = steps.length;
+        let currentStep = 0;
+
+        showStep(currentStep);
+
+        nextButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                if (validateStep(currentStep)) {
+                    progressSteps[currentStep].classList.add("completed");
+                    progressSteps[currentStep].classList.remove("active");
+                    updateProgressStepContent(currentStep);
+
+                    currentStep++;
+                    if (currentStep < totalSteps) {
+                        showStep(currentStep);
+                    }
+                }
+            });
+        });
+
+        // Event listeners for Previous buttons
+        prevButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                currentStep--;
+                if (currentStep >= 0) {
+                    progressSteps[currentStep].classList.remove("completed");
+                    progressSteps[currentStep].classList.add("active");
+                    progressSteps[currentStep].innerHTML = currentStep + 1;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        // Update progress step content
         input.addEventListener('countrychange', function () {
             var countryData = iti.getSelectedCountryData();
             document.getElementById('phone_code').value = '+' + countryData.dialCode;
@@ -352,6 +425,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 s.classList.toggle("active", index === step);
             });
 
+            // Update progress steps classes
             progressSteps.forEach((ps, index) => {
                 if (index < step) {
                     ps.classList.add("completed");
@@ -367,10 +441,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ps.innerHTML = index + 1;
                 }
             });
-
+          
+            // Focus on the first input of the current step
             const progressPercentage = step === 0 ? 0 : (step / (totalSteps - 1)) * 100;
             progressBar.style.setProperty("--progress", `${progressPercentage}%`);
-
             const firstInput = steps[step].querySelector("input, select, textarea");
             if (firstInput) {
                 firstInput.focus();
@@ -379,6 +453,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             form.scrollIntoView({ behavior: "smooth" });
         }
 
+        // Function to validate the current step
         function validateStep(step) {
             const currentFormStep = steps[step];
             const inputs = Array.from(
@@ -393,6 +468,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             });
 
+            // Additional validation for password match
             if (step === 4) {
                 const password = document.getElementById("password");
                 const confirmPassword = document.getElementById("confirm_password");
@@ -407,7 +483,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             return valid;
         }
-
+        // Real-time password match validation
         const password = document.getElementById("password");
         const confirmPassword = document.getElementById("confirm_password");
         const passwordMatchMsg = document.getElementById("password-match");
@@ -422,5 +498,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             });
         }
     });
-
     </script>

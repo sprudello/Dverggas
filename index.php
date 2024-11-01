@@ -104,7 +104,6 @@ while ($row = mysqli_fetch_assoc($result_all)) {
                         `).join('')}
                     </div>
                 </div>`;
-
             categoryList.appendChild(categoryDiv);
 
             applyRandomBackgroundColor(categoryDiv.querySelector('.category-card'));
