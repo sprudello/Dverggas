@@ -37,7 +37,7 @@ git clone https://github.com/sprudello/Dverggas.git
 
 - In the htdocs folder, paste the Dverggas folder into it. (Path to the Dverggas folder should then look like this: ..\xampp\htdocs\Dverggas)
 
-![Picture](imgs/DverggasFolder.png.png)
+![Picture](imgs/DverggasFolder.png)
 
 - Press on Admin, on the same row as MySQL, in the control panel. A website should open up.
 
