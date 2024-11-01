@@ -434,10 +434,10 @@ footer {
 .progress-bar {
   position: absolute;
   top: 15px;
-  left: 0;
-  width: 100%;
+  left: 1px;
+  width: 99%;
   height: 5px;
-  background-color: #444;
+  background-color: var(--input-bg-color);
   z-index: 1;
 }
 
@@ -460,8 +460,8 @@ footer {
 .progress-step {
   width: 30px;
   height: 30px;
-  background-color: #444;
-  color: #fff;
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
   border-radius: 50%;
   text-align: center;
   line-height: 30px;
@@ -471,10 +471,12 @@ footer {
 
 .progress-step.active {
   background-color: #6600cc;
+  color:white;
 }
 
 .progress-step.completed {
   background-color: #6600cc;
+  color:white;
 }
 
 .progress-step i {
