@@ -17,7 +17,7 @@ git clone https://github.com/sprudello/Dverggas.git
 - Or download the ZIP by pressing on <>Code and then Download ZIP.
     - If you download the ZIP you have to be careful not to copy the folder with the Dverggas folder inside, but the folder with all the files.
 
-![GIF]
+![GIF](imgs/ZIPDownload.gif)
   
 - Then Download XAMPP [here](https://www.apachefriends.org/download.html).
 
@@ -27,13 +27,13 @@ git clone https://github.com/sprudello/Dverggas.git
 
 - Start Apache and the MySQL in the control panel. (The MySQL Module may crash so you just have to start it again.)
 
-![GIF]
+![GIF](imgs/StartApacheSQL.gif)
 
 - In the Control Panel press on Explorer to open the xampp folder.
 
 - From the xampp folder, locate and navigate to the htdocs folder.
 
-![GIF]
+![GIF](imgs/locatehtdocs.gif)
 
 - In the htdocs folder, paste the Dverggas folder into it. (Path to the Dverggas folder should then look like this: ..\xampp\htdocs\Dverggas)
 
@@ -41,26 +41,29 @@ git clone https://github.com/sprudello/Dverggas.git
 
 - Press on Admin, on the same row as MySQL, in the control panel. A website should open up.
 
-![GIF]
+![GIF](imgs/SQLadmin.gif)
 
 - Locate and press on the SQL Button.
 
-![Picture](imgs/SQLPage.png.png)
+![Picture](imgs/SQLPage.png)
 
 - In this you can copypaste the MySQL Scripts located in the db folder. (You have to do it in the order below.)
 
     - Firstly, take the script from [tables.sql](https://github.com/sprudello/Dverggas/blob/main/db/tables.sql).
+
+- For the second 2 files you first have to go into the Dverggas Database and then again go into the SQL section. You should see a ``Run SQL query/queries on database Dverggas``
+
     - Secondly, take the script from [categories.sql](https://github.com/sprudello/Dverggas/blob/main/db/categories.sql)
     - Thirdly, take the script from [products.sql](https://github.com/sprudello/Dverggas/blob/main/db/products.sql)
     - You can ignore connection.php
 
-![GIF]
+![VID](imgs/CopyPasteSQL.mp4)
 
 - If all the scripts were successfully executed, then you can move to [localhost/dverggas](http://localhost/dverggas/) and test out the website.
 
 ![Picture](imgs/DverggasWebsite.png)
 
 
-### (Maybe) Tutorial Video
+### Tutorial Video
 
-[Full tutorial in a GIF/Video]
+[VID](imgs/FullTutorial.mp4)
