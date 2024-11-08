@@ -1,7 +1,14 @@
 # Dverggas
 An E-Commerce Website in PHP.
 
-### Team
+### Team : ILA3-0120
+
+- Timo Goedertier
+- Alberto Manser
+- Agachan Atputharsa
+- Cyril Lutziger
+
+### Team : ILA3-0110
 
 - Julius V. Burlet
 - Timo Goedertier
