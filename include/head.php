@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?= $base_path; ?>styles/styles.css">
 
     <script src="<?= $base_path; ?>scripts/modeswitch.js"></script>
+    <script src="<?= $base_path; ?>scripts/shoppingcart.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>

@@ -61,6 +61,102 @@ header .fa-user {
   transform: scale(1.05);
 }
 
+/* Header Icons */
+.header-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.icon-container {
+    position: relative;
+}
+
+/* Shopping Cart Menu */
+#cart-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 100;
+    min-width: 300px;
+}
+
+#cart-menu h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+}
+
+.cart-items {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+.cart-divider {
+    border: none;
+    border-top: 1px solid var(--text-color);
+    opacity: 0.2;
+    margin: 10px 0;
+}
+
+.cart-footer {
+    padding-top: 10px;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.cart-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.checkout-button, .view-cart-button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+    text-decoration: none;
+}
+
+.checkout-button {
+    background-color: #6600cc;
+    color: white;
+}
+
+.checkout-button:hover {
+    background-color: #5800af;
+    box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
+}
+
+.view-cart-button {
+    background-color: #444;
+    color: white;
+}
+
+.view-cart-button:hover {
+    background-color: #555;
+    box-shadow: 0 0 20px rgba(68, 68, 68, 0.5);
+}
+
 /* User Menu */
 #user-menu {
   display: none;
@@ -173,8 +269,14 @@ input:checked + .slider:before {
   padding: 10px;
   border-radius: 25px;
   background-color: #6600cc;
-  color: black;
+  color: white;
   border: none;
+  transition: all 0.3s ease;
+}
+
+.searchbar button:hover {
+  background-color: #5800af;
+  box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 .searchbar .fa-magnifying-glass {
@@ -327,6 +429,7 @@ footer {
 
 .login-button:hover {
   background-color: #5800af;
+  box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 .input-group {
@@ -511,6 +614,7 @@ footer {
 .prev-button:hover,
 .submit-button:hover {
   background-color: #5800af;
+  box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 .input-group input:focus,
