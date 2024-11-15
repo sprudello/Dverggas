@@ -26,7 +26,10 @@ $stmt->close();
                 <i class="fa-solid fa-user"></i>
             </div>
             <div class="user-info">
-                <h3><?php echo htmlspecialchars($user['display_name'] ?: $user['username']); ?></h3>
+                <div class="sidebar-display-name" data-field="display_name">
+                    <h3><?php echo htmlspecialchars($user['display_name'] ?: $user['username']); ?></h3>
+                    <i class="fa-solid fa-pen edit-icon" title="Edit display name"></i>
+                </div>
                 <p><?php echo htmlspecialchars($user['email']); ?></p>
             </div>
         </div>
@@ -59,14 +62,14 @@ $stmt->close();
             <div class="section-header">
                 <h2>Profile Information</h2>
                 <div class="button-group">
+                    <button id="done-button" class="done-button" style="display: none;">
+                        <i class="fa-solid fa-check"></i> Done
+                    </button>
                     <button class="edit-button">
                         <i class="fa-solid fa-pen-to-square"></i> Edit
                     </button>
                     <button class="change-password-button" onclick="showPasswordModal()">
                         <i class="fa-solid fa-key"></i> Change Password
-                    </button>
-                    <button id="done-button" class="done-button" style="display: none;">
-                        <i class="fa-solid fa-check"></i> Done
                     </button>
                 </div>
             </div>
@@ -147,6 +150,97 @@ $stmt->close();
                     </div>
                 </div>
 
+                <div class="setting-group">
+                    <h3>Language Preferences</h3>
+                    <div class="setting-item">
+                        <label for="language">Interface Language:</label>
+                        <select id="language" class="settings-select">
+                            <option value="en">English</option>
+                            <option value="de">Deutsch</option>
+                            <option value="fr">Français</option>
+                            <option value="it">Italiano</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label for="currency">Preferred Currency:</label>
+                        <select id="currency" class="settings-select">
+                            <option value="chf">CHF</option>
+                            <option value="eur">EUR</option>
+                            <option value="usd">USD</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3>Privacy Options</h3>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Show Online Status</span>
+                    </div>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Share Purchase History</span>
+                    </div>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Allow Product Recommendations</span>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3>Accessibility</h3>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>High Contrast Mode</span>
+                    </div>
+                    <div class="setting-item">
+                        <label for="font-size">Font Size:</label>
+                        <select id="font-size" class="settings-select">
+                            <option value="small">Small</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="large">Large</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Reduce Animations</span>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3>Advanced Settings</h3>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Enable Beta Features</span>
+                    </div>
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Automatic Updates</span>
+                    </div>
+                    <button class="settings-button">Clear Cache</button>
+                    <button class="settings-button">Export Data</button>
+                </div>
             </div>
         </section>
 

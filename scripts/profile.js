@@ -112,8 +112,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Edit icons handler
-    document.querySelectorAll('.edit-icon').forEach(icon => {
+    // Edit icons handler for profile details
+    document.querySelectorAll('.detail-group .edit-icon').forEach(icon => {
         icon.addEventListener('click', function() {
             if (!editMode) return;
             
@@ -124,6 +124,35 @@ document.addEventListener('DOMContentLoaded', function() {
             makeEditable(contentP, field);
         });
     });
+
+    // Sidebar display name edit handler
+    const sidebarDisplayName = document.querySelector('.sidebar-display-name');
+    if (sidebarDisplayName) {
+        const editIcon = sidebarDisplayName.querySelector('.edit-icon');
+        const nameElement = sidebarDisplayName.querySelector('h3');
+        const field = sidebarDisplayName.getAttribute('data-field');
+
+        editIcon.addEventListener('click', function() {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = nameElement.textContent;
+            input.className = 'edit-input';
+            
+            input.addEventListener('blur', function() {
+                saveChanges(field, this.value, nameElement);
+            });
+            
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    this.blur();
+                }
+            });
+            
+            nameElement.textContent = '';
+            nameElement.appendChild(input);
+            input.focus();
+        });
+    }
 });
 
 function showPasswordModal() {
