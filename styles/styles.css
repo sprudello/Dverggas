@@ -134,6 +134,7 @@ header .fa-user {
 
 .checkout-button:hover {
     background-color: #5800af;
+    box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 /* User Menu */
@@ -248,8 +249,14 @@ input:checked + .slider:before {
   padding: 10px;
   border-radius: 25px;
   background-color: #6600cc;
-  color: black;
+  color: white;
   border: none;
+  transition: all 0.3s ease;
+}
+
+.searchbar button:hover {
+  background-color: #5800af;
+  box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 .searchbar .fa-magnifying-glass {
@@ -402,6 +409,7 @@ footer {
 
 .login-button:hover {
   background-color: #5800af;
+  box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 .input-group {
@@ -586,6 +594,7 @@ footer {
 .prev-button:hover,
 .submit-button:hover {
   background-color: #5800af;
+  box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 .input-group input:focus,
