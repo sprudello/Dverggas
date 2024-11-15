@@ -2,8 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>Dverggas</title>
+    <title>Dverggas - Your Digital Marketplace</title>
     <script src="https://kit.fontawesome.com/4c39a50c7e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
     <?php
     $base_path = (basename(dirname($_SERVER['SCRIPT_NAME'])) == 'auth') ? '../' : '';

@@ -29,7 +29,7 @@ include_once 'include/header.php';
                 <span>Total:</span>
                 <span id="total">0.00 CHF</span>
             </div>
-            <button class="checkout-button-large">Proceed to Checkout</button>
+            <a href="checkout.php" class="checkout-button-large">Proceed to Checkout</a>
         </div>
     </div>
 </div>
@@ -81,7 +81,7 @@ include_once 'include/header.php';
 }
 
 .checkout-button-large {
-    width: 100%;
+    width: calc(100% - 40px);
     padding: 15px;
     background-color: #6600cc;
     color: white;
@@ -90,7 +90,11 @@ include_once 'include/header.php';
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 1.1em;
-    margin-top: 20px;
+    margin: 20px 20px 0;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
 }
 
 .checkout-button-large:hover {
