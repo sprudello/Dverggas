@@ -1,46 +1,54 @@
 <?php
 session_start();
+
 include '../db/connection.php';
 include_once '../include/head.php';
 
+$error_message = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $login = $_POST['login']; 
-    $password = $_POST['password'];
+    $login = trim($_POST['login']); 
+    $password = trim($_POST['password']);
 
+    // Check for empty fields
     if (empty($login) || empty($password)) {
-        echo "Please fill all required fields!";
-        exit;
-    }
-    
-    if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
-        $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+        $error_message = "Please fill all required fields!";
     } else {
-        $stmt = $conn->prepare("SELECT * FROM users WHERE phone_number = ?");
-    }
-    
-    $stmt->bind_param('s', $login);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
+        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+        } else {
+            $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        }
 
-    if ($user && password_verify($password, $user['password_hash'])) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        echo "Login successful!";
-    } else {
-        echo "Invalid login credentials!";
-    }
+        if (empty($error_message)) {
+            $stmt->bind_param('s', $login);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $user = $result->fetch_assoc();
 
-    $stmt->close();
+            if ($user && password_verify($password, $user['password_hash'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                echo "<script>window.location.href = '../index.php';</script>";
+                exit;
+            } else {
+                $error_message = "Invalid login credentials!";
+            }
+            $stmt->close();
+        }
+    }
 }
 ?>
 
 <div class="login-box">
     <h2 class="login-title">Login</h2>
+    <?php if (!empty($error_message)): ?>
+        <div class="error-message"><?php echo $error_message; ?></div>
+    <?php endif; ?>
     <form method="POST" action="login.php">
         <div class="input-group">
-            <label for="login">Email or Phone Number</label>
-            <input type="text" name="login" id="login" placeholder="Enter Email or Phone Number" required>
+            <label for="login">Email or Username</label>
+            <input type="text" name="login" id="login" placeholder="Enter Email or Username" required>
         </div>
         <div class="input-group">
             <label for="password">Password</label>
@@ -49,5 +57,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" class="login-button">Login</button>
     </form>
 </div>
-
-<?php include_once '../include/footer.php'; ?>

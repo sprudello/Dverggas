@@ -82,11 +82,5 @@ while ($row = $result_products->fetch_assoc()) {
     </section>
 </div>
 
-<script>
-    function toggleUserMenu() {
-        var userMenu = document.getElementById('user-menu');
-        userMenu.style.display = userMenu.style.display === 'none' ? 'block' : 'none';
-    }
-</script>
 
 <?php include_once 'include/footer.php'; ?>
