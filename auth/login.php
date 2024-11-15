@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include '../db/connection.php';
 include_once '../include/head.php';
 
