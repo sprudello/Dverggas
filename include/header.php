@@ -10,8 +10,26 @@
             </button>
         </div>
     </form>
-    <div>
-        <i class="fa-solid fa-user" style="font-size: 24px; cursor: pointer;" onclick="toggleUserMenu()"></i>
+    <div class="header-icons">
+        <div class="icon-container">
+            <i class="fa-solid fa-cart-shopping" style="font-size: 24px; cursor: pointer;" onclick="toggleCartMenu()"></i>
+            <div id="cart-menu" style="display: none;">
+                <h3>Shopping Cart</h3>
+                <div class="cart-items">
+                    <p class="empty-cart">Your cart is empty</p>
+                </div>
+                <hr class="cart-divider">
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <span>0.00 CHF</span>
+                    </div>
+                    <button class="checkout-button">Checkout</button>
+                </div>
+            </div>
+        </div>
+        <div class="icon-container">
+            <i class="fa-solid fa-user" style="font-size: 24px; cursor: pointer;" onclick="toggleUserMenu()"></i>
         <div id="user-menu" style="display: none;">
             <?php if (isset($_SESSION['username'])): ?>
                 <p>Welcome, <?= htmlspecialchars($_SESSION['username']); ?></p>
