@@ -24,7 +24,10 @@
                         <span>Total:</span>
                         <span>0.00 CHF</span>
                     </div>
-                    <button class="checkout-button">Checkout</button>
+                    <div class="cart-buttons">
+                        <button class="checkout-button">Checkout</button>
+                        <a href="<?= $base_path; ?>shoppingcart.php" class="view-cart-button">View Full Cart</a>
+                    </div>
                 </div>
             </div>
         </div>

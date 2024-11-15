@@ -121,20 +121,40 @@ header .fa-user {
     font-weight: bold;
 }
 
-.checkout-button {
-    width: 100%;
+.cart-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.checkout-button, .view-cart-button {
+    flex: 1;
     padding: 10px;
-    background-color: #6600cc;
-    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-align: center;
+    text-decoration: none;
+}
+
+.checkout-button {
+    background-color: #6600cc;
+    color: white;
 }
 
 .checkout-button:hover {
     background-color: #5800af;
     box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
+}
+
+.view-cart-button {
+    background-color: #444;
+    color: white;
+}
+
+.view-cart-button:hover {
+    background-color: #555;
+    box-shadow: 0 0 20px rgba(68, 68, 68, 0.5);
 }
 
 /* User Menu */
