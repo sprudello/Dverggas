@@ -4,6 +4,12 @@ include_once 'include/head.php';
 include_once 'include/header.php';
 include_once 'db/connection.php';
 
+// Debugging: Check if user_id is set
+if (!isset($_SESSION['user_id'])) {
+    echo "User ID is not set in the session.";
+    exit;
+}
+
 // Define function to get cart items
 function getCartItems($conn, $userId) {
     $sql = "
@@ -19,6 +25,10 @@ function getCartItems($conn, $userId) {
     ";
 
     $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        return [];
+    }
     $stmt->bind_param("i", $userId);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -34,10 +44,13 @@ function getCartItems($conn, $userId) {
 
 // Retrieve cart items for the logged-in user
 $cartItems = [];
-if (isset($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id'];
-    $cartItems = getCartItems($conn, $userId);
-}
+$userId = $_SESSION['user_id'];
+$cartItems = getCartItems($conn, $userId);
+
+// Debugging: Output cart items
+echo "<pre>";
+print_r($cartItems);
+echo "</pre>";
 
 $conn->close();
 ?>

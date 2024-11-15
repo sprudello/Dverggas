@@ -2,6 +2,20 @@
 session_start();
 include_once 'include/head.php';
 include_once 'include/header.php';
+include_once 'db/connection.php';
+
+// Initialize variables
+$user_data = null;
+
+// Fetch user data if logged in
+if (isset($_SESSION['user_id'])) {
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->bind_param("i", $_SESSION['user_id']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user_data = $result->fetch_assoc();
+    $stmt->close();
+}
 ?>
 
 <div class="checkout-container">
@@ -46,34 +60,34 @@ include_once 'include/header.php';
                 <div class="two-columns">
                     <div class="input-group">
                         <label for="shipping-firstname">First Name <span class="required">*</span></label>
-                        <input type="text" id="shipping-firstname" name="shipping-firstname" required>
+                        <input type="text" id="shipping-firstname" name="shipping-firstname" required value="<?php echo isset($user_data) ? htmlspecialchars($user_data['firstname']) : ''; ?>">
                     </div>
                     <div class="input-group">
                         <label for="shipping-lastname">Last Name <span class="required">*</span></label>
-                        <input type="text" id="shipping-lastname" name="shipping-lastname" required>
+                        <input type="text" id="shipping-lastname" name="shipping-lastname" required value="<?php echo isset($user_data) ? htmlspecialchars($user_data['lastname']) : ''; ?>">
                     </div>
                 </div>
                 <div class="input-group">
                     <label for="shipping-street">Street Address <span class="required">*</span></label>
-                    <input type="text" id="shipping-street" name="shipping-street" required>
+                    <input type="text" id="shipping-street" name="shipping-street" required value="<?php echo isset($user_data) ? htmlspecialchars($user_data['street']) : ''; ?>">
                 </div>
                 <div class="input-group">
                     <label for="shipping-street2">Additional Address</label>
-                    <input type="text" id="shipping-street2" name="shipping-street2">
+                    <input type="text" id="shipping-street2" name="shipping-street2" value="<?php echo isset($user_data) ? htmlspecialchars($user_data['street2']) : ''; ?>">
                 </div>
                 <div class="two-columns">
                     <div class="input-group">
                         <label for="shipping-zip">ZIP Code <span class="required">*</span></label>
-                        <input type="text" id="shipping-zip" name="shipping-zip" required>
+                        <input type="text" id="shipping-zip" name="shipping-zip" required value="<?php echo isset($user_data) ? htmlspecialchars($user_data['plz']) : ''; ?>">
                     </div>
                     <div class="input-group">
                         <label for="shipping-city">City <span class="required">*</span></label>
-                        <input type="text" id="shipping-city" name="shipping-city" required>
+                        <input type="text" id="shipping-city" name="shipping-city" required value="<?php echo isset($user_data) ? htmlspecialchars($user_data['city']) : ''; ?>">
                     </div>
                 </div>
                 <div class="input-group">
                     <label for="shipping-country">Country <span class="required">*</span></label>
-                    <input type="text" id="shipping-country" name="shipping-country" required>
+                    <input type="text" id="shipping-country" name="shipping-country" required value="<?php echo isset($user_data) ? htmlspecialchars($user_data['country']) : ''; ?>">
                 </div>
                 <button type="button" class="prev-button">Previous</button>
                 <button type="button" class="next-button">Next</button>
