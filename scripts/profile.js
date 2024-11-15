@@ -125,3 +125,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function showPasswordModal() {
+    document.getElementById('password-modal').style.display = 'block';
+}
+
+function closePasswordModal() {
+    document.getElementById('password-modal').style.display = 'none';
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('password-modal');
+    if (event.target == modal) {
+        closePasswordModal();
+    }
+}
+
+// Handle password form submission
+document.getElementById('password-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    
+    if (formData.get('new_password') !== formData.get('confirm_password')) {
+        alert('New passwords do not match!');
+        return;
+    }
+
+    fetch('update_password.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Password updated successfully!');
+            closePasswordModal();
+            this.reset();
+        } else {
+            alert(data.message || 'Failed to update password');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while updating password');
+    });
+});

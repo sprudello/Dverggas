@@ -62,6 +62,9 @@ $stmt->close();
                     <button class="edit-button">
                         <i class="fa-solid fa-pen-to-square"></i> Edit
                     </button>
+                    <button class="change-password-button" onclick="showPasswordModal()">
+                        <i class="fa-solid fa-key"></i> Change Password
+                    </button>
                     <button id="done-button" class="done-button" style="display: none;">
                         <i class="fa-solid fa-check"></i> Done
                     </button>
@@ -136,32 +139,14 @@ $stmt->close();
                 <div class="setting-group">
                     <h3>Theme Settings</h3>
                     <div class="theme-switch-wrapper">
-                        <span>Dark Mode</span>
+                        <span class="mode-text">Dark</span>
                         <label class="switch">
-                            <input type="checkbox" id="theme-switch">
+                            <input type="checkbox" checked>
                             <span class="slider round"></span>
                         </label>
                     </div>
                 </div>
 
-                <div class="setting-group">
-                    <h3>Change Password</h3>
-                    <form class="settings-form">
-                        <div class="input-group">
-                            <label>Current Password</label>
-                            <input type="password" name="current_password">
-                        </div>
-                        <div class="input-group">
-                            <label>New Password</label>
-                            <input type="password" name="new_password">
-                        </div>
-                        <div class="input-group">
-                            <label>Confirm New Password</label>
-                            <input type="password" name="confirm_password">
-                        </div>
-                        <button type="submit" class="save-button">Update Password</button>
-                    </form>
-                </div>
             </div>
         </section>
 
@@ -220,6 +205,29 @@ $stmt->close();
                 </div>
             </div>
         </section>
+    </div>
+</div>
+
+<!-- Password Change Modal -->
+<div id="password-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePasswordModal()">&times;</span>
+        <h2>Change Password</h2>
+        <form id="password-form" class="password-form">
+            <div class="input-group">
+                <label>Current Password</label>
+                <input type="password" name="current_password" required>
+            </div>
+            <div class="input-group">
+                <label>New Password</label>
+                <input type="password" name="new_password" required>
+            </div>
+            <div class="input-group">
+                <label>Confirm New Password</label>
+                <input type="password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="save-button">Update Password</button>
+        </form>
     </div>
 </div>
 
