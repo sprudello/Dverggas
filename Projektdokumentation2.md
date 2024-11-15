@@ -19,6 +19,7 @@ Die Weiterführung des Projektes DVERGGAS
 ### 1.2 User Stories
 
 |US-№	|Verbindlichkeit |	Typ|	Beschreibung|
+|---|----------------|-|-|
 |1.1|	Muss|	Funktional|	Als User möchte ich Waren in einen Warenkorb hinzufügen können, damit ich meine gewünschten Produkte speichern kann.|
 |1.2|	Muss|	Funktional|	Als User möchte ich meinen Warenkorb anschauen können, damit ich die hinzugefügten Produkte überprüfen kann.|
 |1.3|	Muss|	Funktional|	Als User möchte ich Produkte aus meinem Warenkorb entfernen können, damit ich ihn anpassen kann.|
@@ -38,6 +39,7 @@ Die Weiterführung des Projektes DVERGGAS
 ### 1.3 Testfälle
 
 |TC-№|	Ausgangslage|	Eingabe|	Erwartete Ausgabe|
+|---|----------------|-|-|
 |1.1.1|	Der Nutzer hat die Produktseite geöffnet.|	Der Nutzer klickt auf „In den Warenkorb“.|	Das Produkt wird erfolgreich in den Warenkorb gelegt.|
 |1.2.1|	Der Warenkorb enthält Produkte.|	Der Nutzer öffnet den Warenkorb.|	Eine Liste der im Warenkorb enthaltenen Produkte wird angezeigt.|
 |1.3.1|	Der Warenkorb enthält Produkte.|	Der Nutzer klickt auf „Entfernen“.|	Das ausgewählte Produkt wird aus dem Warenkorb entfernt.|
