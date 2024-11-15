@@ -12,6 +12,15 @@
     </form>
     <div class="header-icons">
         <div class="icon-container">
+            <i class="fa-solid fa-bell" style="font-size: 24px; cursor: pointer;" onclick="toggleNotificationMenu()" title="Notifications"></i>
+            <div id="notification-menu" style="display: none;">
+                <h3>Notifications</h3>
+                <div class="notification-items">
+                    <p class="empty-notification">No new notifications</p>
+                </div>
+            </div>
+        </div>
+        <div class="icon-container">
             <i class="fa-solid fa-cart-shopping" style="font-size: 24px; cursor: pointer;" onclick="toggleCartMenu()" title="Shopping Cart"></i>
             <div id="cart-menu" style="display: none;">
                 <h3>Shopping Cart</h3>

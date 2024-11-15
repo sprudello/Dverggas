@@ -153,7 +153,55 @@ $stmt->close();
         <!-- Notifications Section -->
         <section id="notifications" class="content-section">
             <h2>Notifications</h2>
+            <div class="notification-settings">
+                <h3>Notification Preferences</h3>
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Email Notifications</span>
+                    </div>
+                    <p class="setting-description">Receive notifications about orders and updates via email</p>
+                </div>
+                
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Order Updates</span>
+                    </div>
+                    <p class="setting-description">Get notified about order status changes</p>
+                </div>
+                
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Promotional Emails</span>
+                    </div>
+                    <p class="setting-description">Receive special offers and promotions</p>
+                </div>
+                
+                <div class="settings-group">
+                    <div class="setting-item">
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                        <span>Security Alerts</span>
+                    </div>
+                    <p class="setting-description">Get notified about account security events</p>
+                </div>
+            </div>
+            
             <div class="notifications-list">
+                <h3>Recent Notifications</h3>
                 <p>No new notifications</p>
             </div>
         </section>

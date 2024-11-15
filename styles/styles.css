@@ -211,6 +211,37 @@ header .fa-user {
     position: relative;
 }
 
+/* Notification Menu */
+#notification-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 100;
+    min-width: 300px;
+}
+
+#notification-menu h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+}
+
+.notification-items {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.empty-notification {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
 /* Shopping Cart Menu */
 #cart-menu {
     display: none;
@@ -742,6 +773,36 @@ footer {
 
 .edit-icon:hover {
     color: #5800af;
+}
+
+.notification-settings {
+    background-color: var(--card-bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.settings-group {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--shadow-color);
+}
+
+.settings-group:last-child {
+    border-bottom: none;
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.setting-description {
+    margin: 5px 0 0 50px;
+    font-size: 0.9em;
+    color: #666;
 }
 
 .settings-form {

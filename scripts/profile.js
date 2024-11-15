@@ -38,7 +38,7 @@ function saveChanges(field, value, element) {
     formData.append('field', field);
     formData.append('value', value);
 
-    fetch('update_profile.php', {
+    fetch('auth/update_profile.php', {
         method: 'POST',
         body: formData
     })
@@ -152,7 +152,7 @@ document.getElementById('password-form').addEventListener('submit', function(e) 
         return;
     }
 
-    fetch('update_password.php', {
+    fetch('auth/update_password.php', {
         method: 'POST',
         body: formData
     })
