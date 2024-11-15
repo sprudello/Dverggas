@@ -6,7 +6,7 @@
 
 | Datum | Version | Zusammenfassung                                              |
 | ----- | ------- | ------------------------------------------------------------ |
-|       | 0.0.1   | ✍️ Jedes Mal, wenn Sie an dem Projekt arbeiten, fügen Sie hier eine neue Zeile ein und beschreiben in *einem* Satz, was Sie erreicht haben. |
+|       | 0.0.1   |  |
 |       | ...     |                                                              |
 |       | 1.0.0   |                                                              |
 
@@ -14,23 +14,37 @@
 
 ### 1.1 Ihr Projekt
 
-✍️ Beschreiben Sie Ihr Projekt in einem griffigen Satz.
+Die Weiterführung des Projektes DVERGGAS 
 
 ### 1.2 User Stories
 
-| US-№ | Verbindlichkeit | Typ  | Beschreibung                       |
-| ---- | --------------- | ---- | ---------------------------------- |
-| 1    |                 |      | Als ein 🤷‍♂️ möchte ich 🤷‍♂️, damit 🤷‍♂️ |
-| ...  |                 |      |                                    |
+|US-№	|Verbindlichkeit |	Typ|	Beschreibung|
+|1.1|	Muss|	Funktional|	Als User möchte ich Waren in einen Warenkorb hinzufügen können, damit ich meine gewünschten Produkte speichern kann.|
+|1.2|	Muss|	Funktional|	Als User möchte ich meinen Warenkorb anschauen können, damit ich die hinzugefügten Produkte überprüfen kann.|
+|1.3|	Muss|	Funktional|	Als User möchte ich Produkte aus meinem Warenkorb entfernen können, damit ich ihn anpassen kann.|
+|2.1| Muss| Funktional| Als Unternehmen möchte ich einen Unternehmungsaccount erstellen können |
+|2.2| Muss| Funktional| Als Unternehmen möchte ich mich in meinen Unternehmungsaccount einloggen können|
+|3.1| Muss| Funktional| Als Privatnutzer möchte ich einen Privataccount erstellen können|
+|3.2| Muss| Funktional| Als Privatnutzer möchte ich mich in meinen Privataccount einloggen können
+|4.1|	Muss|	Funktional|	Als Unternehmen möchte ich Produkte veröffentlichen können, damit ich sie zum Verkauf anbieten kann.|
+|4.2|	Muss|	Funktional|	Als Privatnutzer möchte ich eigene Produkte zum Verkauf anbieten können, damit ich sie anderen Nutzern zur Verfügung stellen kann.|
+|5.1|	Kann|	Qualität|	Als User möchte ich eine Vorschau meiner Bestellung vor der Bezahlung sehen, damit ich sicher sein kann, dass alles korrekt ist.|
+|5.2| Muss| Funktional | Als User möchte ich einen Funktionierenden Checkout sehen|
+|5.3| Kann|	Funktional|	Als User möchte ich eine Bestätigungsmail nach Abschluss des Checkouts erhalten, damit ich einen Nachweis über meine Bestellung habe.|
+
 
 ✍️ Jede User Story hat eine ganzzahlige Nummer (1, 2, 3 etc.), eine Verbindlichkeit (Muss oder Kann?), und einen Typ (Funktional, Qualität, Rand). Die User Story selber hat folgende Form: *Als ein 🤷‍♂️ möchte ich 🤷‍♂️, damit 🤷‍♂️*.
 
 ### 1.3 Testfälle
 
-| TC-№ | Ausgangslage | Eingabe | Erwartete Ausgabe |
-| ---- | ------------ | ------- | ----------------- |
-| 1.1  |              |         |                   |
-| ...  |              |         |                   |
+|TC-№|	Ausgangslage|	Eingabe|	Erwartete Ausgabe|
+|1.1.1|	Der Nutzer hat die Produktseite geöffnet.|	Der Nutzer klickt auf „In den Warenkorb“.|	Das Produkt wird erfolgreich in den Warenkorb gelegt.|
+|1.2.1|	Der Warenkorb enthält Produkte.|	Der Nutzer öffnet den Warenkorb.|	Eine Liste der im Warenkorb enthaltenen Produkte wird angezeigt.|
+|1.3.1|	Der Warenkorb enthält Produkte.|	Der Nutzer klickt auf „Entfernen“.|	Das ausgewählte Produkt wird aus dem Warenkorb entfernt.|
+|2.1.1|	Der Nutzer ist als Unternehmen angemeldet.|	Der Nutzer erstellt ein neues Produkt und klickt auf „Veröffentlichen“.|	Das Produkt wird im Katalog veröffentlicht.|
+|2.2.1|	Der Nutzer ist als Privatnutzer angemeldet.|	Der Nutzer erstellt ein neues Produkt und klickt auf „Veröffentlichen“.|	Das Produkt wird im Katalog veröffentlicht.|
+|3.1.1|	Der Warenkorb ist vollständig befüllt.|	Der Nutzer klickt auf „Zur Kasse gehen“.|	Eine Übersicht mit den Bestelldetails wird angezeigt.|
+|3.2.1|	Der Checkout wurde erfolgreich abgeschlossen.|	Der Nutzer schließt die Zahlung ab.|	Eine Bestätigungsmail wird an die hinterlegte E-Mail-Adresse gesendet.|
 
 ✍️ Die Nummer hat das Format `N.m`, wobei `N` die Nummer der User Story ist, die der Testfall abdeckt, und `m` von `1` an nach oben gezählt. Beispiel: Der dritte Testfall, der die zweite User Story abdeckt, hat also die Nummer `2.3`.
 
