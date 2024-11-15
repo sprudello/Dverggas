@@ -58,26 +58,62 @@ $stmt->close();
         <section id="profile" class="content-section active">
             <div class="section-header">
                 <h2>Profile Information</h2>
+                <div class="button-group">
+                    <button class="edit-button">
+                        <i class="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+                    <button id="done-button" class="done-button" style="display: none;">
+                        <i class="fa-solid fa-check"></i> Done
+                    </button>
+                </div>
             </div>
             <div class="profile-details">
-                <div class="detail-group">
-                    <label>Username:</label>
-                    <p><?php echo htmlspecialchars($user['username']); ?></p>
+                <div class="detail-group" data-field="username">
+                    <div class="detail-header">
+                        <label>Username:</label>
+                        <i class="fa-solid fa-pen edit-icon" style="display: none;"></i>
+                    </div>
+                    <div class="detail-content">
+                        <p><?php echo htmlspecialchars($user['username']); ?></p>
+                    </div>
+                </div>
+                <div class="detail-group" data-field="firstname">
+                    <div class="detail-header">
+                        <label>First Name:</label>
+                        <i class="fa-solid fa-pen edit-icon" style="display: none;"></i>
+                    </div>
+                    <div class="detail-content">
+                        <p><?php echo htmlspecialchars($user['firstname']); ?></p>
+                    </div>
+                </div>
+                <div class="detail-group" data-field="lastname">
+                    <div class="detail-header">
+                        <label>Last Name:</label>
+                        <i class="fa-solid fa-pen edit-icon" style="display: none;"></i>
+                    </div>
+                    <div class="detail-content">
+                        <p><?php echo htmlspecialchars($user['lastname']); ?></p>
+                    </div>
                 </div>
                 <div class="detail-group">
-                    <label>Name:</label>
-                    <p><?php echo htmlspecialchars($user['firstname'] . ' ' . $user['lastname']); ?></p>
-                </div>
-                <div class="detail-group">
-                    <label>Email:</label>
+                    <div class="detail-header">
+                        <label>Email:</label>
+                        <i class="fa-solid fa-pen edit-icon" style="display: none;"></i>
+                    </div>
                     <p><?php echo htmlspecialchars($user['email']); ?></p>
                 </div>
                 <div class="detail-group">
-                    <label>Phone:</label>
+                    <div class="detail-header">
+                        <label>Phone:</label>
+                        <i class="fa-solid fa-pen edit-icon" style="display: none;"></i>
+                    </div>
                     <p><?php echo htmlspecialchars($user['phone_number'] ?: 'Not provided'); ?></p>
                 </div>
                 <div class="detail-group">
-                    <label>Address:</label>
+                    <div class="detail-header">
+                        <label>Address:</label>
+                        <i class="fa-solid fa-pen edit-icon" style="display: none;"></i>
+                    </div>
                     <p>
                         <?php 
                         $address = htmlspecialchars($user['street']) . ' ' . htmlspecialchars($user['house_number']);
@@ -188,22 +224,5 @@ $stmt->close();
 </div>
 
 <script src="scripts/profile.js"></script>
-<script>
-function showSection(sectionId) {
-    // Hide all sections
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Show selected section
-    document.getElementById(sectionId).classList.add('active');
-    
-    // Update sidebar active state
-    document.querySelectorAll('.sidebar-nav a').forEach(link => {
-        link.classList.remove('active');
-    });
-    document.querySelector(`a[href="#${sectionId}"]`).classList.add('active');
-}
-</script>
 
 <?php include_once 'include/footer.php'; ?>

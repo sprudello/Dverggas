@@ -5,14 +5,14 @@
     <form method="GET" action="search.php">
         <div class="searchbar">
             <input type="text" name="search_term" placeholder="Suche nach Produkten oder Kategorien">
-            <button type="submit">
+            <button type="submit" title="Search for products">
                 <i class="fa-solid fa-magnifying-glass"></i> Suche
             </button>
         </div>
     </form>
     <div class="header-icons">
         <div class="icon-container">
-            <i class="fa-solid fa-cart-shopping" style="font-size: 24px; cursor: pointer;" onclick="toggleCartMenu()"></i>
+            <i class="fa-solid fa-cart-shopping" style="font-size: 24px; cursor: pointer;" onclick="toggleCartMenu()" title="Shopping Cart"></i>
             <div id="cart-menu" style="display: none;">
                 <h3>Shopping Cart</h3>
                 <div class="cart-items">
@@ -25,14 +25,14 @@
                         <span>0.00 CHF</span>
                     </div>
                     <div class="cart-buttons">
-                        <a href="<?= $base_path; ?>checkout.php" class="checkout-button">Checkout</a>
-                        <a href="<?= $base_path; ?>shoppingcart.php" class="view-cart-button">View Full Cart</a>
+                        <a href="<?= $base_path; ?>checkout.php" class="checkout-button" title="Proceed to checkout">Checkout</a>
+                        <a href="<?= $base_path; ?>shoppingcart.php" class="view-cart-button" title="View shopping cart details">View Full Cart</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="icon-container">
-            <i class="fa-solid fa-user" style="font-size: 24px; cursor: pointer;" onclick="toggleUserMenu()"></i>
+            <i class="fa-solid fa-user" style="font-size: 24px; cursor: pointer;" onclick="toggleUserMenu()" title="User Menu"></i>
         <div id="user-menu" style="display: none;">
             <?php if (isset($_SESSION['username'])): ?>
                 <p>Welcome, <?= htmlspecialchars($_SESSION['username']); ?></p>
@@ -47,8 +47,8 @@
                         <span class="slider round"></span>
                     </label>
                 </div>
-                <a href="auth/login.php">Login</a>
-                <a href="auth/register.php">Register</a>
+                <a href="auth/login.php" title="Sign in to your account">Login</a>
+                <a href="auth/register.php" title="Create a new account">Register</a>
             <?php endif; ?>
         </div>
 

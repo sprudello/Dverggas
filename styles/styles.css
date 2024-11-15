@@ -629,6 +629,47 @@ footer {
     margin-bottom: 20px;
 }
 
+.edit-button {
+    background-color: #6600cc;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #5800af;
+    box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.done-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s ease;
+}
+
+.done-button:hover {
+    background-color: #218838;
+    box-shadow: 0 0 20px rgba(40, 167, 69, 0.5);
+}
+
 
 .content-section {
     display: none;
@@ -647,6 +688,21 @@ footer {
 .detail-group {
     display: grid;
     gap: 5px;
+    margin-bottom: 15px;
+}
+
+.edit-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #6600cc;
+    border-radius: 4px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+}
+
+.edit-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(102, 0, 204, 0.5);
 }
 
 .detail-content {
@@ -670,6 +726,22 @@ footer {
 
 .detail-group p {
     margin: 0;
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-icon {
+    cursor: pointer;
+    color: #6600cc;
+    font-size: 0.9em;
+}
+
+.edit-icon:hover {
+    color: #5800af;
 }
 
 .settings-form {
