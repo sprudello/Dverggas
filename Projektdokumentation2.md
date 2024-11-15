@@ -26,15 +26,20 @@ Die Weiterführung des Projektes DVERGGAS
 |2.1| Muss| Funktional| Als Unternehmen möchte ich einen Unternehmungsaccount erstellen können |
 |2.2| Muss| Funktional| Als Unternehmen möchte ich mich in meinen Unternehmungsaccount einloggen können|
 |3.1| Muss| Funktional| Als Privatnutzer möchte ich einen Privataccount erstellen können|
-|3.2| Muss| Funktional| Als Privatnutzer möchte ich mich in meinen Privataccount einloggen können
-|4.1|	Muss|	Funktional|	Als Unternehmen möchte ich Produkte veröffentlichen können, damit ich sie zum Verkauf anbieten kann.|
-|4.2|	Muss|	Funktional|	Als Privatnutzer möchte ich eigene Produkte zum Verkauf anbieten können, damit ich sie anderen Nutzern zur Verfügung stellen kann.|
-|5.1|	Kann|	Qualität|	Als User möchte ich eine Vorschau meiner Bestellung vor der Bezahlung sehen, damit ich sicher sein kann, dass alles korrekt ist.|
-|5.2| Muss| Funktional | Als User möchte ich einen Funktionierenden Checkout sehen|
-|5.3| Kann|	Funktional|	Als User möchte ich eine Bestätigungsmail nach Abschluss des Checkouts erhalten, damit ich einen Nachweis über meine Bestellung habe.|
+|3.2| Muss| Funktional| Als Privatnutzer möchte ich mich in meinen Privataccount einloggen können|
+|4.1| Muss| Funktional| Als Nutzer möchte ich mein Profil verwalten können |
+|4.2| Muss| Funktional| Als Nutzer möchte ich mein passwort ändern können|
+|4.3| Muss| Funktional| Als Nutzer möchte ich meine Profilinformationen ändern können |
+|5.1| Kann | Qualität | Als Nutzer möchte ich meine Notifications sehen können |
+|5.2| Kann | Qualität | Als Nutzer möchte ich mein Einkaufsverlauf sehen können|
+|6.1| Kann | Funktional| als Nutzer möchte ich Produkte zu einer Wunschliste hinzufügen können |
+|6.2| Kann | Qualität | Als Nutzer möchte ich meine Wunschliste abrufen können |
+|7.1|	Muss|	Funktional|	Als Unternehmen möchte ich Produkte veröffentlichen können, damit ich sie zum Verkauf anbieten kann.|
+|7.2|	Muss|	Funktional|	Als Privatnutzer möchte ich eigene Produkte zum Verkauf anbieten können, damit ich sie anderen Nutzern zur Verfügung stellen kann.|
+|8.1|	Kann|	Qualität|	Als User möchte ich eine Vorschau meiner Bestellung vor der Bezahlung sehen, damit ich sicher sein kann, dass alles korrekt ist.|
+|8.2| Muss| Funktional | Als User möchte ich einen Funktionierenden Checkout sehen|
+|8.3| Kann|	Funktional|	Als User möchte ich eine Bestätigungsmail nach Abschluss des Checkouts erhalten, damit ich einen Nachweis über meine Bestellung habe.|
 
-
-✍️ Jede User Story hat eine ganzzahlige Nummer (1, 2, 3 etc.), eine Verbindlichkeit (Muss oder Kann?), und einen Typ (Funktional, Qualität, Rand). Die User Story selber hat folgende Form: *Als ein 🤷‍♂️ möchte ich 🤷‍♂️, damit 🤷‍♂️*.
 
 ### 1.3 Testfälle
 
