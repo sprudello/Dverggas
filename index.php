@@ -79,10 +79,6 @@ while ($row = mysqli_fetch_assoc($result_all)) {
     let allCategories = <?= json_encode($all_categories); ?>;
     let expanded = false;
 
-    function toggleUserMenu() {
-        var userMenu = document.getElementById('user-menu');
-        userMenu.style.display = userMenu.style.display === 'none' ? 'block' : 'none';
-    }
 
     function toggleCategories() {
     const categoryList = document.getElementById('category-list');

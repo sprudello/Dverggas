@@ -25,7 +25,7 @@
                         <span>0.00 CHF</span>
                     </div>
                     <div class="cart-buttons">
-                        <button class="checkout-button">Checkout</button>
+                        <a href="<?= $base_path; ?>checkout.php" class="checkout-button">Checkout</a>
                         <a href="<?= $base_path; ?>shoppingcart.php" class="view-cart-button">View Full Cart</a>
                     </div>
                 </div>
