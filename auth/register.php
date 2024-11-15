@@ -1,6 +1,40 @@
 <?php
 session_start();
+
 include '../db/connection.php';
+
+// Validation functions
+function containsNumber($str) {
+    return preg_match('/\d/', $str);
+}
+
+function isValidName($str) {
+    return preg_match('/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.\'-]+$/u', $str);
+}
+
+function isValidUsername($str) {
+    return preg_match('/^[a-zA-Z0-9_-]{3,20}$/', $str);
+}
+
+function isValidPassword($str) {
+    // At least 8 characters
+    // At least one uppercase letter
+    // At least one lowercase letter
+    // At least one number
+    // At least one special character
+    return strlen($str) >= 8 &&
+           preg_match('/[A-Z]/', $str) &&
+           preg_match('/[a-z]/', $str) &&
+           preg_match('/[0-9]/', $str) &&
+           preg_match('/[!@#$%^&*(),.?":{}|<>]/', $str);
+}
+
+function isValidPhoneNumber($number) {
+    // Remove all non-digit characters
+    $cleanNumber = preg_replace('/[^0-9]/', '', $number);
+    // Check if length is between 10 and 15 digits
+    return strlen($cleanNumber) >= 10 && strlen($cleanNumber) <= 15;
+}
 
 $errors = [];
 
@@ -35,17 +69,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $full_phone_number = $phone_code . $phone_number;
     }
 
-    // Validate required fields
-    if (empty($username)) $errors[] = "Username is required.";
-    if (empty($firstname)) $errors[] = "Firstname is required.";
-    if (empty($lastname)) $errors[] = "Lastname is required.";
-    if (empty($email)) $errors[] = "Email is required.";
-    if (empty($street)) $errors[] = "Street is required.";
-    if (empty($house_number)) $errors[] = "House number is required.";
-    if (empty($plz)) $errors[] = "PLZ is required.";
-    if (empty($city)) $errors[] = "City is required.";
-    if (empty($country)) $errors[] = "Country is required.";
-    if (empty($password)) $errors[] = "Password is required.";
+    // Validate required fields and formats
+    if (empty($username)) {
+        $errors[] = "Username is required.";
+    } elseif (!isValidUsername($username)) {
+        $errors[] = "Username must be 3-20 characters long and contain only letters, numbers, underscores and hyphens.";
+    }
+
+    if (empty($firstname)) {
+        $errors[] = "Firstname is required.";
+    } elseif (!isValidName($firstname)) {
+        $errors[] = "Firstname can only contain letters and basic punctuation.";
+    }
+
+    if (empty($lastname)) {
+        $errors[] = "Lastname is required.";
+    } elseif (!isValidName($lastname)) {
+        $errors[] = "Lastname can only contain letters and basic punctuation.";
+    }
+
+    if (!empty($display_name) && !isValidUsername($display_name)) {
+        $errors[] = "Display name must be 3-20 characters long and contain only letters, numbers, underscores and hyphens.";
+    }
+
+    if (empty($email)) {
+        $errors[] = "Email is required.";
+    }
+
+    if (!empty($phone_number) && !isValidPhoneNumber($phone_number)) {
+        $errors[] = "Invalid phone number format.";
+    }
+
+    if (empty($street)) {
+        $errors[] = "Street is required.";
+    } elseif (containsNumber($street)) {
+        $errors[] = "Street name should not contain numbers.";
+    }
+
+    if (empty($house_number)) {
+        $errors[] = "House number is required.";
+    }
+
+    if (empty($plz)) {
+        $errors[] = "PLZ is required.";
+    }
+
+    if (empty($city)) {
+        $errors[] = "City is required.";
+    } elseif (containsNumber($city)) {
+        $errors[] = "City name should not contain numbers.";
+    }
+
+    if (empty($country)) {
+        $errors[] = "Country is required.";
+    } elseif (containsNumber($country)) {
+        $errors[] = "Country name should not contain numbers.";
+    }
+
+    if (empty($password)) {
+        $errors[] = "Password is required.";
+    } elseif (!isValidPassword($password)) {
+        $errors[] = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+    }
 
     // Validate email format
     if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -132,13 +217,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!-- Registration form -->
 <div class="registration-container">
-    <?php if (!empty($errors)): ?>
-        <div class="error-messages">
-            <?php foreach ($errors as $error): ?>
-                <div class="error"><?php echo htmlspecialchars($error); ?></div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
 
     <form id="registration-form" method="post" action="">
         <div class="progress-container">
@@ -272,6 +350,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </div>
 
+<?php if (!empty($errors)): ?>
+    <div class="registration-error-container">
+        <div class="error-messages">
+            <?php foreach ($errors as $error): ?>
+                <div class="error-item">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <?php echo htmlspecialchars($error); ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
 <!-- jQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -280,149 +371,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-      
-        // Initialize intl-tel-input
-        var input = document.querySelector("#phone");
-        var iti = window.intlTelInput(input, {
-            separateDialCode: true,
-            initialCountry: "ch",
-            preferredCountries: ["ch", "de", "fr", "it", "us"],
-            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
-        });
-
-        // Update hidden phone_code input
-        input.addEventListener('countrychange', function () {
-            var countryData = iti.getSelectedCountryData();
-            document.getElementById('phone_code').value = '+' + countryData.dialCode;
-        });
-
-        // Populate phone_code on initial load
-        var countryData = iti.getSelectedCountryData();
-        document.getElementById('phone_code').value = '+' + countryData.dialCode;
-
-
-        // Multi-step form script
-        let currentStep = 0;
-        const form = document.getElementById("registration-form");
-        const steps = Array.from(form.querySelectorAll(".step"));
-        const nextButtons = form.querySelectorAll(".next-button");
-        const prevButtons = form.querySelectorAll(".prev-button");
-        const progressSteps = document.querySelectorAll(".progress-step");
-        const progressBar = document.querySelector(".progress-bar");
-        const totalSteps = steps.length;
-
-        function showStep(stepNumber) {
-            steps.forEach((step, index) => {
-                step.style.display = index === stepNumber ? "block" : "none";
-                if (index === stepNumber) {
-                    step.classList.add("active");
-                } else {
-                    step.classList.remove("active");
-                }
-            });
-
-            // Update progress bar
-            const progress = ((stepNumber) / (totalSteps - 1)) * 100;
-            progressBar.style.setProperty("--progress", `${progress}%`);
-
-            // Update progress steps
-            progressSteps.forEach((step, index) => {
-                if (index < stepNumber) {
-                    step.classList.add("completed");
-                    step.classList.remove("active");
-                    step.innerHTML = '<i class="fa-solid fa-check"></i>';
-                } else if (index === stepNumber) {
-                    step.classList.add("active");
-                    step.classList.remove("completed");
-                    step.innerHTML = index + 1;
-                } else {
-                    step.classList.remove("active", "completed");
-                    step.innerHTML = index + 1;
-                }
-            });
-        }
-
-        // Show initial step
-        showStep(currentStep);
-
-        // Next button event listeners
-        nextButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-                if (validateStep(currentStep)) {
-                    currentStep++;
-                    if (currentStep < steps.length) {
-                        showStep(currentStep);
-                    }
-                }
-            });
-        });
-
-        // Previous button event listeners
-        prevButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-                currentStep--;
-                if (currentStep >= 0) {
-                    showStep(currentStep);
-                }
-            });
-        });
-
-        // Phone country change event
-        input.addEventListener('countrychange', function () {
-            var countryData = iti.getSelectedCountryData();
-            document.getElementById('phone_code').value = '+' + countryData.dialCode;
-        });
-
-        // Set initial phone code
-        var countryData = iti.getSelectedCountryData();
-        document.getElementById('phone_code').value = '+' + countryData.dialCode;
-
-
-        // Function to validate the current step
-        function validateStep(step) {
-            const currentFormStep = steps[step];
-            const inputs = Array.from(
-                currentFormStep.querySelectorAll("input, select, textarea")
-            );
-            let valid = true;
-
-            inputs.forEach((input) => {
-                if (!input.checkValidity()) {
-                    input.reportValidity();
-                    valid = false;
-                }
-            });
-
-            // Additional validation for password match
-            if (step === 4) {
-                const password = document.getElementById("password");
-                const confirmPassword = document.getElementById("confirm_password");
-                const passwordMatchMsg = document.getElementById("password-match");
-
-                if (password.value !== confirmPassword.value) {
-                    passwordMatchMsg.textContent = "Passwords do not match.";
-                    valid = false;
-                } else {
-                    passwordMatchMsg.textContent = "Passwords match.";
-                }
-            }
-            return valid;
-        }
-        // Real-time password match validation
-        const password = document.getElementById("password");
-        const confirmPassword = document.getElementById("confirm_password");
-        const passwordMatchMsg = document.getElementById("password-match");
-
-        if (password && confirmPassword && passwordMatchMsg) {
-            confirmPassword.addEventListener("input", () => {
-                if (password.value !== confirmPassword.value) {
-                    passwordMatchMsg.textContent = "Passwords do not match.";
-                } else {
-                    passwordMatchMsg.textContent = "";
-                }
-            });
-        }
-    });
-    </script>
+<script src="../scripts/registration.js"></script>

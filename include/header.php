@@ -36,6 +36,7 @@
         <div id="user-menu" style="display: none;">
             <?php if (isset($_SESSION['username'])): ?>
                 <p>Welcome, <?= htmlspecialchars($_SESSION['username']); ?></p>
+                <a href="<?= $base_path; ?>profile.php">My Profile</a>
                 <a href="auth/logout.php">Logout</a>
             <?php else: ?>
                 <p>Welcome, Guest</p>
