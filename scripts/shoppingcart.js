@@ -45,7 +45,7 @@ function toggleUserMenu() {
 }
 
 function updateCartPreview() {
-    fetch('get_cart.php')
+    fetch('Shoppingcart/get_cart.php')
         .then(response => response.json())
         .then(data => {
             const cartMenu = document.getElementById('cart-menu');
@@ -78,6 +78,3 @@ function updateCartPreview() {
 }
 
 document.addEventListener('DOMContentLoaded', updateCartPreview);
-    // Toggle user menu
-    userMenu.style.display = userMenu.style.display === 'none' ? 'block' : 'none';
-}

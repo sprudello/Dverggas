@@ -978,7 +978,7 @@ footer {
 .login-box {
   width: 600px;
   padding: 50px;
-  margin: 0 auto;
+  margin: 50px auto;
   background-color: var(--card-bg-color);
   box-shadow: 0 0 20px var(--shadow-color);
   border-radius: 10px;
