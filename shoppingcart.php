@@ -47,11 +47,6 @@ $cartItems = [];
 $userId = $_SESSION['user_id'];
 $cartItems = getCartItems($conn, $userId);
 
-// Debugging: Output cart items
-echo "<pre>";
-print_r($cartItems);
-echo "</pre>";
-
 $conn->close();
 ?>
 
@@ -127,6 +122,8 @@ $conn->close();
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px var(--shadow-color);
+    position: relative;
+    z-index: 1;
 }
 
 .cart-summary {
@@ -135,6 +132,8 @@ $conn->close();
     border-radius: 10px;
     box-shadow: 0 4px 8px var(--shadow-color);
     height: fit-content;
+    position: relative;
+    z-index: 1;
 }
 
 .summary-row {
@@ -165,11 +164,19 @@ $conn->close();
     display: inline-block;
     text-align: center;
     text-decoration: none;
+    position: relative;
+    z-index: 2;
 }
 
 .checkout-button-large:hover {
     background-color: #5800af;
     box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
+}
+
+@media (max-width: 768px) {
+    .cart-container {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 
