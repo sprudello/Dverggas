@@ -16,10 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
             $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-        } elseif (preg_match('/^\d{12}$/', $login)) { 
-            $stmt = $conn->prepare("SELECT * FROM users WHERE phone_number = ?");
         } else {
-            $error_message = "Invalid email or phone number format!";
+            $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
         }
 
         if (empty($error_message)) {
@@ -49,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php endif; ?>
     <form method="POST" action="login.php">
         <div class="input-group">
-            <label for="login">Email or Phone Number</label>
-            <input type="text" name="login" id="login" placeholder="Enter Email or Phone Number" required>
+            <label for="login">Email or Username</label>
+            <input type="text" name="login" id="login" placeholder="Enter Email or Username" required>
         </div>
         <div class="input-group">
             <label for="password">Password</label>

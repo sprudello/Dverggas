@@ -3,6 +3,39 @@ session_start();
 
 include '../db/connection.php';
 
+// Validation functions
+function containsNumber($str) {
+    return preg_match('/\d/', $str);
+}
+
+function isValidName($str) {
+    return preg_match('/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.\'-]+$/u', $str);
+}
+
+function isValidUsername($str) {
+    return preg_match('/^[a-zA-Z0-9_-]{3,20}$/', $str);
+}
+
+function isValidPassword($str) {
+    // At least 8 characters
+    // At least one uppercase letter
+    // At least one lowercase letter
+    // At least one number
+    // At least one special character
+    return strlen($str) >= 8 &&
+           preg_match('/[A-Z]/', $str) &&
+           preg_match('/[a-z]/', $str) &&
+           preg_match('/[0-9]/', $str) &&
+           preg_match('/[!@#$%^&*(),.?":{}|<>]/', $str);
+}
+
+function isValidPhoneNumber($number) {
+    // Remove all non-digit characters
+    $cleanNumber = preg_replace('/[^0-9]/', '', $number);
+    // Check if length is between 10 and 15 digits
+    return strlen($cleanNumber) >= 10 && strlen($cleanNumber) <= 15;
+}
+
 $errors = [];
 
 // Initialize variables to avoid undefined variable warnings
@@ -36,17 +69,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $full_phone_number = $phone_code . $phone_number;
     }
 
-    // Validate required fields
-    if (empty($username)) $errors[] = "Username is required.";
-    if (empty($firstname)) $errors[] = "Firstname is required.";
-    if (empty($lastname)) $errors[] = "Lastname is required.";
-    if (empty($email)) $errors[] = "Email is required.";
-    if (empty($street)) $errors[] = "Street is required.";
-    if (empty($house_number)) $errors[] = "House number is required.";
-    if (empty($plz)) $errors[] = "PLZ is required.";
-    if (empty($city)) $errors[] = "City is required.";
-    if (empty($country)) $errors[] = "Country is required.";
-    if (empty($password)) $errors[] = "Password is required.";
+    // Validate required fields and formats
+    if (empty($username)) {
+        $errors[] = "Username is required.";
+    } elseif (!isValidUsername($username)) {
+        $errors[] = "Username must be 3-20 characters long and contain only letters, numbers, underscores and hyphens.";
+    }
+
+    if (empty($firstname)) {
+        $errors[] = "Firstname is required.";
+    } elseif (!isValidName($firstname)) {
+        $errors[] = "Firstname can only contain letters and basic punctuation.";
+    }
+
+    if (empty($lastname)) {
+        $errors[] = "Lastname is required.";
+    } elseif (!isValidName($lastname)) {
+        $errors[] = "Lastname can only contain letters and basic punctuation.";
+    }
+
+    if (!empty($display_name) && !isValidUsername($display_name)) {
+        $errors[] = "Display name must be 3-20 characters long and contain only letters, numbers, underscores and hyphens.";
+    }
+
+    if (empty($email)) {
+        $errors[] = "Email is required.";
+    }
+
+    if (!empty($phone_number) && !isValidPhoneNumber($phone_number)) {
+        $errors[] = "Invalid phone number format.";
+    }
+
+    if (empty($street)) {
+        $errors[] = "Street is required.";
+    } elseif (containsNumber($street)) {
+        $errors[] = "Street name should not contain numbers.";
+    }
+
+    if (empty($house_number)) {
+        $errors[] = "House number is required.";
+    }
+
+    if (empty($plz)) {
+        $errors[] = "PLZ is required.";
+    }
+
+    if (empty($city)) {
+        $errors[] = "City is required.";
+    } elseif (containsNumber($city)) {
+        $errors[] = "City name should not contain numbers.";
+    }
+
+    if (empty($country)) {
+        $errors[] = "Country is required.";
+    } elseif (containsNumber($country)) {
+        $errors[] = "Country name should not contain numbers.";
+    }
+
+    if (empty($password)) {
+        $errors[] = "Password is required.";
+    } elseif (!isValidPassword($password)) {
+        $errors[] = "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.";
+    }
 
     // Validate email format
     if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -133,13 +217,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!-- Registration form -->
 <div class="registration-container">
-    <?php if (!empty($errors)): ?>
-        <div class="error-messages">
-            <?php foreach ($errors as $error): ?>
-                <div class="error"><?php echo htmlspecialchars($error); ?></div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
 
     <form id="registration-form" method="post" action="">
         <div class="progress-container">
@@ -272,6 +349,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </form>
 </div>
+
+<?php if (!empty($errors)): ?>
+    <div class="registration-error-container">
+        <div class="error-messages">
+            <?php foreach ($errors as $error): ?>
+                <div class="error-item">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <?php echo htmlspecialchars($error); ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
 
 <!-- jQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

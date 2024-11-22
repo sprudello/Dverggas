@@ -1,9 +1,12 @@
 -- Database ---
-CREATE DATABASE Dverggas;
+CREATE DATABASE IF NOT EXISTS Dverggas;
+USE Dverggas;
+
+-- Enable proper timestamp handling
+SET SQL_MODE = 'ALLOW_INVALID_DATES';
 
 -- Tables ---
-USE Dverggas;
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     firstname VARCHAR(50) NOT NULL,
@@ -20,20 +23,19 @@ CREATE TABLE users (
     city VARCHAR(255) NOT NULL,
     country VARCHAR(255) NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
+    avatar_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
-USE Dverggas;
-CREATE TABLE categories (
+CREATE TABLE IF NOT EXISTS categories (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     parent_id INT NULL,
     FOREIGN KEY (parent_id) REFERENCES categories(id)
 );
 
-USE Dverggas;
-CREATE TABLE products (
+CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     category_id INT,
     title VARCHAR(48) NOT NULL,

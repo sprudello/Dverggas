@@ -67,7 +67,7 @@ while ($row = $result_products->fetch_assoc()) {
         <?php if (count($products) > 0): ?>
             <div class="product-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
                 <?php foreach ($products as $product): ?>
-                    <div class="product-card" style="border: 1px solid #ccc; padding: 20px; border-radius: 10px;">
+                    <div class="product-card" style="border: 1px solid #ccc; padding: 20px; border-radius: 10px;" onmouseover="startHoverTimer(this)" onmouseout="clearHoverTimer(this)">
                         <h3><?= htmlspecialchars($product['title']); ?></h3>
                         <p><?= htmlspecialchars($product['prod_desc']); ?></p>
                         <p><strong>Brand:</strong> <?= htmlspecialchars($product['brand']); ?></p>
