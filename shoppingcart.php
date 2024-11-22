@@ -4,13 +4,6 @@ include_once 'include/head.php';
 include_once 'include/header.php';
 include_once 'db/connection.php';
 
-// Debugging: Check if user_id is set
-if (!isset($_SESSION['user_id'])) {
-    echo "User ID is not set in the session.";
-    exit;
-}
-
-// Define function to get cart items
 function getCartItems($conn, $userId) {
     $sql = "
     SELECT 
@@ -99,85 +92,5 @@ $conn->close();
         </div>
     </div>
 </div>
-
-<style>
-.shopping-cart-page {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.shopping-cart-page h1 {
-    margin-bottom: 30px;
-}
-
-.cart-container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 30px;
-}
-
-.cart-items-container {
-    background-color: var(--card-bg-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    position: relative;
-    z-index: 1;
-}
-
-.cart-summary {
-    background-color: var(--card-bg-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px var(--shadow-color);
-    height: fit-content;
-    position: relative;
-    z-index: 1;
-}
-
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--shadow-color);
-}
-
-.summary-row.total {
-    font-weight: bold;
-    font-size: 1.2em;
-    border-bottom: none;
-}
-
-.checkout-button-large {
-    width: 100%;
-    padding: 15px;
-    background-color: #6600cc;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 1.1em;
-    margin-top: 20px;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    position: relative;
-    z-index: 2;
-}
-
-.checkout-button-large:hover {
-    background-color: #5800af;
-    box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
-}
-
-@media (max-width: 768px) {
-    .cart-container {
-        grid-template-columns: 1fr;
-    }
-}
-</style>
 
 <?php include_once 'include/footer.php'; ?>
