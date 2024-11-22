@@ -1,13 +1,11 @@
 # Projekt-Dokumentation
 
-☝️ Alle Text-Stellen, welche mit einem ✍️ beginnen, können Sie löschen, sobald Sie die entsprechende Stellen ausgefüllt haben.
-
-✍️ Ihr Gruppenname und Ihre Nachnamen
+Goedertier Timo, Manser Alberto, Lutziger Cyril, Atputharasa Agachan
 
 | Datum | Version | Zusammenfassung                                              |
 | ----- | ------- | ------------------------------------------------------------ |
-|       | 0.0.1   |  |
-|       | ...     |                                                              |
+| 15.11.24 | 0.0.1   |Login hinzugefügt, Warenkorb speichert ab  |
+| 22.11.24       | 0.0.2| Warenkorb fertig, Checkout begonnen                                                              |
 |       | 1.0.0   |                                                              |
 
 ## 1 Informieren
@@ -43,17 +41,28 @@ Die Weiterführung des Projektes DVERGGAS
 
 ### 1.3 Testfälle
 
-|TC-№|	Ausgangslage|	Eingabe|	Erwartete Ausgabe|
-|---|----------------|-|-|
-|1.1.1|	Der Nutzer hat die Produktseite geöffnet.|	Der Nutzer klickt auf „In den Warenkorb“.|	Das Produkt wird erfolgreich in den Warenkorb gelegt.|
-|1.2.1|	Der Warenkorb enthält Produkte.|	Der Nutzer öffnet den Warenkorb.|	Eine Liste der im Warenkorb enthaltenen Produkte wird angezeigt.|
-|1.3.1|	Der Warenkorb enthält Produkte.|	Der Nutzer klickt auf „Entfernen“.|	Das ausgewählte Produkt wird aus dem Warenkorb entfernt.|
-|2.1.1|	Der Nutzer ist als Unternehmen angemeldet.|	Der Nutzer erstellt ein neues Produkt und klickt auf „Veröffentlichen“.|	Das Produkt wird im Katalog veröffentlicht.|
-|2.2.1|	Der Nutzer ist als Privatnutzer angemeldet.|	Der Nutzer erstellt ein neues Produkt und klickt auf „Veröffentlichen“.|	Das Produkt wird im Katalog veröffentlicht.|
-|3.1.1|	Der Warenkorb ist vollständig befüllt.|	Der Nutzer klickt auf „Zur Kasse gehen“.|	Eine Übersicht mit den Bestelldetails wird angezeigt.|
-|3.2.1|	Der Checkout wurde erfolgreich abgeschlossen.|	Der Nutzer schließt die Zahlung ab.|	Eine Bestätigungsmail wird an die hinterlegte E-Mail-Adresse gesendet.|
+|TC-№	|Ausgangslage|	Eingabe|	Erwartete Ausgabe|
+|-------|------------|---------|---------------------|
+|1.1.1	|Der Nutzer hat die Produktseite geöffnet.	|Der Nutzer klickt auf „In den Warenkorb“.	|Das Produkt wird erfolgreich in den Warenkorb gelegt.|
+|1.2.1	|Der Warenkorb enthält Produkte.	|Der Nutzer öffnet den Warenkorb.	|Eine Liste der im Warenkorb enthaltenen Produkte wird angezeigt.|
+|1.3.1	|Der Warenkorb enthält Produkte.	|Der Nutzer klickt auf „Entfernen“.	|Das ausgewählte Produkt wird aus dem Warenkorb entfernt.|
+|2.1.1	Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Unternehmenskonto wird erstellt, und der Nutzer wird eingeloggt.|
+|2.2.1	|Der Unternehmenskonto-Benutzer existiert.	|Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.
+|3.1.1	|Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Privatkonto wird erstellt, und der Nutzer wird eingeloggt.|
+|3.2.1	|Der Privatkonto-Benutzer existiert.	 |Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.|
+|4.1.1	|Der Nutzer ist eingeloggt.	|Der Nutzer öffnet die Profilseite und ändert Einstellungen.	|Die Änderungen werden gespeichert und aktualisiert.|
+|4.2.1	|Der Nutzer ist eingeloggt.	|Der Nutzer gibt das aktuelle und ein neues Passwort ein und klickt auf „Speichern“.	|Das Passwort wird erfolgreich geändert.|
+|4.3.1|	Der Nutzer ist eingeloggt.	|Der Nutzer aktualisiert Profilinformationen und klickt auf „Speichern“.	|Die aktualisierten Informationen werden gespeichert.|
+|5.1.1	|Der Nutzer hat Benachrichtigungen.	|Der Nutzer öffnet die Notifications-Seite.|	Eine Liste der Benachrichtigungen wird angezeigt.|
+|5.2.1	|Der Nutzer hat einen Einkaufsverlauf.	|Der Nutzer öffnet die Seite „Einkaufsverlauf“.	|Der Einkaufsverlauf wird angezeigt.|
+|6.1.1	|Der Nutzer hat die Produktseite geöffnet.	|Der Nutzer klickt auf „Zur Wunschliste hinzufügen“.	|Das Produkt wird erfolgreich zur Wunschliste hinzugefügt.|
+|6.2.1	|Der Nutzer hat Produkte in seiner Wunschliste.	|Der Nutzer öffnet die Wunschliste.	|Eine Liste der Produkte in der Wunschliste wird angezeigt.|
+|7.1.1|	Der Nutzer ist als Unternehmen eingeloggt.	|Der Nutzer erstellt ein neues Produkt und klickt auf „Veröffentlichen“.	|Das Produkt wird erfolgreich veröffentlicht.|
+|7.2.1	|Der Nutzer ist als Privatnutzer eingeloggt.	|Der Nutzer erstellt ein neues Produkt und klickt auf „Veröffentlichen“.	|Das Produkt wird erfolgreich veröffentlicht.|
+|8.1.1	|Der Warenkorb ist vollständig befüllt.	|Der Nutzer klickt auf „Zur Kasse gehen“.	|Eine Vorschau der Bestellung wird angezeigt.|
+|8.2.1	|Der Nutzer hat die Bestellung überprüft.	|Der Nutzer klickt auf „Zahlen“.	|Die Zahlung wird erfolgreich abgeschlossen, und die Bestellung ist abgeschlossen.|
+|8.3.1	|Der Checkout wurde erfolgreich abgeschlossen.	|Der Nutzer schließt die Zahlung ab.	|Eine Bestätigungsmail wird an die hinterlegte E-Mail-Adresse gesendet.|
 
-✍️ Die Nummer hat das Format `N.m`, wobei `N` die Nummer der User Story ist, die der Testfall abdeckt, und `m` von `1` an nach oben gezählt. Beispiel: Der dritte Testfall, der die zweite User Story abdeckt, hat also die Nummer `2.3`.
 
 ### 1.4 Diagramme
 
@@ -63,14 +72,26 @@ Die Weiterführung des Projektes DVERGGAS
 
 | AP-№ | Frist | Zuständig | Beschreibung | geplante Zeit |
 | ---- | ----- | --------- | ------------ | ------------- |
-| 1.A  |       |           |              |               |
-| ...  |       |           |              |               |
+| 1.A  | 13.12.24| Alberto Manser |Implementierung der Funktion, Produkte in den Warenkorb hinzuzufügen.|1 Stunde|
+| 1.B  | 13.12.24| Alberto Manser |Entwicklung der Anzeige der Warenkorb-Inhalte.| 2 Stunden|
+| 1.C  | 13.12.24| Alberto Manser |Implementierung der Funktion, Produkte aus dem Warenkorb zu entfernen. |2 Stunden |
+| 2.A  | 13.12.24| Alberto Manser |Erstellung der Unternehmenskonto-Registrierungsfunktion. |2 Stunden  |
+| 2.B  | 13.12.24| Agachan Atputharasa |Implementierung der Login-Funktion für Unternehmenskonten. |2 Stunden|
+| 3.A  | 13.12.24| Agachan Atputharasa |Erstellung der Privatkonto-Registrierungsfunktion. |2 Stunden|
+| 3.B  | 13.12.24| Agachan Atputharasa |Implementierung der Login-Funktion für Privatkonten. |2 Stunden|
+| 4.A  | 13.12.24| Timo Goedertier |Entwicklung der Profilverwaltung für Nutzer. |2 Stunden|
+| 4.B  | 13.12.24| Timo Goedertier |Implementierung der Passwortänderungsfunktion. |2 Stunden|
+| 5.A  | 13.12.24| Timo Goedertier |Implementierung der Benachrichtigungsanzeige. |1.5 Stunden|
+| 5.B  | 13.12.24| Timo Goedertier |Entwicklung der Einkaufsverlaufsanzeige. |2 Stunden|
+| 6.A  | 13.12.24| Agachan Atputharasa |Implementierung der Wunschlisten-Funktion (Hinzufügen). |2 Stunden|
+| 6.B  | 13.12.24| Timo Goedertier |Entwicklung der Wunschlistenanzeige. |1 Stunde|
+| 7.A  | 13.12.24| Alberto Manser |Implementierung der Produktveröffentlichung für Unternehmen. |2 Stunden|
+| 7.B  | 13.12.24| Timo Goedertier |Implementierung der Produktveröffentlichung für Privatnutzer. |2 Stunden|
+| 8.A  | 13.12.24| Cyril Lutziger |Entwicklung der Bestellvorschau. |1 Stunde|
+| 8.B  | 13.12.24| Cyril Lutziger |Implementierung des Checkout-Prozesses. |3 Stunden|
+| 8.C  | 13.12.24| Cyril Lutziger |Entwicklung der Bestätigungsmail-Funktion. |3 Stunden|
+| 9.A  | 20.12.24| Alle | Durchführung Testen und Bugfixes | 5 Stunden |
 
-Total: 
-
-✍️ Die Nummer hat das Format `N.m`, wobei `N` die Nummer der User Story ist, auf die sich das Arbeitspaket bezieht, und `m` von `A` an nach oben buchstabiert. Beispiel: Das dritte Arbeitspaket, das die zweite User Story betrifft, hat also die Nummer `2.C`.
-
-✍️ Ein Arbeitspaket sollte etwa 45' für eine Person in Anspruch nehmen. Die totale Anzahl Arbeitspakete sollte etwa Folgendem entsprechen: `Anzahl R-Sitzungen` ╳ `Anzahl Gruppenmitglieder` ╳ `4`. Wenn Sie also zu dritt an einem Projekt arbeiten, für welches zwei R-Sitzungen geplant sind, sollten Sie auf `2` ╳ `3` ╳`4` = `24` Arbeitspakete kommen. Sollten Sie merken, dass Sie hier nicht genügend Arbeitspakte haben, denken Sie sich weitere "Kann"-User Stories für Kapitel 1.2 aus.
 
 ## 3 Entscheiden
 
