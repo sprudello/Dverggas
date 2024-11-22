@@ -67,13 +67,13 @@ while ($row = $result_products->fetch_assoc()) {
         <?php if (count($products) > 0): ?>
             <div class="product-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
                 <?php foreach ($products as $product): ?>
-                    <div class="product-card" style="border: 1px solid #ccc; padding: 20px; border-radius: 10px;">
+                    <div class="product-card" style="border: 1px solid #ccc; padding: 20px; border-radius: 10px;" onmouseover="startHoverTimer(this)" onmouseout="clearHoverTimer(this)">
                         <h3><?= htmlspecialchars($product['title']); ?></h3>
                         <p><?= htmlspecialchars($product['prod_desc']); ?></p>
                         <p><strong>Brand:</strong> <?= htmlspecialchars($product['brand']); ?></p>
                         <p><strong>Price:</strong> $<?= number_format($product['price'], 2); ?></p>
                         <p><strong>Release Date:</strong> <?= date("F j, Y", strtotime($product['release_date'])); ?></p>
-                        <form class="add-to-cart-form" onsubmit="addToCart(event, this)">
+                        <form method="POST" action="../shoppingcart/add_to_cart.php">
                             <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['id']); ?>">
                             <input type="hidden" name="category_id" value="<?= htmlspecialchars($category_id); ?>">
                             <button type="submit" style="background: none; border: none; cursor: pointer;">
@@ -88,6 +88,5 @@ while ($row = $result_products->fetch_assoc()) {
         <?php endif; ?>
     </section>
 </div>
-
 
 <?php include_once 'include/footer.php'; ?>

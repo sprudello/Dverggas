@@ -49,7 +49,7 @@ function addToCart(event, form) {
     
     const formData = new FormData(form);
     
-    fetch('Shoppingcart/add_to_cart.php', {
+    fetch('../shoppingcart/add_to_cart.php', {
         method: 'POST',
         body: formData
     })
@@ -86,7 +86,7 @@ function addToCart(event, form) {
 }
 
 function updateCartPreview() {
-    fetch('Shoppingcart/get_cart.php')
+    fetch('../shoppingcart/get_cart.php')
         .then(response => response.json())
         .then(data => {
             const cartMenu = document.getElementById('cart-menu');
