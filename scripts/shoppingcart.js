@@ -62,7 +62,7 @@ function addToCart(event, form) {
             const cartTotalSpan = cartMenu.querySelector('.cart-total span:last-child');
 
             if (data.cartItems.length > 0) {
-                cartItemsDiv.innerHTML = ''; // Clear existing items
+                cartItemsDiv.innerHTML = '';
                 data.cartItems.forEach(item => {
                     const itemDiv = document.createElement('div');
                     itemDiv.classList.add('cart-item');
