@@ -60,6 +60,5 @@
                 <a href="auth/register.php" title="Create a new account">Register</a>
             <?php endif; ?>
         </div>
-
     </div>
 </header>
