@@ -94,7 +94,7 @@ $conn->close();
                 <span>Total:</span>
                 <span id="total"><?php echo number_format($subtotal, 2); ?> CHF</span>
             </div>
-            <a href="checkout.php" class="checkout-button-large">Proceed to Checkout</a>
+            <a href="../checkout.php" class="checkout-button-large">Proceed to Checkout</a>
         </div>
     </div>
 </div>

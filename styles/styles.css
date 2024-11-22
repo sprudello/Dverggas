@@ -1299,7 +1299,7 @@ footer {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
   font-size: 1.1em;
   margin-top: 20px;
   display: inline-block;
@@ -1307,11 +1307,20 @@ footer {
   text-decoration: none;
   position: relative;
   z-index: 2;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 .checkout-button-large:hover {
   background-color: #5800af;
   box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
+  transform: translateY(-2px);
+}
+
+.checkout-button-large:active {
+  transform: translateY(0);
+  box-shadow: 0 0 10px rgba(102, 0, 204, 0.3);
 }
 
 @media (max-width: 768px) {

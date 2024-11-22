@@ -44,6 +44,47 @@ function toggleUserMenu() {
     userMenu.style.display = userMenu.style.display === 'none' ? 'block' : 'none';
 }
 
+function addToCart(event, form) {
+    event.preventDefault();
+    
+    const formData = new FormData(form);
+    
+    fetch('Shoppingcart/add_to_cart.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update cart menu
+            const cartMenu = document.getElementById('cart-menu');
+            const cartItemsDiv = cartMenu.querySelector('.cart-items');
+            const cartTotalSpan = cartMenu.querySelector('.cart-total span:last-child');
+
+            if (data.cartItems.length > 0) {
+                cartItemsDiv.innerHTML = ''; // Clear existing items
+                data.cartItems.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('cart-item');
+                    itemDiv.innerHTML = `
+                        <p>${item.title}</p>
+                        <p>Price: ${item.price} CHF</p>
+                        <p>Quantity: ${item.quantity}</p>
+                    `;
+                    cartItemsDiv.appendChild(itemDiv);
+                });
+                cartTotalSpan.textContent = `${data.total} CHF`;
+            }
+            
+            // Show cart menu
+            cartMenu.style.display = 'block';
+        } else {
+            console.error('Failed to add item to cart:', data.message);
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
 function updateCartPreview() {
     fetch('Shoppingcart/get_cart.php')
         .then(response => response.json())
