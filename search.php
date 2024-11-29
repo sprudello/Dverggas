@@ -12,7 +12,8 @@ function searchProducts($conn, $searchTerm) {
         products.title, 
         products.prod_desc, 
         products.price, 
-        products.brand, 
+        products.brand,
+        products.category_id,
         categories.name AS category_name
     FROM products
     LEFT JOIN categories ON products.category_id = categories.id
@@ -61,6 +62,13 @@ $conn->close();
                     <p>Description: <?php echo htmlspecialchars($product['prod_desc']); ?></p>
                     <p>Price: <?php echo htmlspecialchars($product['price']); ?>€</p>
                     <p>Brand: <?php echo htmlspecialchars($product['brand']); ?></p>
+                    <form class="add-to-cart-form" onsubmit="addToCart(event, this)">
+                        <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+                        <input type="hidden" name="category_id" value="<?php echo htmlspecialchars($product['category_id']); ?>">
+                        <button type="submit" style="background: none; border: none; cursor: pointer;">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </form>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -68,5 +76,6 @@ $conn->close();
         <p>No products found.</p>
     <?php endif; ?>
 </div>
+
 
 <?php include_once 'include/footer.php'; ?>
