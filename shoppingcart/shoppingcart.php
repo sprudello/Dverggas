@@ -1,8 +1,8 @@
 <?php
 session_start();
-include_once 'include/head.php';
-include_once 'include/header.php';
-include_once 'db/connection.php';
+include_once '../include/head.php';
+include_once '../include/header.php';
+include_once '../db/connection.php';
 
 function getCartItems($conn, $userId) {
     $sql = "
@@ -37,8 +37,10 @@ function getCartItems($conn, $userId) {
 
 // Retrieve cart items for the logged-in user
 $cartItems = [];
-$userId = $_SESSION['user_id'];
-$cartItems = getCartItems($conn, $userId);
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $cartItems = getCartItems($conn, $userId);
+}
 
 $conn->close();
 ?>
@@ -93,4 +95,4 @@ $conn->close();
     </div>
 </div>
 
-<?php include_once 'include/footer.php'; ?>
+<?php include_once '../include/footer.php'; ?>

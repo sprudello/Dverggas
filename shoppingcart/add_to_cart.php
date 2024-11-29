@@ -1,6 +1,8 @@
 <?php
 session_start();
-include_once 'db/connection.php';
+include_once '../include/head.php';
+include_once '../include/header.php';
+include_once '../db/connection.php';
 
 if (isset($_POST['product_id']) && isset($_SESSION['user_id']) && isset($_POST['category_id'])) {
     $product_id = intval($_POST['product_id']);
@@ -13,7 +15,7 @@ if (isset($_POST['product_id']) && isset($_SESSION['user_id']) && isset($_POST['
     $stmt->execute();
     $stmt->close();
 
-    header("Location: category.php?id=" . $category_id);
+    header("Location: ../category.php?id=" . $category_id);
     exit();
 } else {
     echo "Error: Product ID, User ID, or Category ID is missing.";
