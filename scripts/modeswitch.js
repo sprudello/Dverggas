@@ -28,6 +28,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const modeText = document.querySelector('.mode-text');
     const root = document.documentElement;
 
+    // Only proceed with checkbox functionality if it exists
+    if (checkbox && modeText) {
+
     function setTheme(isDark) {
         if (isDark) {
             root.style.setProperty('--bg-color', '#242424');
@@ -62,7 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
         setTheme(isDarkMode);
     }
 
-    checkbox.addEventListener('change', function() {
-        setTheme(this.checked);
-    });
+        checkbox.addEventListener('change', function() {
+            setTheme(this.checked);
+        });
+    }
 });

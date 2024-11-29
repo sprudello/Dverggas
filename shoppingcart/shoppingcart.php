@@ -1,8 +1,14 @@
 <?php
 session_start();
-include_once 'include/head.php';
-include_once 'include/header.php';
-include_once 'db/connection.php';
+include_once '../include/head.php';
+include_once '../include/header.php';
+include_once '../db/connection.php';
+
+// Redirect if not logged in
+if (!isset($_SESSION['user_id'])) {
+    header('Location: ../auth/login.php');
+    exit;
+}
 
 function getCartItems($conn, $userId) {
     $sql = "
@@ -88,9 +94,8 @@ $conn->close();
                 <span>Total:</span>
                 <span id="total"><?php echo number_format($subtotal, 2); ?> CHF</span>
             </div>
-            <a href="checkout.php" class="checkout-button-large">Proceed to Checkout</a>
+            <a href="../checkout.php" class="checkout-button-large">Proceed to Checkout</a>
         </div>
     </div>
 </div>
-
-<?php include_once 'include/footer.php'; ?>
+<?php include_once '../include/footer.php'; ?>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once 'db/connection.php';
+include_once '../db/connection.php';
 
 if (isset($_POST['cart_id']) && isset($_SESSION['user_id'])) {
     $cart_id = intval($_POST['cart_id']);
