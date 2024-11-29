@@ -59,6 +59,13 @@ function saveChanges(field, value, element) {
 
 // Add event listeners when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Check if there's a hash in the URL
+    if (window.location.hash) {
+        // Remove the # from the hash
+        const section = window.location.hash.substring(1);
+        showSection(section);
+    }
+    
     // Edit button handler
     document.querySelector('.edit-button').addEventListener('click', function() {
         editMode = !editMode;
