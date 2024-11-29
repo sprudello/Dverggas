@@ -65,8 +65,8 @@ Die Weiterführung des Projektes DVERGGAS
 
 
 ### 1.4 Diagramme
+![image](https://github.com/user-attachments/assets/a6e3d4e5-b69c-437c-bc45-9cc738eb3ff5)
 
-✍️ Hier können Sie PAPs, Use Case- und Gantt-Diagramme oder Ähnliches einfügen.
 
 ## 2 Planen
 
