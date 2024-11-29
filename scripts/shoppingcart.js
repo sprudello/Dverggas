@@ -15,6 +15,35 @@ function toggleNotificationMenu() {
     notificationMenu.style.display = notificationMenu.style.display === 'none' ? 'block' : 'none';
 }
 
+function markAsRead(element) {
+    element.classList.remove('unread');
+    updateUnreadCount();
+}
+
+function markAllAsRead() {
+    const notifications = document.querySelectorAll('.notification-item.unread');
+    notifications.forEach(notification => {
+        notification.classList.remove('unread');
+    });
+    updateUnreadCount();
+}
+
+function updateUnreadCount() {
+    const unreadCount = document.querySelectorAll('.notification-item.unread').length;
+    const bellIcon = document.querySelector('.fa-bell');
+    
+    if (unreadCount > 0) {
+        bellIcon.style.color = '#6600cc';
+    } else {
+        bellIcon.style.color = 'inherit';
+    }
+}
+
+// Initialize unread count when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    updateUnreadCount();
+});
+
 function toggleCartMenu() {
     var cartMenu = document.getElementById('cart-menu');
     var userMenu = document.getElementById('user-menu');
