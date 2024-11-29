@@ -16,6 +16,25 @@ if (isset($_SESSION['user_id'])) {
     $user_data = $result->fetch_assoc();
     $stmt->close();
 }
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user_id = $_SESSION['user_id'];
+    $payment_type = 'credit_card'; // Assuming credit card for simplicity
+    $card_number = $_POST['card-number'];
+    $card_holder_name = $_POST['card-name'];
+    $expiry_date = $_POST['expiry-date'];
+    $cvv = $_POST['cvv'];
+
+    $stmt = $conn->prepare("INSERT INTO payment_details (user_id, payment_type, card_number, card_holder_name, expiry_date, cvv) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("isssss", $user_id, $payment_type, $card_number, $card_holder_name, $expiry_date, $cvv);
+    $stmt->execute();
+    $stmt->close();
+
+    // Redirect to a confirmation page or display a success message
+    header("Location: confirmation.php");
+    exit();
+}
 ?>
 
 <div class="checkout-container">
@@ -29,7 +48,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </div>
 
-    <form id="checkout-form" method="post" action="">
+    <form id="checkout-form" method="post" action="checkout.php">
         <div class="steps-container">
             <!-- Step 1: Review Cart -->
             <div class="step active">
