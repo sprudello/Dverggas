@@ -64,12 +64,17 @@ function toggleCartMenu() {
 function toggleUserMenu() {
     var userMenu = document.getElementById('user-menu');
     var cartMenu = document.getElementById('cart-menu');
+    var notificationMenu = document.getElementById('notification-menu');
     
-    // Close cart menu if it's open
+    // Close other menus if they're open
     if (cartMenu.style.display === 'block') {
         cartMenu.style.display = 'none';
     }
+    if (notificationMenu.style.display === 'block') {
+        notificationMenu.style.display = 'none';
+    }
     
+    // Toggle user menu
     userMenu.style.display = userMenu.style.display === 'none' ? 'block' : 'none';
 }
 
