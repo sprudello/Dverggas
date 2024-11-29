@@ -72,13 +72,18 @@ while ($row = mysqli_fetch_assoc($result_all)) {
 <!-- About Section -->
 <div class="about">
     <p>Dverggas is your go-to online store for a variety of products, ranging from electronics to household items.
-        Explore our diverse categories and find exactly what you need at the best prices.</p>
+        Explore our diverse categories and find exactly what you need at the best prices.
+    </p>
 </div>
 
 <script>
     let allCategories = <?= json_encode($all_categories); ?>;
     let expanded = false;
 
+    function toggleUserMenu() {
+        var userMenu = document.getElementById('user-menu');
+        userMenu.style.display = userMenu.style.display === 'none' ? 'block' : 'none';
+    }
 
     function toggleCategories() {
     const categoryList = document.getElementById('category-list');

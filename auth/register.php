@@ -275,7 +275,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- jQuery CDN -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Include intl-tel-input scripts -->
+<!-- Include country-select-js and intl-tel-input scripts -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/country-select-js/2.1.1/css/countrySelect.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/country-select-js/2.1.1/js/countrySelect.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
@@ -302,9 +304,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         var countryData = iti.getSelectedCountryData();
         document.getElementById('phone_code').value = '+' + countryData.dialCode;
 
+        // Initialize country-select
+        $("#country").countrySelect({
+            defaultCountry: "ch",
+            preferredCountries: ["ch", "de", "fr", "it", "us"],
+        });
+
+        var countryValue = $("#country").val();
+        if (countryValue) {
+            $("#country").countrySelect("setCountry", countryValue);
+        }
 
         // Multi-step form script
-        let currentStep = 0;
         const form = document.getElementById("registration-form");
         const steps = Array.from(form.querySelectorAll(".step"));
         const nextButtons = form.querySelectorAll(".next-button");
@@ -312,73 +323,135 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         const progressSteps = document.querySelectorAll(".progress-step");
         const progressBar = document.querySelector(".progress-bar");
         const totalSteps = steps.length;
+        let currentStep = 0;
 
-        function showStep(stepNumber) {
-            steps.forEach((step, index) => {
-                step.style.display = index === stepNumber ? "block" : "none";
-                if (index === stepNumber) {
-                    step.classList.add("active");
-                } else {
-                    step.classList.remove("active");
-                }
-            });
-
-            // Update progress bar
-            const progress = ((stepNumber) / (totalSteps - 1)) * 100;
-            progressBar.style.setProperty("--progress", `${progress}%`);
-
-            // Update progress steps
-            progressSteps.forEach((step, index) => {
-                if (index < stepNumber) {
-                    step.classList.add("completed");
-                    step.classList.remove("active");
-                    step.innerHTML = '<i class="fa-solid fa-check"></i>';
-                } else if (index === stepNumber) {
-                    step.classList.add("active");
-                    step.classList.remove("completed");
-                    step.innerHTML = index + 1;
-                } else {
-                    step.classList.remove("active", "completed");
-                    step.innerHTML = index + 1;
-                }
-            });
-        }
-
-        // Show initial step
         showStep(currentStep);
 
-        // Next button event listeners
         nextButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 if (validateStep(currentStep)) {
+                    progressSteps[currentStep].classList.add("completed");
+                    progressSteps[currentStep].classList.remove("active");
+                    updateProgressStepContent(currentStep);
+
                     currentStep++;
-                    if (currentStep < steps.length) {
+                    if (currentStep < totalSteps) {
                         showStep(currentStep);
                     }
                 }
             });
         });
 
-        // Previous button event listeners
+        // Event listeners for Previous buttons
         prevButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 currentStep--;
                 if (currentStep >= 0) {
+                    progressSteps[currentStep].classList.remove("completed");
+                    progressSteps[currentStep].classList.add("active");
+                    progressSteps[currentStep].innerHTML = currentStep + 1;
                     showStep(currentStep);
                 }
             });
         });
 
-        // Phone country change event
+        // Update progress step content
         input.addEventListener('countrychange', function () {
             var countryData = iti.getSelectedCountryData();
             document.getElementById('phone_code').value = '+' + countryData.dialCode;
         });
 
-        // Set initial phone code
         var countryData = iti.getSelectedCountryData();
         document.getElementById('phone_code').value = '+' + countryData.dialCode;
 
+        $("#country").countrySelect({
+            defaultCountry: "ch",
+            preferredCountries: ["ch", "de", "fr", "it", "us"],
+        });
+
+        var countryValue = $("#country").val();
+        if (countryValue) {
+            $("#country").countrySelect("setCountry", countryValue);
+        }
+
+        const form = document.getElementById("registration-form");
+        const steps = Array.from(form.querySelectorAll(".step"));
+        const nextButtons = form.querySelectorAll(".next-button");
+        const prevButtons = form.querySelectorAll(".prev-button");
+        const progressSteps = document.querySelectorAll(".progress-step");
+        const progressBar = document.querySelector(".progress-bar");
+        const totalSteps = steps.length;
+        let currentStep = 0;
+
+        showStep(currentStep);
+
+        nextButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                if (validateStep(currentStep)) {
+                    progressSteps[currentStep].classList.add("completed");
+                    progressSteps[currentStep].classList.remove("active");
+                    updateProgressStepContent(currentStep);
+
+                    currentStep++;
+                    if (currentStep < totalSteps) {
+                        showStep(currentStep);
+                    }
+                }
+            });
+        });
+
+        prevButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                currentStep--;
+                if (currentStep >= 0) {
+                    progressSteps[currentStep].classList.remove("completed");
+                    progressSteps[currentStep].classList.add("active");
+                    progressSteps[currentStep].innerHTML = currentStep + 1;
+                    showStep(currentStep);
+                }
+            });
+        });
+
+        function updateProgressStepContent(stepIndex) {
+            if (progressSteps[stepIndex].classList.contains("completed")) {
+                progressSteps[stepIndex].innerHTML = '<i class="fa-solid fa-check"></i>';
+            } else {
+                progressSteps[stepIndex].innerHTML = stepIndex + 1;
+            }
+        }
+
+        function showStep(step) {
+            steps.forEach((s, index) => {
+                s.classList.toggle("active", index === step);
+            });
+
+            // Update progress steps classes
+            progressSteps.forEach((ps, index) => {
+                if (index < step) {
+                    ps.classList.add("completed");
+                    updateProgressStepContent(index);
+                } else if (index === step) {
+                    ps.classList.add("active");
+                    ps.classList.remove("completed");
+                    if (!ps.classList.contains("completed")) {
+                        ps.innerHTML = index + 1;
+                    }
+                } else {
+                    ps.classList.remove("active", "completed");
+                    ps.innerHTML = index + 1;
+                }
+            });
+          
+            // Focus on the first input of the current step
+            const progressPercentage = step === 0 ? 0 : (step / (totalSteps - 1)) * 100;
+            progressBar.style.setProperty("--progress", `${progressPercentage}%`);
+            const firstInput = steps[step].querySelector("input, select, textarea");
+            if (firstInput) {
+                firstInput.focus();
+            }
+
+            form.scrollIntoView({ behavior: "smooth" });
+        }
 
         // Function to validate the current step
         function validateStep(step) {

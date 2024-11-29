@@ -8,124 +8,17 @@
   --shadow-color: rgba(255, 255, 255, 0.1);
   --hover-shadow-color: rgba(255, 255, 255, 0.2);
 }
-
-/* Checkout Styles */
-.checkout-container {
-    width: 800px;
-    margin: 50px auto;
-    background-color: var(--card-bg-color);
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px var(--shadow-color);
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
 }
 
-.checkout-container .progress-container {
-    position: relative;
-    margin-bottom: 30px;
-}
-
-.checkout-container .progress-bar {
-    position: absolute;
-    top: 15px;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background-color: var(--input-bg-color);
-    z-index: 1;
-}
-
-.checkout-container .progress-bar::before {
-    content: "";
-    position: absolute;
-    height: 100%;
-    background-color: #6600cc;
-    width: var(--progress, 0%);
-    transition: width 0.3s;
-}
-
-.checkout-container .progress-steps {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    z-index: 2;
-}
-
-.checkout-container .progress-step {
-    width: 35px;
-    height: 35px;
-    background-color: var(--input-bg-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: var(--text-color);
-}
-
-.checkout-container .progress-step.active {
-    background-color: #6600cc;
-    color: white;
-}
-
-.checkout-container .progress-step.completed {
-    background-color: #6600cc;
-    color: white;
-}
-
-.checkout-container .steps-container .step {
-    display: none;
-}
-
-.checkout-container .steps-container .step.active {
-    display: block;
-}
-
-.checkout-container .cart-summary {
-    margin: 20px 0;
-    padding: 20px;
-    background-color: var(--input-bg-color);
-    border-radius: 5px;
-}
-
-.checkout-container .summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-    padding: 5px 0;
-}
-
-.checkout-container .summary-row.total {
-    border-top: 2px solid var(--text-color);
-    font-weight: bold;
-    font-size: 1.2em;
-    padding-top: 10px;
-}
-
-.checkout-container .confirmation-summary {
-    background-color: var(--input-bg-color);
-    padding: 20px;
-    border-radius: 5px;
-    margin: 20px 0;
-}
-
-.checkout-container .confirmation-summary h3 {
-    color: #6600cc;
-    margin-bottom: 10px;
-}
-
-.checkout-container .confirmation-summary > div {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--text-color);
-}
-
-.checkout-container .confirmation-summary > div:last-child {
-    border-bottom: none;
-}
 
 /* Base Style */
 body {
-  font-family: 'Poppins', Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
@@ -163,137 +56,16 @@ header .fa-user {
 }
 
 .title-button {
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: 2rem;
+  font-weight: bold;
   color: var(--text-color);
-  text-decoration: none;
-  background: linear-gradient(45deg, #6600cc, #9933ff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 2px 2px 4px rgba(102, 0, 204, 0.3);
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  position: relative;
-  padding: 5px 10px;
-}
-
-.title-button::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(45deg, #6600cc, #9933ff);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
+  text-shadow: 0 4px 8px var(--shadow-color);
+  transition: transform 0.3s;
 }
 
 .title-button:hover {
-  transform: translateY(-2px);
-}
-
-.title-button:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-/* Header Icons */
-.header-icons {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.icon-container {
-    position: relative;
-}
-
-/* Shopping Cart Menu */
-#cart-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: var(--card-bg-color);
-    box-shadow: 0 4px 8px var(--shadow-color);
-    padding: 15px;
-    border-radius: 5px;
-    z-index: 100;
-    min-width: 300px;
-}
-
-#cart-menu h3 {
-    margin: 0 0 15px 0;
-    font-size: 16px;
-}
-
-.cart-items {
-    max-height: 300px;
-    overflow-y: auto;
-    margin-bottom: 15px;
-}
-
-.empty-cart {
-    text-align: center;
-    color: #666;
-    font-style: italic;
-}
-
-.cart-divider {
-    border: none;
-    border-top: 1px solid var(--text-color);
-    opacity: 0.2;
-    margin: 10px 0;
-}
-
-.cart-footer {
-    padding-top: 10px;
-}
-
-.cart-total {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-.cart-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.checkout-button, .view-cart-button {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    text-align: center;
-    text-decoration: none;
-}
-
-.checkout-button {
-    background-color: #6600cc;
-    color: white;
-}
-
-.checkout-button:hover {
-    background-color: #5800af;
-    box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
-}
-
-.view-cart-button {
-    background-color: #444;
-    color: white;
-}
-
-.view-cart-button:hover {
-    background-color: #555;
-    box-shadow: 0 0 20px rgba(68, 68, 68, 0.5);
+  text-shadow: 0 4px 8px var(--hover-shadow-color);
+  transform: scale(1.05);
 }
 
 /* User Menu */
@@ -408,14 +180,8 @@ input:checked + .slider:before {
   padding: 10px;
   border-radius: 25px;
   background-color: #6600cc;
-  color: white;
+  color: black;
   border: none;
-  transition: all 0.3s ease;
-}
-
-.searchbar button:hover {
-  background-color: #5800af;
-  box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 .searchbar .fa-magnifying-glass {
@@ -568,7 +334,6 @@ footer {
 
 .login-button:hover {
   background-color: #5800af;
-  box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 .input-group {
@@ -753,7 +518,6 @@ footer {
 .prev-button:hover,
 .submit-button:hover {
   background-color: #5800af;
-  box-shadow: 0 0 20px rgba(102, 0, 204, 0.5);
 }
 
 .input-group input:focus,
@@ -787,3 +551,4 @@ footer {
   vertical-align: middle;
   color: black;
 }
+
