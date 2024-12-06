@@ -7,7 +7,6 @@ if (isset($_POST['product_id']) && isset($_SESSION['user_id']) && isset($_POST['
     $user_id = intval($_SESSION['user_id']);
     $category_id = intval($_POST['category_id']);
     $quantity = 1;
-
     $stmt = $conn->prepare("INSERT INTO cart (user_id, product_id, quantity) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)");
     $stmt->bind_param("iii", $user_id, $product_id, $quantity);
     $stmt->execute();

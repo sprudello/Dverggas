@@ -18,7 +18,7 @@ $user = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 ?>
 
-<div class="profile-container" style="width: 1200px;">
+<div class="profile-container">
     <!-- Sidebar -->
     <div class="profile-sidebar">
         <div class="sidebar-user">
@@ -245,7 +245,7 @@ $stmt->close();
         </section>
 
         <!-- Notifications Section -->
-        <section id="notifications" class="content-section">
+        <section id="notifications" class="content-section" onload="showSection('notifications')">
             <h2>Notifications</h2>
             <div class="notification-settings">
                 <h3>Notification Preferences</h3>
