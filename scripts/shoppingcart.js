@@ -30,6 +30,9 @@ function toggleCartMenu() {
     
     // Toggle cart menu
     cartMenu.style.display = cartMenu.style.display === 'none' ? 'block' : 'none';
+    if (cartMenu.style.display === 'block') {
+        updateCartPreview();
+    }
 }
 
 function toggleUserMenu() {
@@ -50,9 +53,16 @@ function toggleUserMenu() {
 }
 
 function updateCartPreview() {
-    fetch('get_cart.php')
-        .then(response => response.json())
+    fetch('shoppingcart/get_cart.php')
+        .then(response => {
+            console.log('Response:', response);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log('Data:', data);
             const cartMenu = document.getElementById('cart-menu');
             const cartItemsDiv = cartMenu.querySelector('.cart-items');
             const cartTotalSpan = cartMenu.querySelector('.cart-total span:last-child');

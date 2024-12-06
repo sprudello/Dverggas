@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
     <?php
-    $base_path = (basename(dirname($_SERVER['SCRIPT_NAME'])) == 'auth') ? '../' : '';
+    $base_path = (basename(dirname($_SERVER['SCRIPT_NAME'])) == 'auth' || basename(dirname($_SERVER['SCRIPT_NAME'])) == 'shoppingcart') ? '../' : '';
     ?>
     <link rel="stylesheet" type="text/css" href="<?= $base_path; ?>styles/styles.css">
 
