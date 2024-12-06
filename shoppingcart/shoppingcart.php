@@ -43,8 +43,10 @@ function getCartItems($conn, $userId) {
 
 // Retrieve cart items for the logged-in user
 $cartItems = [];
-$userId = $_SESSION['user_id'];
-$cartItems = getCartItems($conn, $userId);
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $cartItems = getCartItems($conn, $userId);
+}
 
 $conn->close();
 ?>
@@ -98,5 +100,4 @@ $conn->close();
         </div>
     </div>
 </div>
-
 <?php include_once '../include/footer.php'; ?>

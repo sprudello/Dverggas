@@ -1338,6 +1338,7 @@ footer {
   color: black;
 }
 
+/* Shopping Cart Page Styles */
 .shopping-cart-page {
   padding: 20px;
   max-width: 1200px;
@@ -1359,8 +1360,6 @@ footer {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px var(--shadow-color);
-  position: relative;
-  z-index: 1;
 }
 
 .cart-summary {
@@ -1424,4 +1423,3 @@ footer {
       grid-template-columns: 1fr;
   }
 }
-

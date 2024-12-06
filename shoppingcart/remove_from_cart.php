@@ -1,5 +1,7 @@
 <?php
 session_start();
+include_once '../include/head.php';
+include_once '../include/header.php';
 include_once '../db/connection.php';
 
 if (isset($_POST['cart_id']) && isset($_SESSION['user_id'])) {
@@ -15,7 +17,7 @@ if (isset($_POST['cart_id']) && isset($_SESSION['user_id'])) {
     $stmt->execute();
     $stmt->close();
 
-    header("Location: shoppingcart.php");
+    header("Location: ../shoppingcart/shoppingcart.php");
     exit();
 } else {
     echo "Error: Cart ID or User ID is missing.";
