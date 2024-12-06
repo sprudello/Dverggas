@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS users (
     avatar_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+    kontentyp ENUM('Unternehmen', 'Privatperson') NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS categories (
