@@ -51,7 +51,7 @@ if (isset($_SESSION['user_id'])) {
                         <span id="checkout-total">0.00 CHF</span>
                     </div>
                 </div>
-                <button type="button" class="next-button">Next</button>
+                <button type="button" class="next-button"auth/update_checkout.php>Next</button>
             </div>
 
             <!-- Step 2: Shipping -->
@@ -196,6 +196,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize first step
     showStep(currentStep);
+
+    // Automatically insert slashes in the expiry date field
+    const expiryDateInput = document.getElementById('expiry-date');
+    expiryDateInput.addEventListener('input', function() {
+        let value = expiryDateInput.value.replace(/\D/g, '');
+        if (value.length > 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2, 4);
+        }
+        expiryDateInput.value = value;
+    });
 });
 </script>
 
