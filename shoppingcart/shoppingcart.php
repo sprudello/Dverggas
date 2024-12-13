@@ -43,15 +43,17 @@ function getCartItems($conn, $userId) {
 
 // Retrieve cart items for the logged-in user
 $cartItems = [];
-$userId = $_SESSION['user_id'];
-$cartItems = getCartItems($conn, $userId);
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+    $cartItems = getCartItems($conn, $userId);
+}
 
 $conn->close();
 ?>
 
 <div class="shopping-cart-page">
     <h1>Shopping Cart</h1>
-    
+
     <div class="cart-container">
         <div class="cart-items-container">
             <div id="cart-items-full" class="cart-items">
@@ -72,7 +74,7 @@ $conn->close();
                 <?php endif; ?>
             </div>
         </div>
-        
+
         <div class="cart-summary">
             <h2>Order Summary</h2>
             <div class="summary-row">
@@ -98,5 +100,4 @@ $conn->close();
         </div>
     </div>
 </div>
-
 <?php include_once '../include/footer.php'; ?>

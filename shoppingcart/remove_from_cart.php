@@ -15,9 +15,9 @@ if (isset($_POST['cart_id']) && isset($_SESSION['user_id'])) {
     $stmt->execute();
     $stmt->close();
 
-    echo json_encode(['success' => true]);
+    header("Location: ../shoppingcart/shoppingcart.php");
     exit();
 } else {
-    echo json_encode(['success' => false, 'message' => 'Cart ID or User ID is missing']);
+    echo "Error: Cart ID or User ID is missing.";
 }
 ?>
