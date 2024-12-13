@@ -1,7 +1,5 @@
 <?php
 session_start();
-include_once '../include/head.php';
-include_once '../include/header.php';
 include_once '../db/connection.php';
 
 if (isset($_POST['cart_id']) && isset($_SESSION['user_id'])) {
@@ -17,9 +15,9 @@ if (isset($_POST['cart_id']) && isset($_SESSION['user_id'])) {
     $stmt->execute();
     $stmt->close();
 
-    header("Location: ../shoppingcart/shoppingcart.php");
+    echo json_encode(['success' => true]);
     exit();
 } else {
-    echo "Error: Cart ID or User ID is missing.";
+    echo json_encode(['success' => false, 'message' => 'Cart ID or User ID is missing']);
 }
 ?>
