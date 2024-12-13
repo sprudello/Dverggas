@@ -1,8 +1,12 @@
 -- Database ---
-CREATE DATABASE IF NOT EXISTS Dverggas;
+CREATE DATABASE IF NOT EXISTS Dverggas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 USE Dverggas;
 
--- Enable proper timestamp handling
+-- Enable proper timestamp and charset handling
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
 SET SQL_MODE = 'ALLOW_INVALID_DATES';
 
 -- Tables ---
@@ -25,7 +29,7 @@ CREATE TABLE IF NOT EXISTS users (
     password_hash VARCHAR(255) NOT NULL,
     avatar_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS categories (
@@ -47,8 +51,6 @@ CREATE TABLE IF NOT EXISTS products (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
-USE Dverggas;
-
 CREATE TABLE cart (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -57,4 +59,14 @@ CREATE TABLE cart (
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE wishlist (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    CONSTRAINT unique_wishlist_item UNIQUE (user_id, product_id)
 );

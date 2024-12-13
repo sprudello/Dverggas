@@ -18,7 +18,7 @@ $user = $stmt->get_result()->fetch_assoc();
 $stmt->close();
 ?>
 
-<div class="profile-container">
+<div class="profile-container" style="width: 1200px;">
     <!-- Sidebar -->
     <div class="profile-sidebar">
         <div class="sidebar-user">
@@ -245,7 +245,7 @@ $stmt->close();
         </section>
 
         <!-- Notifications Section -->
-        <section id="notifications" class="content-section" onload="showSection('notifications')">
+        <section id="notifications" class="content-section">
             <h2>Notifications</h2>
             <div class="notification-settings">
                 <h3>Notification Preferences</h3>
@@ -312,7 +312,50 @@ $stmt->close();
         <section id="wishlist" class="content-section">
             <h2>My Wishlist</h2>
             <div class="wishlist-items">
-                <p>Your wishlist is empty</p>
+                <?php
+                // Fetch wishlist items
+                $wishlist_query = "SELECT w.id as wishlist_id, p.* FROM wishlist w 
+                                 JOIN products p ON w.product_id = p.id 
+                                 WHERE w.user_id = ?";
+                $stmt = $conn->prepare($wishlist_query);
+                $stmt->bind_param("i", $_SESSION['user_id']);
+                $stmt->execute();
+                $wishlist_items = $stmt->get_result();
+
+                if ($wishlist_items->num_rows > 0):
+                    while ($item = $wishlist_items->fetch_assoc()):
+                ?>
+                    <div class="wishlist-item">
+                        <div class="item-details">
+                            <h3><?php echo htmlspecialchars($item['title']); ?></h3>
+                            <p><?php echo htmlspecialchars($item['prod_desc']); ?></p>
+                            <p class="price"><?php echo number_format($item['price'], 2); ?> CHF</p>
+                        </div>
+                        <div class="item-actions">
+                            <form class="add-to-cart-form" onsubmit="addToCart(event, this)">
+                                <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                                <input type="hidden" name="category_id" value="<?php echo $item['category_id']; ?>">
+                                <button type="submit" class="add-to-cart-btn" title="Add to Cart">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                </button>
+                            </form>
+                            <form class="remove-from-wishlist-form" onsubmit="removeFromWishlist(event, this)">
+                                <input type="hidden" name="wishlist_id" value="<?php echo $item['wishlist_id']; ?>">
+                                <button type="submit" class="remove-from-wishlist-btn" title="Remove from Wishlist">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <?php 
+                    endwhile;
+                else:
+                ?>
+                    <p>Your wishlist is empty</p>
+                <?php
+                endif;
+                $stmt->close();
+                ?>
             </div>
         </section>
 
