@@ -74,7 +74,7 @@ while ($row = $result_products->fetch_assoc()) {
                         <p><strong>Price:</strong> $<?= number_format($product['price'], 2); ?></p>
                         <p><strong>Release Date:</strong> <?= date("F j, Y", strtotime($product['release_date'])); ?></p>
                         <div class="product-actions">
-                            <form method="POST" action="../shoppingcart/add_to_cart.php" class="add-to-cart-form">
+                            <form method="POST" action="shoppingcart/add_to_cart.php" class="add-to-cart-form">
                                 <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['id']); ?>">
                                 <input type="hidden" name="category_id" value="<?= htmlspecialchars($category_id); ?>">
                                 <button type="submit" style="background: none; border: none; cursor: pointer;">
