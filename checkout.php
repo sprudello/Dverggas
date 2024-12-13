@@ -29,7 +29,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </div>
 
-    <form id="checkout-form" method="post" action="">
+    <form id="checkout-form" method="post" action="auth/update_checkout.php">
         <div class="steps-container">
             <!-- Step 1: Review Cart -->
             <div class="step active">

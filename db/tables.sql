@@ -70,3 +70,12 @@ CREATE TABLE wishlist (
     FOREIGN KEY (product_id) REFERENCES products(id),
     CONSTRAINT unique_wishlist_item UNIQUE (user_id, product_id)
 );
+
+CREATE TABLE IF NOT EXISTS payment_methods (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    card_number VARCHAR(20) NOT NULL,
+    expiry_date VARCHAR(5) NOT NULL,
+    card_name VARCHAR(100) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
