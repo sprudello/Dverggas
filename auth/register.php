@@ -221,6 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="account-selection">
         <button id="unternehmen-button" class="account-button">Unternehmen</button>
         <button id="privatnutzer-button" class="account-button">Privatnutzer</button>
+        <input type="hidden" id="kontentyp" name="kontentyp" value="">
     </div>
 
     <form id="registration-form" method="post" action="">
@@ -356,17 +357,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <script>
-document.getElementById('unternehmen-button').addEventListener('click', function() {
-    document.getElementById('kontentyp').value = 'Unternehmen';
-    document.querySelector('.account-selection').style.display = 'none';
-    document.getElementById('registration-form').style.display = 'block';
-});
+    document.getElementById('unternehmen-button').addEventListener('click', function() {
+        document.getElementById('kontentyp').value = 'Unternehmen';
+        document.querySelector('.account-selection').style.display = 'none';
+        document.getElementById('registration-form').style.display = 'block';
+    });
 
-document.getElementById('privatnutzer-button').addEventListener('click', function() {
-    document.getElementById('kontentyp').value = 'Privatnutzer';
-    document.querySelector('.account-selection').style.display = 'none';
-    document.getElementById('registration-form').style.display = 'block';
-});
+    document.getElementById('privatnutzer-button').addEventListener('click', function() {
+        document.getElementById('kontentyp').value = 'Privatnutzer';
+        document.querySelector('.account-selection').style.display = 'none';
+        document.getElementById('registration-form').style.display = 'block';
+    });
 </script>
 
 <?php if (!empty($errors)): ?>
