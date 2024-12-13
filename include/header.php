@@ -21,6 +21,15 @@
             </div>
         </div>
         <div class="icon-container">
+            <i class="fa-solid fa-heart" style="font-size: 24px; cursor: pointer;" onclick="toggleWishlistMenu()" title="Wishlist"></i>
+            <div id="wishlist-menu" style="display: none;">
+                <h3>Wishlist</h3>
+                <div class="wishlist-items">
+                    <p class="empty-wishlist">Your wishlist is empty</p>
+                </div>
+            </div>
+        </div>
+        <div class="icon-container">
             <i class="fa-solid fa-cart-shopping" style="font-size: 24px; cursor: pointer;" onclick="toggleCartMenu()" title="Shopping Cart"></i>
             <div id="cart-menu" style="display: none;">
                 <h3>Shopping Cart</h3>

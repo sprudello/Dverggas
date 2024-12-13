@@ -46,8 +46,8 @@ $stmt->close();
             <a href="#orders" onclick="showSection('orders')">
                 <i class="fa-solid fa-box"></i> Orders
             </a>
-            <a href="#wishlist" onclick="showSection('wishlist')">
-                <i class="fa-solid fa-heart"></i> Wishlist
+            <a href="#lists" onclick="showSection('lists')">
+                <i class="fa-solid fa-list"></i> Lists
             </a>
             <a href="#billing" onclick="showSection('billing')">
                 <i class="fa-solid fa-credit-card"></i> Billing Information
@@ -304,14 +304,76 @@ $stmt->close();
         <section id="orders" class="content-section">
             <h2>Order History</h2>
             <div class="orders-list">
-                <p>No orders found</p>
+                <?php
+                // Fetch orders with their items
+                $orders_query = "SELECT o.*, 
+                               oi.quantity, 
+                               oi.price_at_time,
+                               p.title as product_title,
+                               p.prod_desc as product_description
+                               FROM orders o
+                               LEFT JOIN order_items oi ON o.id = oi.order_id
+                               LEFT JOIN products p ON oi.product_id = p.id
+                               WHERE o.user_id = ?
+                               ORDER BY o.order_date DESC";
+                
+                $stmt = $conn->prepare($orders_query);
+                $stmt->bind_param("i", $_SESSION['user_id']);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                
+                if ($result->num_rows > 0) {
+                    $current_order_id = null;
+                    while ($row = $result->fetch_assoc()) {
+                        if ($current_order_id !== $row['id']) {
+                            // Close previous order div if exists
+                            if ($current_order_id !== null) {
+                                echo "</div></div>";
+                            }
+                            // Start new order
+                            $current_order_id = $row['id'];
+                            ?>
+                            <div class="order-item">
+                                <div class="order-header">
+                                    <h3>Order #<?php echo $row['id']; ?></h3>
+                                    <p>Date: <?php echo date('F j, Y', strtotime($row['order_date'])); ?></p>
+                                    <p>Status: <span class="order-status <?php echo $row['status']; ?>"><?php echo ucfirst($row['status']); ?></span></p>
+                                    <p>Total: <?php echo number_format($row['total_amount'], 2); ?> CHF</p>
+                                </div>
+                                <div class="order-products">
+                            <?php
+                        }
+                        // Display product info
+                        if ($row['product_title']) {
+                            ?>
+                            <div class="order-product">
+                                <h4><?php echo htmlspecialchars($row['product_title']); ?></h4>
+                                <p><?php echo htmlspecialchars($row['product_description']); ?></p>
+                                <p>Quantity: <?php echo $row['quantity']; ?></p>
+                                <p>Price: <?php echo number_format($row['price_at_time'], 2); ?> CHF</p>
+                            </div>
+                            <?php
+                        }
+                    }
+                    // Close last order div
+                    if ($current_order_id !== null) {
+                        echo "</div></div>";
+                    }
+                } else {
+                    echo "<p>No orders found</p>";
+                }
+                $stmt->close();
+                ?>
             </div>
         </section>
 
-        <!-- Wishlist Section -->
-        <section id="wishlist" class="content-section">
-            <h2>My Wishlist</h2>
-            <div class="wishlist-items">
+        <!-- Lists Section -->
+        <section id="lists" class="content-section">
+            <h2>My Lists</h2>
+            <div class="lists-container">
+                <div class="wishlist-section">
+                    <h3>Wishlist</h3>
+                    <div class="wishlist-items">
                 <?php
                 // Fetch wishlist items
                 $wishlist_query = "SELECT w.id as wishlist_id, p.* FROM wishlist w 
@@ -356,6 +418,58 @@ $stmt->close();
                 endif;
                 $stmt->close();
                 ?>
+                    </div>
+                </div>
+
+                <div class="cart-section">
+                    <h3>Shopping Cart</h3>
+                    <div class="cart-items">
+                    <?php
+                    // Fetch cart items
+                    $cart_query = "SELECT c.id as cart_id, p.* FROM cart c 
+                                 JOIN products p ON c.product_id = p.id 
+                                 WHERE c.user_id = ?";
+                    $stmt = $conn->prepare($cart_query);
+                    $stmt->bind_param("i", $_SESSION['user_id']);
+                    $stmt->execute();
+                    $cart_items = $stmt->get_result();
+
+                    if ($cart_items->num_rows > 0):
+                        while ($item = $cart_items->fetch_assoc()):
+                    ?>
+                        <div class="cart-item">
+                            <div class="item-details">
+                                <h3><?php echo htmlspecialchars($item['title']); ?></h3>
+                                <p><?php echo htmlspecialchars($item['prod_desc']); ?></p>
+                                <p class="price"><?php echo number_format($item['price'], 2); ?> CHF</p>
+                            </div>
+                            <div class="item-actions">
+                                <form class="move-to-wishlist-form" onsubmit="moveToWishlist(event, this)">
+                                    <input type="hidden" name="product_id" value="<?php echo $item['id']; ?>">
+                                    <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
+                                    <button type="submit" class="move-to-wishlist-btn" title="Move to Wishlist">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </button>
+                                </form>
+                                <form class="remove-from-cart-form" onsubmit="removeFromCart(event, this)">
+                                    <input type="hidden" name="cart_id" value="<?php echo $item['cart_id']; ?>">
+                                    <button type="submit" class="remove-from-cart-btn" title="Remove from Cart">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php 
+                        endwhile;
+                    else:
+                    ?>
+                        <p>Your cart is empty</p>
+                    <?php
+                    endif;
+                    $stmt->close();
+                    ?>
+                    </div>
+                </div>
             </div>
         </section>
 
