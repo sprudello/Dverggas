@@ -32,11 +32,9 @@ Die Weiterführung des Projektes DVERGGAS
 |5.2| Kann | Qualität | Als Nutzer möchte ich mein Einkaufsverlauf sehen können|
 |6.1| Kann | Funktional| als Nutzer möchte ich Produkte zu einer Wunschliste hinzufügen können |
 |6.2| Kann | Qualität | Als Nutzer möchte ich meine Wunschliste abrufen können |
-|7.1|	Muss|	Funktional|	Als Unternehmen möchte ich Produkte veröffentlichen können, damit ich sie zum Verkauf anbieten kann.|
-|7.2|	Muss|	Funktional|	Als Privatnutzer möchte ich eigene Produkte zum Verkauf anbieten können, damit ich sie anderen Nutzern zur Verfügung stellen kann.|
-|8.1|	Kann|	Qualität|	Als User möchte ich eine Vorschau meiner Bestellung vor der Bezahlung sehen, damit ich sicher sein kann, dass alles korrekt ist.|
-|8.2| Muss| Funktional | Als User möchte ich einen Funktionierenden Checkout sehen|
-|8.3| Kann|	Funktional|	Als User möchte ich eine Bestätigungsmail nach Abschluss des Checkouts erhalten, damit ich einen Nachweis über meine Bestellung habe.|
+|7.1|	Kann|	Qualität|	Als User möchte ich eine Vorschau meiner Bestellung vor der Bezahlung sehen, damit ich sicher sein kann, dass alles korrekt ist.|
+|7.2| Muss| Funktional | Als User möchte ich einen Funktionierenden Checkout sehen|
+|7.3| Kann|	Funktional|	Als User möchte ich eine Bestätigungsmail nach Abschluss des Checkouts erhalten, damit ich einen Nachweis über meine Bestellung habe.|
 
 
 ### 1.3 Testfälle
@@ -57,11 +55,9 @@ Die Weiterführung des Projektes DVERGGAS
 |5.2.1	|Der Nutzer hat einen Einkaufsverlauf.	|Der Nutzer öffnet die Seite „Einkaufsverlauf“.	|Der Einkaufsverlauf wird angezeigt.|
 |6.1.1	|Der Nutzer hat die Produktseite geöffnet.	|Der Nutzer klickt auf „Zur Wunschliste hinzufügen“.	|Das Produkt wird erfolgreich zur Wunschliste hinzugefügt.|
 |6.2.1	|Der Nutzer hat Produkte in seiner Wunschliste.	|Der Nutzer öffnet die Wunschliste.	|Eine Liste der Produkte in der Wunschliste wird angezeigt.|
-|7.1.1|	Der Nutzer ist als Unternehmen eingeloggt.	|Der Nutzer erstellt ein neues Produkt und klickt auf „Veröffentlichen“.	|Das Produkt wird erfolgreich veröffentlicht.|
-|7.2.1	|Der Nutzer ist als Privatnutzer eingeloggt.	|Der Nutzer erstellt ein neues Produkt und klickt auf „Veröffentlichen“.	|Das Produkt wird erfolgreich veröffentlicht.|
-|8.1.1	|Der Warenkorb ist vollständig befüllt.	|Der Nutzer klickt auf „Zur Kasse gehen“.	|Eine Vorschau der Bestellung wird angezeigt.|
-|8.2.1	|Der Nutzer hat die Bestellung überprüft.	|Der Nutzer klickt auf „Zahlen“.	|Die Zahlung wird erfolgreich abgeschlossen, und die Bestellung ist abgeschlossen.|
-|8.3.1	|Der Checkout wurde erfolgreich abgeschlossen.	|Der Nutzer schließt die Zahlung ab.	|Eine Bestätigungsmail wird an die hinterlegte E-Mail-Adresse gesendet.|
+|7.1.1	|Der Warenkorb ist vollständig befüllt.	|Der Nutzer klickt auf „Zur Kasse gehen“.	|Eine Vorschau der Bestellung wird angezeigt.|
+|7.2.1	|Der Nutzer hat die Bestellung überprüft.	|Der Nutzer klickt auf „Zahlen“.	|Die Zahlung wird erfolgreich abgeschlossen, und die Bestellung ist abgeschlossen.|
+|7.3.1	|Der Checkout wurde erfolgreich abgeschlossen.	|Der Nutzer schließt die Zahlung ab.	|Eine Bestätigungsmail wird an die hinterlegte E-Mail-Adresse gesendet.|
 
 
 ### 1.4 Diagramme
@@ -85,12 +81,10 @@ Die Weiterführung des Projektes DVERGGAS
 | 5.B  | 13.12.24| Timo Goedertier |Entwicklung der Einkaufsverlaufsanzeige. |2 Stunden|
 | 6.A  | 13.12.24| Agachan Atputharasa |Implementierung der Wunschlisten-Funktion (Hinzufügen). |2 Stunden|
 | 6.B  | 13.12.24| Timo Goedertier |Entwicklung der Wunschlistenanzeige. |1 Stunde|
-| 7.A  | 13.12.24| Alberto Manser |Implementierung der Produktveröffentlichung für Unternehmen. |2 Stunden|
-| 7.B  | 13.12.24| Timo Goedertier |Implementierung der Produktveröffentlichung für Privatnutzer. |2 Stunden|
-| 8.A  | 13.12.24| Cyril Lutziger |Entwicklung der Bestellvorschau. |1 Stunde|
-| 8.B  | 13.12.24| Cyril Lutziger |Implementierung des Checkout-Prozesses. |3 Stunden|
-| 8.C  | 13.12.24| Cyril Lutziger |Entwicklung der Bestätigungsmail-Funktion. |3 Stunden|
-| 9.A  | 20.12.24| Alle | Durchführung Testen und Bugfixes | 5 Stunden |
+| 7.A  | 13.12.24| Cyril Lutziger |Entwicklung der Bestellvorschau. |1 Stunde|
+| 7.B  | 13.12.24| Cyril Lutziger |Implementierung des Checkout-Prozesses. |3 Stunden|
+| 7.C  | 13.12.24| Cyril Lutziger |Entwicklung der Bestätigungsmail-Funktion. |3 Stunden|
+| 8.A  | 20.12.24| Alle | Durchführung Testen und Bugfixes | 5 Stunden |
 
 
 ## 3 Entscheiden
