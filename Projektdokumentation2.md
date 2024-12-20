@@ -21,23 +21,23 @@ Die Weiterführung des Projektes DVERGGAS
 
 |US-№	|Verbindlichkeit |	Typ|	Beschreibung|
 |---|----------------|-|-|
-|1.1|	Muss|	Funktional|	Als User möchte ich Waren in einen Warenkorb hinzufügen können, damit ich meine gewünschten Produkte speichern kann.|
-|1.2|	Muss|	Funktional|	Als User möchte ich meinen Warenkorb anschauen können, damit ich die hinzugefügten Produkte überprüfen kann.|
-|1.3|	Muss|	Funktional|	Als User möchte ich Produkte aus meinem Warenkorb entfernen können, damit ich ihn anpassen kann.|
+|1.1|	Muss|	Funktional|	Als User möchte ich Waren in einen Warenkorb hinzufügen können, damit ich meine gewünschten Produkte speichern kann|
+|1.2|	Muss|	Funktional|	Als User möchte ich meinen Warenkorb anschauen können, damit ich die hinzugefügten Produkte überprüfen kann|
+|1.3|	Muss|	Funktional|	Als User möchte ich Produkte aus meinem Warenkorb entfernen können, damit ich ihn anpassen kann|
 |2.1| Muss| Funktional| Als Unternehmen möchte ich einen Unternehmungsaccount erstellen können |
 |2.2| Muss| Funktional| Als Unternehmen möchte ich mich in meinen Unternehmungsaccount einloggen können|
 |3.1| Muss| Funktional| Als Privatnutzer möchte ich einen Privataccount erstellen können|
 |3.2| Muss| Funktional| Als Privatnutzer möchte ich mich in meinen Privataccount einloggen können|
 |4.1| Muss| Funktional| Als Nutzer möchte ich mein Profil verwalten können |
-|4.2| Muss| Funktional| Als Nutzer möchte ich mein passwort ändern können|
+|4.2| Muss| Funktional| Als Nutzer möchte ich mein Passwort ändern können|
 |4.3| Muss| Funktional| Als Nutzer möchte ich meine Profilinformationen ändern können |
 |5.1| Kann | Qualität | Als Nutzer möchte ich meine Notifications sehen können |
-|5.2| Kann | Qualität | Als Nutzer möchte ich mein Einkaufsverlauf sehen können|
+|5.2| Kann | Qualität | Als Nutzer möchte ich meinen Einkaufsverlauf sehen können|
 |6.1| Kann | Funktional| als Nutzer möchte ich Produkte zu einer Wunschliste hinzufügen können |
 |6.2| Kann | Qualität | Als Nutzer möchte ich meine Wunschliste abrufen können |
-|7.1|	Kann|	Qualität|	Als User möchte ich eine Vorschau meiner Bestellung vor der Bezahlung sehen, damit ich sicher sein kann, dass alles korrekt ist.|
-|7.2| Muss| Funktional | Als User möchte ich einen Funktionierenden Checkout sehen|
-|7.3| Kann|	Funktional|	Als User möchte ich eine Bestätigungsmail nach Abschluss des Checkouts erhalten, damit ich einen Nachweis über meine Bestellung habe.|
+|7.1|	Kann|	Qualität|	Als User möchte ich eine Vorschau meiner Bestellung vor der Bezahlung sehen, damit ich sicher sein kann, dass alles korrekt ist|
+|7.2| Muss| Funktional | Als User möchte ich einen funktionierenden Checkout sehen|
+|7.3| Kann|	Funktional|	Als User möchte ich eine Bestätigungsmail nach Abschluss des Checkouts erhalten, damit ich einen Nachweis über meine Bestellung habe|
 
 
 ### 1.3 Testfälle
@@ -92,8 +92,8 @@ Die Weiterführung des Projektes DVERGGAS
 
 ## 3 Entscheiden
 
-Wegen Zeitdruckes haben wir uns entschieden das Arbeitspaket 7.C nicht zu implementieren.
-Die Arbeitspakete von 2 wurden ausserdem leicht verändert da wir keine separaten Loginfenster oder funktionen hinzugefügt haben.
+Wegen Zeitdruckes haben wir uns entschieden, das Arbeitspaket 7.C nicht zu implementieren.
+Die Arbeitspakete von 2 wurden ausserdem leicht verändert, da wir keine separaten Loginfenster oder Funktionen hinzugefügt haben.
 
 ## 4 Realisieren
 
@@ -114,7 +114,7 @@ Die Arbeitspakete von 2 wurden ausserdem leicht verändert da wir keine separate
 |6.B|	6.12.24|	Timo Goedertier|	1 Stunde| 2 Stunden|
 |7.A|	6.12.24|	Cyril Lutziger|	1 Stunde| 1.5 Stunden	|
 |7.B|	13.12.24|	Cyril Lutziger|	3 Stunden| 4 Stunden |	
-|7.C|	13.12.24|	Cyril Lutziger|	3 Stunden| Nicht Implementiert |
+|7.C|	13.12.24|	Cyril Lutziger|	3 Stunden| Nicht implementiert |
 |8.A|	20.12.24|	Alle|	5 Stunden|  |
 
 ## 5 Kontrollieren
@@ -141,4 +141,3 @@ Die Arbeitspakete von 2 wurden ausserdem leicht verändert da wir keine separate
 | 7.1.1 | 13.12.24 | Cyril Lutziger      | Erfolgreich | |
 | 7.2.1 | 20.12.24 | Cyril Lutziger      | Erfolgreich | |
 | 7.3.1 | 20.12.24 | Cyril Lutziger      | Erfolgreich | |
-
