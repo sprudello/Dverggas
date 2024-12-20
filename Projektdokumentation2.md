@@ -2,11 +2,14 @@
 
 Goedertier Timo, Manser Alberto, Lutziger Cyril, Atputharasa Agachan
 
-| Datum | Version | Zusammenfassung                                              |
-| ----- | ------- | ------------------------------------------------------------ |
-| 15.11.24 | 0.0.1   |Login hinzugefügt, Warenkorb speichert ab  |
-| 22.11.24       | 0.0.2| Warenkorb fertig, Checkout begonnen                                                              |
-|       | 1.0.0   |                                                              |
+| Datum | Version | Zusammenfassung |
+|-------|---------|----------------|
+| 15.11.24 | 0.0.1 | Login hinzugefügt, Warenkorb speichert ab |
+| 22.11.24 | 0.0.2 | Warenkorb fertig, Checkout begonnen |
+| 29.11.24 | 0.0.3 | Warenkorb-Entfernung implementiert, Login-System vervollständigt |
+| 06.12.24 | 0.0.4 | Wunschlisten und Bestellvorschau implementiert |
+| 13.12.24 | 0.0.5 | Checkout-Prozess fertiggestellt, Einkaufsverlauf hinzugefügt |
+| 20.12.24 | 1.0.0 | Finales Testing und Projektabschluss |
 
 ## 1 Informieren
 
@@ -44,7 +47,7 @@ Die Weiterführung des Projektes DVERGGAS
 |1.1.1	|Der Nutzer hat die Produktseite geöffnet.	|Der Nutzer klickt auf „In den Warenkorb“.	|Das Produkt wird erfolgreich in den Warenkorb gelegt.|
 |1.2.1	|Der Warenkorb enthält Produkte.	|Der Nutzer öffnet den Warenkorb.	|Eine Liste der im Warenkorb enthaltenen Produkte wird angezeigt.|
 |1.3.1	|Der Warenkorb enthält Produkte.	|Der Nutzer klickt auf „Entfernen“.	|Das ausgewählte Produkt wird aus dem Warenkorb entfernt.|
-|2.1.1	Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Unternehmenskonto wird erstellt, und der Nutzer wird eingeloggt.|
+|2.1.1	|Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Unternehmenskonto wird erstellt, und der Nutzer wird eingeloggt.|
 |2.2.1	|Der Unternehmenskonto-Benutzer existiert.	|Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.
 |3.1.1	|Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Privatkonto wird erstellt, und der Nutzer wird eingeloggt.|
 |3.2.1	|Der Privatkonto-Benutzer existiert.	 |Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.|
