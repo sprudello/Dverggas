@@ -1,6 +1,6 @@
 <!-- Header -->
 <header>
-    <a class="title-button" href="index.php">Dverggas</a>
+<a class="title-button" href="../index.php">Dverggas</a>
     <!-- Search Bar -->
     <form method="GET" action="search.php">
         <div class="searchbar">
@@ -17,6 +17,15 @@
                 <h3>Notifications</h3>
                 <div class="notification-items">
                     <p class="empty-notification">No new notifications</p>
+                </div>
+            </div>
+        </div>
+        <div class="icon-container">
+            <i class="fa-solid fa-heart" style="font-size: 24px; cursor: pointer;" onclick="toggleWishlistMenu()" title="Wishlist"></i>
+            <div id="wishlist-menu" style="display: none;">
+                <h3>Wishlist</h3>
+                <div class="wishlist-items">
+                    <p class="empty-wishlist">Your wishlist is empty</p>
                 </div>
             </div>
         </div>
@@ -42,23 +51,24 @@
         </div>
         <div class="icon-container">
             <i class="fa-solid fa-user" style="font-size: 24px; cursor: pointer;" onclick="toggleUserMenu()" title="User Menu"></i>
-        <div id="user-menu" style="display: none;">
-            <?php if (isset($_SESSION['username'])): ?>
-                <p>Welcome, <?= htmlspecialchars($_SESSION['username']); ?></p>
-                <a href="<?= $base_path; ?>profile.php">My Profile</a>
-                <a href="auth/logout.php">Logout</a>
-            <?php else: ?>
-                <p>Welcome, Guest</p>
-                <div class="switch-container">
-                <p class="mode-text">Dark</p>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider round"></span>
-                    </label>
-                </div>
-                <a href="auth/login.php" title="Sign in to your account">Login</a>
-                <a href="auth/register.php" title="Create a new account">Register</a>
-            <?php endif; ?>
+            <div id="user-menu" style="display: none;">
+                <?php if (isset($_SESSION['username'])): ?>
+                    <p>Welcome, <?= htmlspecialchars($_SESSION['username']); ?></p>
+                    <a href="profile.php">My Profile</a>
+                    <a href="auth/logout.php">Logout</a>
+                <?php else: ?>
+                    <p>Welcome, Guest</p>
+                    <div class="switch-container">
+                        <p class="mode-text">Dark</p>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                    <a href="auth/login.php" title="Sign in to your account">Login</a>
+                    <a href="auth/register.php" title="Create a new account">Register</a>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 </header>

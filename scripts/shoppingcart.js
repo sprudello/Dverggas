@@ -2,7 +2,7 @@ function toggleNotificationMenu() {
     var notificationMenu = document.getElementById('notification-menu');
     var userMenu = document.getElementById('user-menu');
     var cartMenu = document.getElementById('cart-menu');
-    
+
     // Close other menus if they're open
     if (userMenu.style.display === 'block') {
         userMenu.style.display = 'none';
@@ -10,7 +10,7 @@ function toggleNotificationMenu() {
     if (cartMenu.style.display === 'block') {
         cartMenu.style.display = 'none';
     }
-    
+
     // Toggle notification menu
     notificationMenu.style.display = notificationMenu.style.display === 'none' ? 'block' : 'none';
 }
@@ -19,7 +19,7 @@ function toggleCartMenu() {
     var cartMenu = document.getElementById('cart-menu');
     var userMenu = document.getElementById('user-menu');
     var notificationMenu = document.getElementById('notification-menu');
-    
+
     // Close other menus if they're open
     if (userMenu.style.display === 'block') {
         userMenu.style.display = 'none';
@@ -27,68 +27,42 @@ function toggleCartMenu() {
     if (notificationMenu.style.display === 'block') {
         notificationMenu.style.display = 'none';
     }
-    
+
     // Toggle cart menu
     cartMenu.style.display = cartMenu.style.display === 'none' ? 'block' : 'none';
+    if (cartMenu.style.display === 'block') {
+        updateCartPreview();
+    }
 }
 
 function toggleUserMenu() {
     var userMenu = document.getElementById('user-menu');
     var cartMenu = document.getElementById('cart-menu');
-    
-    // Close cart menu if it's open
+    var notificationMenu = document.getElementById('notification-menu');
+
+    // Close other menus if they're open
     if (cartMenu.style.display === 'block') {
         cartMenu.style.display = 'none';
     }
-    
+    if (notificationMenu.style.display === 'block') {
+        notificationMenu.style.display = 'none';
+    }
+
+    // Toggle user menu
     userMenu.style.display = userMenu.style.display === 'none' ? 'block' : 'none';
 }
 
-function addToCart(event, form) {
-    event.preventDefault();
-    
-    const formData = new FormData(form);
-    
-    fetch('../shoppingcart/add_to_cart.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Update cart menu
-            const cartMenu = document.getElementById('cart-menu');
-            const cartItemsDiv = cartMenu.querySelector('.cart-items');
-            const cartTotalSpan = cartMenu.querySelector('.cart-total span:last-child');
-
-            if (data.cartItems.length > 0) {
-                cartItemsDiv.innerHTML = '';
-                data.cartItems.forEach(item => {
-                    const itemDiv = document.createElement('div');
-                    itemDiv.classList.add('cart-item');
-                    itemDiv.innerHTML = `
-                        <p>${item.title}</p>
-                        <p>Price: ${item.price} CHF</p>
-                        <p>Quantity: ${item.quantity}</p>
-                    `;
-                    cartItemsDiv.appendChild(itemDiv);
-                });
-                cartTotalSpan.textContent = `${data.total} CHF`;
-            }
-            
-            // Show cart menu
-            cartMenu.style.display = 'block';
-        } else {
-            console.error('Failed to add item to cart:', data.message);
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
 function updateCartPreview() {
-    fetch('../shoppingcart/get_cart.php')
-        .then(response => response.json())
+    fetch('shoppingcart/get_cart.php')
+        .then(response => {
+            console.log('Response:', response);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log('Data:', data);
             const cartMenu = document.getElementById('cart-menu');
             const cartItemsDiv = cartMenu.querySelector('.cart-items');
             const cartTotalSpan = cartMenu.querySelector('.cart-total span:last-child');
@@ -119,46 +93,3 @@ function updateCartPreview() {
 }
 
 document.addEventListener('DOMContentLoaded', updateCartPreview);
-
-function addToWishlist(event, form) {
-    event.preventDefault();
-    
-    fetch('../shoppingcart/add_to_wishlist.php', {
-        method: 'POST',
-        body: new FormData(form)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            const heartIcon = form.querySelector('.fa-heart');
-            heartIcon.classList.remove('fa-regular');
-            heartIcon.classList.add('fa-solid');
-        } else {
-            console.error('Failed to add to wishlist:', data.message);
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-function removeFromWishlist(event, form) {
-    event.preventDefault();
-    
-    fetch('../shoppingcart/remove_from_wishlist.php', {
-        method: 'POST',
-        body: new FormData(form)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            form.closest('.wishlist-item').remove();
-            // If no items left, show empty message
-            const wishlistItems = document.querySelector('.wishlist-items');
-            if (!wishlistItems.querySelector('.wishlist-item')) {
-                wishlistItems.innerHTML = '<p>Your wishlist is empty</p>';
-            }
-        } else {
-            console.error('Failed to remove from wishlist:', data.message);
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
