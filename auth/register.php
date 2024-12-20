@@ -1,8 +1,7 @@
 <?php
 session_start();
-include_once '../include/head.php';
-include_once '../include/header.php';
-include_once '../db/connection.php';
+
+include '../db/connection.php';
 
 // Validation functions
 function containsNumber($str) {
@@ -62,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $confirm_password = $_POST['confirm_password'] ?? '';
     $accept_tos = isset($_POST['accept_tos']);
     $accept_privacy = isset($_POST['accept_privacy']);
-    $kontentyp = $_POST['kontentyp'];
 
     // Combine phone code and phone number
     if (empty($phone_number)) {
@@ -215,14 +213,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<?php include_once '../include/head.php'; ?>
+
 <!-- Registration form -->
 <div class="registration-container">
-    <h1>Kontenwahl</h1>
-    <div class="account-selection">
-        <button id="unternehmen-button" class="account-button">Unternehmen</button>
-        <button id="privatnutzer-button" class="account-button">Privatnutzer</button>
-        <input type="hidden" id="kontentyp" name="kontentyp" value="">
-    </div>
 
     <form id="registration-form" method="post" action="">
         <div class="progress-container">
@@ -356,20 +350,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </form>
 </div>
 
-<script>
-    document.getElementById('unternehmen-button').addEventListener('click', function() {
-        document.getElementById('kontentyp').value = 'Unternehmen';
-        document.querySelector('.account-selection').style.display = 'none';
-        document.getElementById('registration-form').style.display = 'block';
-    });
-
-    document.getElementById('privatnutzer-button').addEventListener('click', function() {
-        document.getElementById('kontentyp').value = 'Privatnutzer';
-        document.querySelector('.account-selection').style.display = 'none';
-        document.getElementById('registration-form').style.display = 'block';
-    });
-</script>
-
 <?php if (!empty($errors)): ?>
     <div class="registration-error-container">
         <div class="error-messages">
@@ -392,4 +372,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
 
 <script src="../scripts/registration.js"></script>
-<?php include_once '../include/footer.php'; ?>
