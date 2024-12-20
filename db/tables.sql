@@ -91,3 +91,22 @@ CREATE TABLE order_items (
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
+
+CREATE TABLE IF NOT EXISTS payment_details (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    payment_type ENUM('credit_card', 'debit_card', 'bank_transfer', 'paypal', 'crypto', 'apple_pay', 'google_pay') NOT NULL,
+    card_number VARBINARY(255) NULL,
+    card_holder_name VARBINARY(255) NULL,
+    expiry_date DATE NULL,
+    cvv VARBINARY(255) NULL,
+    bank_name VARBINARY(255) NULL,
+    account_number VARBINARY(255) NULL,
+    routing_number VARBINARY(255) NULL,
+    paypal_email VARBINARY(255) NULL,
+    is_default BOOLEAN DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT unique_default_per_user UNIQUE (user_id, is_default)
+);
