@@ -30,18 +30,40 @@ while ($row = mysqli_fetch_assoc($result_subcategories)) {
 
 $subcategory_ids = array_merge([$category_id], array_column($subcategories, 'id'));
 
-$placeholders = implode(',', array_fill(0, count($subcategory_ids), '?'));
-
-// Fetch products of current category and its subcategories
-$query_products = "SELECT * FROM products WHERE category_id IN ($placeholders)";
-$stmt = $conn->prepare($query_products);
-$stmt->bind_param(str_repeat('i', count($subcategory_ids)), ...$subcategory_ids);
-$stmt->execute();
-$result_products = $stmt->get_result();
-
+// Filter logic
+$filter_used = false;
 $products = [];
+$price_min = isset($_GET['price_min']) ? (float)$_GET['price_min'] : null;
+$price_max = isset($_GET['price_max']) ? (float)$_GET['price_max'] : null;
+$brand = isset($_GET['brand']) ? $_GET['brand'] : null;
+
+// Dynamische Query für Filter
+$query_products = "SELECT * FROM products WHERE category_id IN (" . implode(',', $subcategory_ids) . ")";
+
+if ($price_min !== null) {
+    $query_products .= " AND price >= $price_min";
+    $filter_used = true;
+}
+if ($price_max !== null) {
+    $query_products .= " AND price <= $price_max";
+    $filter_used = true;
+}
+if ($brand) {
+    $query_products .= " AND brand = '" . $conn->real_escape_string($brand) . "'";
+    $filter_used = true;
+}
+
+$result_products = $conn->query($query_products);
 while ($row = $result_products->fetch_assoc()) {
     $products[] = $row;
+}
+
+// Alle Marken für den Filter
+$brands_query = "SELECT DISTINCT brand FROM products WHERE category_id IN (" . implode(',', $subcategory_ids) . ")";
+$result_brands = $conn->query($brands_query);
+$brands = [];
+while ($row = $result_brands->fetch_assoc()) {
+    $brands[] = $row['brand'];
 }
 ?>
 
@@ -63,6 +85,30 @@ while ($row = $result_products->fetch_assoc()) {
 
     <!-- Product Listing -->
     <section class="products" style="width: 80%; padding: 20px;">
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <form method="GET" action="">
+                <input type="hidden" name="id" value="<?= $category_id; ?>">
+                <label for="price_min">Preis von:</label>
+                <input type="number" name="price_min" id="price_min" step="0.01" min="0" placeholder="Min. Preis" value="<?= htmlspecialchars($price_min ?? '') ?>">
+
+                <label for="price_max">bis:</label>
+                <input type="number" name="price_max" id="price_max" step="0.01" min="0" placeholder="Max. Preis" value="<?= htmlspecialchars($price_max ?? '') ?>">
+
+                <label for="brand">Marke:</label>
+                <select name="brand" id="brand">
+                    <option value="">Alle Marken</option>
+                    <?php foreach ($brands as $brand_option): ?>
+                        <option value="<?= htmlspecialchars($brand_option) ?>" <?= ($brand === $brand_option) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($brand_option) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <button type="submit">Filtern</button>
+            </form>
+        </div>
+
         <h2>Products in <?= htmlspecialchars($category['name']); ?></h2>
         <?php if (count($products) > 0): ?>
             <div class="product-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
@@ -73,21 +119,6 @@ while ($row = $result_products->fetch_assoc()) {
                         <p><strong>Brand:</strong> <?= htmlspecialchars($product['brand']); ?></p>
                         <p><strong>Price:</strong> $<?= number_format($product['price'], 2); ?></p>
                         <p><strong>Release Date:</strong> <?= date("F j, Y", strtotime($product['release_date'])); ?></p>
-                        <div class="product-actions">
-                            <form class="add-to-cart-form" onsubmit="addToCart(event, this)">
-                                <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['id']); ?>">
-                                <input type="hidden" name="category_id" value="<?= htmlspecialchars($category_id); ?>">
-                                <button type="submit" style="background: none; border: none; cursor: pointer;">
-                                    <i class="fa-solid fa-plus"></i>
-                                </button>
-                            </form>
-                            <form class="add-to-wishlist-form" onsubmit="addToWishlist(event, this)">
-                                <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['id']); ?>">
-                                <button type="submit" style="background: none; border: none; cursor: pointer;">
-                                    <i class="fa-regular fa-heart"></i>
-                                </button>
-                            </form>
-                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -96,5 +127,61 @@ while ($row = $result_products->fetch_assoc()) {
         <?php endif; ?>
     </section>
 </div>
+
+<script>
+    function toggleUserMenu() {
+        var userMenu = document.getElementById('user-menu');
+        userMenu.style.display = userMenu.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+<style>
+    
+    div.filter-section form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    div.filter-section form label {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    div.filter-section form input[type="number"],
+    div.filter-section form select {
+        width: auto;  
+        padding: 5px 8px; 
+        background-color: #444;
+        color: white;
+        border: 1px solid #444;
+        border-radius: 5px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    div.filter-section form select:focus,
+    div.filter-section form input[type="number"]:focus {
+        border-color: #6600cc;
+        outline: none;
+        box-shadow: 0 0 5px rgba(102, 0, 204, 0.5);
+    }
+
+    div.filter-section form button {
+        padding: 5px 15px; 
+        background-color: #6600cc;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(102, 0, 204, 0.5);
+    }
+
+    div.filter-section form button:hover {
+        background-color: #5800af;
+        box-shadow: 0 8px 16px rgba(88, 0, 175, 0.5);
+    }
+</style>
 
 <?php include_once 'include/footer.php'; ?>
