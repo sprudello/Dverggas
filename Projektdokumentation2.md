@@ -2,11 +2,14 @@
 
 Goedertier Timo, Manser Alberto, Lutziger Cyril, Atputharasa Agachan
 
-| Datum | Version | Zusammenfassung                                              |
-| ----- | ------- | ------------------------------------------------------------ |
-| 15.11.24 | 0.0.1   |Login hinzugefügt, Warenkorb speichert ab  |
-| 22.11.24       | 0.0.2| Warenkorb fertig, Checkout begonnen                                                              |
-|       | 1.0.0   |                                                              |
+| Datum | Version | Zusammenfassung |
+|-------|---------|----------------|
+| 15.11.24 | 0.0.1 | Login hinzugefügt, Warenkorb speichert ab |
+| 22.11.24 | 0.0.2 | Warenkorb fertig, Checkout begonnen |
+| 29.11.24 | 0.0.3 | Warenkorb-Entfernung implementiert, Login-System vervollständigt |
+| 06.12.24 | 0.0.4 | Wunschlisten und Bestellvorschau implementiert |
+| 13.12.24 | 0.0.5 | Checkout-Prozess fertiggestellt, Einkaufsverlauf hinzugefügt |
+| 20.12.24 | 1.0.0 | Finales Testing und Projektabschluss |
 
 ## 1 Informieren
 
@@ -44,8 +47,8 @@ Die Weiterführung des Projektes DVERGGAS
 |1.1.1	|Der Nutzer hat die Produktseite geöffnet.	|Der Nutzer klickt auf „In den Warenkorb“.	|Das Produkt wird erfolgreich in den Warenkorb gelegt.|
 |1.2.1	|Der Warenkorb enthält Produkte.	|Der Nutzer öffnet den Warenkorb.	|Eine Liste der im Warenkorb enthaltenen Produkte wird angezeigt.|
 |1.3.1	|Der Warenkorb enthält Produkte.	|Der Nutzer klickt auf „Entfernen“.	|Das ausgewählte Produkt wird aus dem Warenkorb entfernt.|
-|2.1.1	Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Unternehmenskonto wird erstellt, und der Nutzer wird eingeloggt.|
-|2.2.1	|Der Unternehmenskonto-Benutzer existiert.	|Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.
+|2.1.1	|Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Unternehmenskonto wird erstellt, und der Nutzer wird eingeloggt.|
+|2.2.1	|Der Unternehmenskonto-Benutzer existiert.	|Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.|
 |3.1.1	|Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Privatkonto wird erstellt, und der Nutzer wird eingeloggt.|
 |3.2.1	|Der Privatkonto-Benutzer existiert.	 |Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.|
 |4.1.1	|Der Nutzer ist eingeloggt.	|Der Nutzer öffnet die Profilseite und ändert Einstellungen.	|Die Änderungen werden gespeichert und aktualisiert.|
@@ -57,7 +60,7 @@ Die Weiterführung des Projektes DVERGGAS
 |6.2.1	|Der Nutzer hat Produkte in seiner Wunschliste.	|Der Nutzer öffnet die Wunschliste.	|Eine Liste der Produkte in der Wunschliste wird angezeigt.|
 |7.1.1	|Der Warenkorb ist vollständig befüllt.	|Der Nutzer klickt auf „Zur Kasse gehen“.	|Eine Vorschau der Bestellung wird angezeigt.|
 |7.2.1	|Der Nutzer hat die Bestellung überprüft.	|Der Nutzer klickt auf „Zahlen“.	|Die Zahlung wird erfolgreich abgeschlossen, und die Bestellung ist abgeschlossen.|
-|7.3.1	|Der Checkout wurde erfolgreich abgeschlossen.	|Der Nutzer schließt die Zahlung ab.	|Eine Bestätigungsmail wird an die hinterlegte E-Mail-Adresse gesendet.|
+|7.3.1	|Der Checkout wurde erfolgreich abgeschlossen.	|Der Nutzer schliesst die Zahlung ab.	|Eine Bestätigungsmail wird an die hinterlegte E-Mail-Adresse gesendet.|
 
 
 ### 1.4 Diagramme
@@ -118,7 +121,24 @@ Die Arbeitspakete von 2 wurden ausserdem leicht verändert da wir keine separate
 
 ### 5.1 Testprotokoll
 
-| TC-№ | Datum | Resultat | Tester |
-| ---- | ----- | -------- | ------ |
-| 1.1  |       |          |        |
-| ...  |       |          |        |
+| TC-№  | Datum    | Tester              | Resultat    | Fehlerbeschreibung |
+|-------|----------|---------------------|-------------|-------------------|
+| 1.1.1 | 08.11.24 | Alberto Manser      | Erfolgreich | |
+| 1.2.1 | 08.11.24 | Alberto Manser      | Erfolgreich | |
+| 1.2.1 | 15.11.24 | Alberto Manser      | Erfolgreich | |
+| 1.3.1 | 15.11.24 | Alberto Manser      | Erfolgreich | |
+| 2.1.1 | 15.11.24 | Agachan Atputharasa | Erfolgreich | |
+| 2.2.1 | 22.11.24 | Agachan Atputharasa | Erfolgreich | |
+| 3.1.1 | 22.11.24 | Agachan Atputharasa | Erfolgreich | |
+| 3.2.1 | 29.11.24 | Agachan Atputharasa | Erfolgreich | |
+| 4.1.1 | 29.11.24 | Timo Goedertier     | Erfolgreich | |
+| 4.2.1 | 06.12.24 | Timo Goedertier     | Erfolgreich | |
+| 4.3.1 | 06.12.24 | Timo Goedertier     | Erfolgreich | |
+| 5.1.1 | 06.12.24 | Timo Goedertier     | Erfolgreich | |
+| 5.2.1 | 06.12.24 | Timo Goedertier     | Erfolgreich | |
+| 6.1.1 | 13.12.24 | Agachan Atputharasa | Erfolgreich | |
+| 6.2.1 | 13.12.24 | Timo Goedertier     | Erfolgreich | |
+| 7.1.1 | 13.12.24 | Cyril Lutziger      | Erfolgreich | |
+| 7.2.1 | 20.12.24 | Cyril Lutziger      | Erfolgreich | |
+| 7.3.1 | 20.12.24 | Cyril Lutziger      | Erfolgreich | |
+
