@@ -1,6 +1,6 @@
 <!-- Header -->
 <header>
-<a class="title-button" href="../index.php">Dverggas</a>
+<a class="title-button" href="<?= $base_path; ?>index.php">Dverggas</a>
     <!-- Search Bar -->
     <form method="GET" action="search.php">
         <div class="searchbar">
