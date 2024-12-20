@@ -262,14 +262,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="text" name="username" id="username" required value="<?php echo htmlspecialchars($username); ?>">
                     </div>
                 </div>
-                <div class="input-group">
-                    <label for="email">Email <span class="required">*</span></label>
-                    <input type="email" name="email" id="email" required value="<?php echo htmlspecialchars($email); ?>">
-                </div>
-                <div class="input-group">
-                    <label for="password">Password <span class="required">*</span></label>
-                    <input type="password" name="password" id="password" required>
-                </div>
                 <button type="button" class="next-button">Next</button>
             </div>
 

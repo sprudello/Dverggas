@@ -118,24 +118,7 @@ Die Arbeitspakete von 2 wurden ausserdem leicht verändert da wir keine separate
 
 ### 5.1 Testprotokoll
 
-| TC-№  | Datum    | Tester              | Resultat    | Fehlerbeschreibung |
-|-------|----------|---------------------|-------------|-------------------|
-| 1.1.1 | 20.12.24 | Alberto Manser      | Erfolgreich | |
-| 1.2.1 | 20.12.24 | Alberto Manser      | Erfolgreich | |
-| 1.2.1 | 20.12.24 | Alberto Manser      | Erfolgreich | |
-| 1.3.1 | 20.12.24 | Alberto Manser      | Erfolgreich | |
-| 2.1.1 | 20.12.24 | Agachan Atputharasa | Erfolgreich | |
-| 2.2.1 | 20.12.24 | Agachan Atputharasa | Erfolgreich | |
-| 3.1.1 | 20.12.24 | Agachan Atputharasa | Erfolgreich | |
-| 3.2.1 | 20.12.24 | Agachan Atputharasa | Erfolgreich | |
-| 4.1.1 | 20.12.24 | Timo Goedertier     | Erfolgreich | |
-| 4.2.1 | 20.12.24 | Timo Goedertier     | Erfolgreich | |
-| 4.3.1 | 20.12.24 | Timo Goedertier     | Erfolgreich | |
-| 5.1.1 | 20.12.24 | Timo Goedertier     | Erfolgreich | |
-| 5.2.1 | 20.12.24 | Timo Goedertier     | Erfolgreich | |
-| 6.1.1 | 20.12.24 | Agachan Atputharasa | Erfolgreich | |
-| 6.2.1 | 20.12.24 | Timo Goedertier     | Erfolgreich | |
-| 7.1.1 | 20.12.24 | Cyril Lutziger      | Erfolgreich | |
-| 7.2.1 | 20.12.24 | Cyril Lutziger      | Erfolgreich | |
-| 7.3.1 | 20.12.24 | Cyril Lutziger      | Erfolgreich | |
-
+| TC-№ | Datum | Resultat | Tester |
+| ---- | ----- | -------- | ------ |
+| 1.1  |       |          |        |
+| ...  |       |          |        |
