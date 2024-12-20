@@ -60,7 +60,7 @@ Die Weiterführung des Projektes DVERGGAS
 |6.2.1	|Der Nutzer hat Produkte in seiner Wunschliste.	|Der Nutzer öffnet die Wunschliste.	|Eine Liste der Produkte in der Wunschliste wird angezeigt.|
 |7.1.1	|Der Warenkorb ist vollständig befüllt.	|Der Nutzer klickt auf „Zur Kasse gehen“.	|Eine Vorschau der Bestellung wird angezeigt.|
 |7.2.1	|Der Nutzer hat die Bestellung überprüft.	|Der Nutzer klickt auf „Zahlen“.	|Die Zahlung wird erfolgreich abgeschlossen, und die Bestellung ist abgeschlossen.|
-|7.3.1	|Der Checkout wurde erfolgreich abgeschlossen.	|Der Nutzer schließt die Zahlung ab.	|Eine Bestätigungsmail wird an die hinterlegte E-Mail-Adresse gesendet.|
+|7.3.1	|Der Checkout wurde erfolgreich abgeschlossen.	|Der Nutzer schliesst die Zahlung ab.	|Eine Bestätigungsmail wird an die hinterlegte E-Mail-Adresse gesendet.|
 
 
 ### 1.4 Diagramme
