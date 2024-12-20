@@ -19,7 +19,7 @@ INSERT INTO products (category_id, title, prod_desc, price, brand, release_date)
     (23, 'Repair Service Q', 'Quick and reliable repair service', 75.00, 'BrandN', '2024-02-28 00:00:00'),
     (24, 'Delivery Service R', 'Fast delivery service within the city', 50.00, 'BrandO', '2024-03-18 00:00:00'),
     (25, 'Refrigerator S', 'Energy-efficient refrigerator', 999.99, 'BrandP', '2024-01-12 00:00:00'),
-    (25, 'Washing Machine T', 'Front-load washing machine with advanced features', 799.99, 'BrandQ', '2024-02-14 00:00:00'),
+    (25, 'Washing Machine', 'Front-load washing machine with advanced features', 799.99, 'BrandQ', '2024-02-14 00:00:00'),
     (25, 'Microwave U', 'Compact microwave with multiple settings', 149.99, 'BrandR', '2024-03-12 00:00:00'),
     (26, 'Men\'s T-Shirt V', 'Comfortable cotton t-shirt', 19.99, 'BrandS', '2024-01-11 00:00:00'),
     (26, 'Women\'s Dress W', 'Stylish summer dress', 49.99, 'BrandT', '2024-02-08 00:00:00'),

@@ -1,9 +1,14 @@
 -- Database ---
-CREATE DATABASE IF NOT EXISTS Dverggas;
+CREATE DATABASE IF NOT EXISTS Dverggas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 USE Dverggas;
 
--- Enable proper timestamp handling
-SET SQL_MODE = 'ALLOW_INVALID_DATES';
+-- Enable proper timestamp and charset handling
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+SET time_zone = '+01:00';
+
+SET SQL_MODE = 'ALLOW_INVALID_DATES,NO_ZERO_DATE,NO_ZERO_IN_DATE';
 
 -- Tables ---
 CREATE TABLE IF NOT EXISTS users (
@@ -48,8 +53,6 @@ CREATE TABLE IF NOT EXISTS products (
     FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
-USE Dverggas;
-
 CREATE TABLE cart (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -57,5 +60,34 @@ CREATE TABLE cart (
     quantity INT NOT NULL DEFAULT 1,
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE wishlist (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id),
+    CONSTRAINT unique_wishlist_item UNIQUE (user_id, product_id)
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(12, 2) NOT NULL,
+    status ENUM('pending', 'processing', 'shipped', 'delivered', 'cancelled') NOT NULL DEFAULT 'pending',
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price_at_time DECIMAL(12, 2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
 );

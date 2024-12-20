@@ -1,6 +1,6 @@
 <!-- Header -->
 <header>
-    <a class="title-button" href="/Dverggas/index.php">Dverggas</a> <!-- Adjust the path as needed -->
+<a class="title-button" href="../index.php">Dverggas</a>
     <!-- Search Bar -->
     <form method="GET" action="search.php">
         <div class="searchbar">
@@ -14,28 +14,18 @@
         <div class="icon-container">
             <i class="fa-solid fa-bell" style="font-size: 24px; cursor: pointer;" onclick="toggleNotificationMenu()" title="Notifications"></i>
             <div id="notification-menu" style="display: none;">
-                <div class="notification-header">
-                    <h3>Notifications</h3>
-                    <div class="notification-actions">
-                        <button class="mark-read-button" onclick="markAllAsRead()">Mark all as read</button>
-                        <a href="profile.php#notifications" class="settings-link">
-                            <i class="fa-solid fa-gear"></i> Notification Settings
-                        </a>
-                    </div>
-                </div>
+                <h3>Notifications</h3>
                 <div class="notification-items">
-                    <div class="notification-item unread" onclick="markAsRead(this)" data-id="1">
-                        <strong>New Product Available</strong>
-                        <p>Check out our latest gaming console!</p>
-                    </div>
-                    <div class="notification-item unread" onclick="markAsRead(this)" data-id="2">
-                        <strong>Special Offer</strong>
-                        <p>Get 20% off on all electronics today!</p>
-                    </div>
-                    <div class="notification-item unread" onclick="markAsRead(this)" data-id="3">
-                        <strong>Order Update</strong>
-                        <p>Your recent order has been shipped!</p>
-                    </div>
+                    <p class="empty-notification">No new notifications</p>
+                </div>
+            </div>
+        </div>
+        <div class="icon-container">
+            <i class="fa-solid fa-heart" style="font-size: 24px; cursor: pointer;" onclick="toggleWishlistMenu()" title="Wishlist"></i>
+            <div id="wishlist-menu" style="display: none;">
+                <h3>Wishlist</h3>
+                <div class="wishlist-items">
+                    <p class="empty-wishlist">Your wishlist is empty</p>
                 </div>
             </div>
         </div>

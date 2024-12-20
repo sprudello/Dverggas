@@ -62,13 +62,21 @@ $conn->close();
                     <p>Description: <?php echo htmlspecialchars($product['prod_desc']); ?></p>
                     <p>Price: <?php echo htmlspecialchars($product['price']); ?>€</p>
                     <p>Brand: <?php echo htmlspecialchars($product['brand']); ?></p>
-                    <form class="add-to-cart-form" onsubmit="addToCart(event, this)">
-                        <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
-                        <input type="hidden" name="category_id" value="<?php echo htmlspecialchars($product['category_id']); ?>">
-                        <button type="submit" style="background: none; border: none; cursor: pointer;">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </form>
+                    <div class="product-actions">
+                        <form class="add-to-cart-form" onsubmit="addToCart(event, this)">
+                            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+                            <input type="hidden" name="category_id" value="<?php echo htmlspecialchars($product['category_id']); ?>">
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </form>
+                        <form class="add-to-wishlist-form" onsubmit="addToWishlist(event, this)">
+                            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+                            <button type="submit" style="background: none; border: none; cursor: pointer;">
+                                <i class="fa-regular fa-heart"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>

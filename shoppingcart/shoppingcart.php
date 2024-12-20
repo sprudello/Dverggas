@@ -53,7 +53,7 @@ $conn->close();
 
 <div class="shopping-cart-page">
     <h1>Shopping Cart</h1>
-    
+
     <div class="cart-container">
         <div class="cart-items-container">
             <div id="cart-items-full" class="cart-items">
@@ -74,7 +74,7 @@ $conn->close();
                 <?php endif; ?>
             </div>
         </div>
-        
+
         <div class="cart-summary">
             <h2>Order Summary</h2>
             <div class="summary-row">
