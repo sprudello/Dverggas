@@ -48,7 +48,7 @@ Die Weiterführung des Projektes DVERGGAS
 |1.2.1	|Der Warenkorb enthält Produkte.	|Der Nutzer öffnet den Warenkorb.	|Eine Liste der im Warenkorb enthaltenen Produkte wird angezeigt.|
 |1.3.1	|Der Warenkorb enthält Produkte.	|Der Nutzer klickt auf „Entfernen“.	|Das ausgewählte Produkt wird aus dem Warenkorb entfernt.|
 |2.1.1	|Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Unternehmenskonto wird erstellt, und der Nutzer wird eingeloggt.|
-|2.2.1	|Der Unternehmenskonto-Benutzer existiert.	|Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.
+|2.2.1	|Der Unternehmenskonto-Benutzer existiert.	|Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.|
 |3.1.1	|Der Nutzer ist nicht eingeloggt.	|Der Nutzer füllt die Registrierungsmaske aus und klickt auf „Registrieren“.	|Ein Privatkonto wird erstellt, und der Nutzer wird eingeloggt.|
 |3.2.1	|Der Privatkonto-Benutzer existiert.	 |Der Nutzer gibt seine Login-Daten ein und klickt auf „Einloggen“.	|Der Nutzer wird erfolgreich eingeloggt.|
 |4.1.1	|Der Nutzer ist eingeloggt.	|Der Nutzer öffnet die Profilseite und ändert Einstellungen.	|Die Änderungen werden gespeichert und aktualisiert.|
