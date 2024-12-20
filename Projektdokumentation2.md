@@ -89,16 +89,27 @@ Die Weiterführung des Projektes DVERGGAS
 
 ## 3 Entscheiden
 
-✍️ Dokumentieren Sie hier Ihre Entscheidungen und Annahmen, die Sie im Bezug auf Ihre User Stories und die Implementierung getroffen haben.
 
 ## 4 Realisieren
 
-| AP-№ | Datum | Zuständig | geplante Zeit | tatsächliche Zeit |
-| ---- | ----- | --------- | ------------- | ----------------- |
-| 1.A  |       |           |               |                   |
-| ...  |       |           |               |                   |
-
-✍️ Tragen Sie jedes Mal, wenn Sie ein Arbeitspaket abschließen, hier ein, wie lang Sie effektiv dafür hatten.
+|AP-№|	Datum|	Zuständig|	geplante Zeit|	tatsächliche Zeit|
+|1.A|	22.11.24|	Alberto Manser|	1 Stunde| 1.5 Stunden |
+|1.B|	29.11.24|	Alberto Manser|	2 Stunden| 4 Stunden |	
+|1.C|	29.11.24|	Alberto Manser|	2 Stunden| 1 Stunde |
+|2.A|	30.11.24|	Alberto Manser|	2 Stunden| | 
+|2.B|	30.11.24|	Agachan Atputharasa|	2 Stunden| |	
+|3.A|	30.11.24|	Agachan Atputharasa|	2 Stunden| |
+|3.B|	30.11.24|	Agachan Atputharasa|	2 Stunden| |	
+|4.A|	01.12.24|	Timo Goedertier|	2 Stunden| |	
+|4.B|	01.12.24|	Timo Goedertier| 2 Stunden|	|
+|5.A|	01.12.24|	Timo Goedertier|	1.5 Stunden| |
+|5.B|	02.12.24|	Timo Goedertier|	2 Stunden| |	
+|6.A|	02.12.24|	Agachan Atputharasa|	2 Stunden| |	
+|6.B|	02.12.24|	Timo Goedertier|	1 Stunde|	|
+|7.A|	03.12.24|	Cyril Lutziger|	1 Stunde|	|
+|7.B|	03.12.24|	Cyril Lutziger|	3 Stunden| |	
+|7.C|	03.12.24|	Cyril Lutziger|	3 Stunden| |
+|8.A|	20.12.24|	Alle|	5 Stunden| |
 
 ## 5 Kontrollieren
 
@@ -108,18 +119,3 @@ Die Weiterführung des Projektes DVERGGAS
 | ---- | ----- | -------- | ------ |
 | 1.1  |       |          |        |
 | ...  |       |          |        |
-
-✍️ Vergessen Sie nicht, ein Fazit hinzuzufügen, welches das Test-Ergebnis einordnet.
-
-### 5.2 Exploratives Testen
-
-| BR-№ | Ausgangslage | Eingabe | Erwartete Ausgabe | Tatsächliche Ausgabe |
-| ---- | ------------ | ------- | ----------------- | -------------------- |
-| I    |              |         |                   |                      |
-| ...  |              |         |                   |                      |
-
-✍️ Verwenden Sie römische Ziffern für Ihre Bug Reports, also I, II, III, IV etc.
-
-## 6 Auswerten
-
-✍️ Fügen Sie hier eine Verknüpfung zu Ihrem Lern-Bericht ein.
