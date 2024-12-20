@@ -95,6 +95,7 @@ Die Arbeitspakete von 2 wurden ausserdem leicht verändert da wir keine separate
 ## 4 Realisieren
 
 |AP-№|	Datum|	Zuständig|	geplante Zeit|	tatsächliche Zeit|
+|----|-------|-----------|---------------|-------------------|
 |1.A|	15.11.24|	Alberto Manser|	1 Stunde| 1.5 Stunden |
 |1.B|	22.11.24|	Alberto Manser|	2 Stunden| 4 Stunden |	
 |1.C|	29.11.24|	Alberto Manser|	2 Stunden| 1 Stunde |
